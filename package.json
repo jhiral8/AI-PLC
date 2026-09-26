@@ -1,0 +1,21 @@
+{
+  "name": "ai-plc",
+  "version": "0.0.0",
+  "private": true,
+  "description": "CoreFlow: an evidence-linked, gated product lifecycle for PMs and coding agents",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "check": "pnpm typecheck && pnpm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "5.9.2",
+    "vitest": "^3.2.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22"
+  }
+}

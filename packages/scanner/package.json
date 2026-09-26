@@ -1,0 +1,18 @@
+{
+  "name": "@coreflow/scanner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scans a codebase (TypeScript, Angular, Python) into a component manifest and diffs manifests between scans",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "simple-git": "^3.27.0",
+    "ts-morph": "^24.0.0",
+    "zod": "^3.23.0"
+  }
+}
