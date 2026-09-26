@@ -1,0 +1,15 @@
+{
+  "name": "@coreflow/constraints",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Checks requirement text against a component manifest and constraint rules",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  }
+}

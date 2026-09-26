@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*"],
+  // Ported tests were never typechecked in AI-PM and index arrays without guards.
+  // They still run under vitest; tighten them when the scanner is next touched.
+  "exclude": ["src/__tests__/**"]
+}

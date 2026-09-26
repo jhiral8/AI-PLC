@@ -1,0 +1,16 @@
+{
+  "name": "@coreflow/gates",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lifecycle gate checks: evidence quality, completeness, freshness and approval",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@coreflow/trace": "workspace:*",
+    "zod": "^3.23.0"
+  }
+}
