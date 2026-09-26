@@ -1,8 +1,8 @@
 {
-  "name": "@coreflow/trace",
+  "name": "@coreflow/cli",
   "version": "0.1.0",
   "private": true,
-  "description": "Storage-agnostic trace graph: nodes, links, content hashes and downstream suspect propagation",
+  "description": "coreflow command-line tool and agent hook handler",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
@@ -10,6 +10,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "zod": "^3.25.0"
+    "@coreflow/store": "workspace:*",
+    "@coreflow/trace": "workspace:*"
   }
 }

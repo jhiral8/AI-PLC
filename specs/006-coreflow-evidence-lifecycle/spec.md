@@ -165,4 +165,5 @@ affected items.
 ## Status of Work
 
 - Done in this repository: trace graph with suspect propagation (`packages/trace`), gate evaluation with the ported evidence-quality check (`packages/gates`), component scanner and constraint checker ported from AI-PM (`packages/scanner`, `packages/constraints`).
-- Next: file format and CLI, MCP server, Claude Code plugin and Kiro power (User Stories 1–2).
+- Done: file format and Markdown definitions (`packages/store`), CLI and hook handler (`packages/cli`), MCP server (`packages/mcp`), Claude Code plugin and Kiro power (`plugins/coreflow`). User Stories 1 and 2 pass as automated tests. SC-001 checked on this spec: changing FR-002 flags exactly its two linked files.
+- Next: lifecycle stages and gates over the store (User Story 3), then research and artifacts (User Story 4).

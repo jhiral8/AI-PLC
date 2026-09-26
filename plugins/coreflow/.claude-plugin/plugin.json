@@ -1,0 +1,9 @@
+{
+  "name": "coreflow",
+  "version": "0.1.0",
+  "description": "Trace research, requirements, specs, code and tests; see what an upstream change makes suspect; link files to requirements automatically as you work.",
+  "author": { "name": "jhiral8" },
+  "homepage": "https://github.com/jhiral8/AI-PLC",
+  "repository": "https://github.com/jhiral8/AI-PLC",
+  "keywords": ["traceability", "requirements", "product-management", "spec-driven"]
+}

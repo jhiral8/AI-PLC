@@ -1,0 +1,465 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "FR-001",
+      "type": "requirement",
+      "title": "The system MUST store nodes and links in a versioned JSON trace file in the product repo.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-001",
+      "hash": "sha256:b256f87bdcc34939"
+    },
+    {
+      "id": "FR-002",
+      "type": "requirement",
+      "title": "Each link MUST record the upstream node's content hash when made or confirmed.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-002",
+      "hash": "sha256:1106d3d7cd404014"
+    },
+    {
+      "id": "FR-003",
+      "type": "requirement",
+      "title": "The system MUST report suspect nodes with their causes and distance from the cause.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-003",
+      "hash": "sha256:9e0e6323ec41b9a0"
+    },
+    {
+      "id": "FR-004",
+      "type": "requirement",
+      "title": "Content hashing MUST ignore line-ending and trailing-whitespace differences.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-004",
+      "hash": "sha256:e4f57599066c0db8"
+    },
+    {
+      "id": "FR-005",
+      "type": "requirement",
+      "title": "The system MUST support explicit change marks with a reason for changes a hash cannot show.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-005",
+      "hash": "sha256:25e39c5504be06a1"
+    },
+    {
+      "id": "FR-006",
+      "type": "requirement",
+      "title": "The system MUST provide a CLI and an MCP server exposing link, trace, suspect and confirm.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-006",
+      "hash": "sha256:5bbba58ed83ace09"
+    },
+    {
+      "id": "FR-007",
+      "type": "requirement",
+      "title": "The system MUST ship as a Claude Code plugin and as a Kiro power (Agent Plugins format) sharing o...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-007",
+      "hash": "sha256:790dc74fd4a5d684"
+    },
+    {
+      "id": "FR-008",
+      "type": "requirement",
+      "title": "Gates MUST check completeness, evidence coverage, freshness, evidence quality and approval, in bl...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-008",
+      "hash": "sha256:44f62aa7c3d01630"
+    },
+    {
+      "id": "FR-009",
+      "type": "requirement",
+      "title": "Artifact templates MUST come from a permissively licensed library (initially product-on-purpose/p...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-009",
+      "hash": "sha256:7838f823db1a7979"
+    },
+    {
+      "id": "FR-010",
+      "type": "requirement",
+      "title": "Model access MUST go through one injectable client.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-010",
+      "hash": "sha256:0088f4e80d377dd4"
+    },
+    {
+      "id": "packages/cli/src/cli.test.ts",
+      "type": "test",
+      "location": "packages/cli/src/cli.test.ts",
+      "hash": "sha256:493eb0aec3cb5c81"
+    },
+    {
+      "id": "packages/cli/src/cli.ts",
+      "type": "code",
+      "location": "packages/cli/src/cli.ts",
+      "hash": "sha256:4bb585d523db5baa"
+    },
+    {
+      "id": "packages/cli/src/hook.ts",
+      "type": "code",
+      "location": "packages/cli/src/hook.ts",
+      "hash": "sha256:d31d798e947ebdec"
+    },
+    {
+      "id": "packages/cli/src/kiro.ts",
+      "type": "code",
+      "location": "packages/cli/src/kiro.ts",
+      "hash": "sha256:9781fae5448cde57"
+    },
+    {
+      "id": "packages/constraints/src/lib/llm.ts",
+      "type": "code",
+      "location": "packages/constraints/src/lib/llm.ts",
+      "hash": "sha256:f380125e6cc37f4b"
+    },
+    {
+      "id": "packages/gates/src/evidence-quality.ts",
+      "type": "code",
+      "location": "packages/gates/src/evidence-quality.ts",
+      "hash": "sha256:345ee40c7263ddac"
+    },
+    {
+      "id": "packages/gates/src/gate.ts",
+      "type": "code",
+      "location": "packages/gates/src/gate.ts",
+      "hash": "sha256:6362bf55d9810726"
+    },
+    {
+      "id": "packages/gates/src/gates.test.ts",
+      "type": "test",
+      "location": "packages/gates/src/gates.test.ts",
+      "hash": "sha256:1c21adb9b6fec1aa"
+    },
+    {
+      "id": "packages/mcp/src/server.test.ts",
+      "type": "test",
+      "location": "packages/mcp/src/server.test.ts",
+      "hash": "sha256:f0b7b0ca0099d1c5"
+    },
+    {
+      "id": "packages/mcp/src/server.ts",
+      "type": "code",
+      "location": "packages/mcp/src/server.ts",
+      "hash": "sha256:3a9a9e38be3a027e"
+    },
+    {
+      "id": "packages/store/src/project.ts",
+      "type": "code",
+      "location": "packages/store/src/project.ts",
+      "hash": "sha256:18c73f3b6802e4f4"
+    },
+    {
+      "id": "packages/store/src/report.ts",
+      "type": "code",
+      "location": "packages/store/src/report.ts",
+      "hash": "sha256:960491af880a0b07"
+    },
+    {
+      "id": "packages/store/src/store.test.ts",
+      "type": "test",
+      "location": "packages/store/src/store.test.ts",
+      "hash": "sha256:2da045ca2e065075"
+    },
+    {
+      "id": "packages/trace/src/graph.test.ts",
+      "type": "test",
+      "location": "packages/trace/src/graph.test.ts",
+      "hash": "sha256:87400c72c59a6358"
+    },
+    {
+      "id": "packages/trace/src/graph.ts",
+      "type": "code",
+      "location": "packages/trace/src/graph.ts",
+      "hash": "sha256:1c26c9076b27a124"
+    },
+    {
+      "id": "packages/trace/src/hash.ts",
+      "type": "code",
+      "location": "packages/trace/src/hash.ts",
+      "hash": "sha256:041d1d1344d888ee"
+    },
+    {
+      "id": "packages/trace/src/schema.ts",
+      "type": "code",
+      "location": "packages/trace/src/schema.ts",
+      "hash": "sha256:cb401c56fe98e043"
+    },
+    {
+      "id": "plugins/coreflow/hooks/hooks.json",
+      "type": "code",
+      "location": "plugins/coreflow/hooks/hooks.json",
+      "hash": "sha256:b0996661e5368ab2"
+    },
+    {
+      "id": "plugins/coreflow/mcp.json",
+      "type": "code",
+      "location": "plugins/coreflow/mcp.json",
+      "hash": "sha256:eccfb5ffc895eb26"
+    },
+    {
+      "id": "plugins/coreflow/skills/coreflow/SKILL.md",
+      "type": "code",
+      "location": "plugins/coreflow/skills/coreflow/SKILL.md",
+      "hash": "sha256:30423c03af0588fa",
+      "changed": {
+        "reason": "definition removed from plugins/coreflow/skills/coreflow/SKILL.md",
+        "at": "2026-09-26T10:30:52.901Z"
+      }
+    },
+    {
+      "id": "SC-001",
+      "type": "requirement",
+      "title": "On this repository's own specs, changing one requirement lists every affected item with no false ...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#SC-001",
+      "hash": "sha256:f3f5f15df3e57e20"
+    },
+    {
+      "id": "SC-002",
+      "type": "requirement",
+      "title": "At least 80% of links in an agent-built feature are captured automatically.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#SC-002",
+      "hash": "sha256:dec08a45f2f6893a"
+    },
+    {
+      "id": "SC-003",
+      "type": "requirement",
+      "title": "A PM can take one idea from sources to an approved business-case gate without writing links by hand.",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#SC-003",
+      "hash": "sha256:7ee0ebb383f170f7"
+    }
+  ],
+  "links": [
+    {
+      "from": "FR-001",
+      "to": "packages/store/src/project.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:b256f87bdcc34939",
+      "createdAt": "2026-09-26T10:30:51.323Z"
+    },
+    {
+      "from": "FR-001",
+      "to": "packages/store/src/store.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:b256f87bdcc34939",
+      "createdAt": "2026-09-26T10:30:51.411Z"
+    },
+    {
+      "from": "FR-001",
+      "to": "packages/trace/src/schema.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:b256f87bdcc34939",
+      "createdAt": "2026-09-26T10:30:51.239Z"
+    },
+    {
+      "from": "FR-002",
+      "to": "packages/trace/src/graph.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:1106d3d7cd404014",
+      "createdAt": "2026-09-26T10:30:51.591Z"
+    },
+    {
+      "from": "FR-002",
+      "to": "packages/trace/src/graph.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:1106d3d7cd404014",
+      "createdAt": "2026-09-26T10:30:51.499Z"
+    },
+    {
+      "from": "FR-003",
+      "to": "packages/store/src/report.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:9e0e6323ec41b9a0",
+      "createdAt": "2026-09-26T10:30:51.769Z"
+    },
+    {
+      "from": "FR-003",
+      "to": "packages/trace/src/graph.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:9e0e6323ec41b9a0",
+      "createdAt": "2026-09-26T10:30:51.859Z"
+    },
+    {
+      "from": "FR-003",
+      "to": "packages/trace/src/graph.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:9e0e6323ec41b9a0",
+      "createdAt": "2026-09-26T10:30:51.677Z"
+    },
+    {
+      "from": "FR-004",
+      "to": "packages/store/src/store.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e4f57599066c0db8",
+      "createdAt": "2026-09-26T10:30:52.132Z"
+    },
+    {
+      "from": "FR-004",
+      "to": "packages/trace/src/graph.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e4f57599066c0db8",
+      "createdAt": "2026-09-26T10:30:52.040Z"
+    },
+    {
+      "from": "FR-004",
+      "to": "packages/trace/src/hash.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e4f57599066c0db8",
+      "createdAt": "2026-09-26T10:30:51.947Z"
+    },
+    {
+      "from": "FR-005",
+      "to": "packages/trace/src/graph.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:25e39c5504be06a1",
+      "createdAt": "2026-09-26T10:30:52.314Z"
+    },
+    {
+      "from": "FR-005",
+      "to": "packages/trace/src/graph.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:25e39c5504be06a1",
+      "createdAt": "2026-09-26T10:30:52.223Z"
+    },
+    {
+      "from": "FR-006",
+      "to": "packages/cli/src/cli.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5bbba58ed83ace09",
+      "createdAt": "2026-09-26T10:30:52.623Z"
+    },
+    {
+      "from": "FR-006",
+      "to": "packages/cli/src/cli.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5bbba58ed83ace09",
+      "createdAt": "2026-09-26T10:30:52.405Z"
+    },
+    {
+      "from": "FR-006",
+      "to": "packages/mcp/src/server.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5bbba58ed83ace09",
+      "createdAt": "2026-09-26T10:30:52.715Z"
+    },
+    {
+      "from": "FR-006",
+      "to": "packages/mcp/src/server.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5bbba58ed83ace09",
+      "createdAt": "2026-09-26T10:30:52.505Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "packages/cli/src/cli.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:53.267Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "packages/cli/src/hook.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:53.081Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "packages/cli/src/kiro.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:53.178Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "plugins/coreflow/hooks/hooks.json",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:52.902Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "plugins/coreflow/mcp.json",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:52.992Z"
+    },
+    {
+      "from": "FR-007",
+      "to": "plugins/coreflow/skills/coreflow/SKILL.md",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:790dc74fd4a5d684",
+      "createdAt": "2026-09-26T10:30:52.811Z"
+    },
+    {
+      "from": "FR-008",
+      "to": "packages/gates/src/evidence-quality.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:44f62aa7c3d01630",
+      "createdAt": "2026-09-26T10:30:53.476Z"
+    },
+    {
+      "from": "FR-008",
+      "to": "packages/gates/src/gate.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:44f62aa7c3d01630",
+      "createdAt": "2026-09-26T10:30:53.374Z"
+    },
+    {
+      "from": "FR-008",
+      "to": "packages/gates/src/gates.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:44f62aa7c3d01630",
+      "createdAt": "2026-09-26T10:30:53.576Z"
+    },
+    {
+      "from": "FR-010",
+      "to": "packages/constraints/src/lib/llm.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:0088f4e80d377dd4",
+      "createdAt": "2026-09-26T10:30:53.669Z"
+    }
+  ]
+}

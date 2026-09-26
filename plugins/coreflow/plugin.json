@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "coreflow",
+  "version": "0.1.0",
+  "description": "Trace research, requirements, specs, code and tests; see what an upstream change makes suspect.",
+  "author": { "name": "jhiral8" },
+  "keywords": ["traceability", "requirements", "suspect", "spec", "coreflow", "golden thread", "impact analysis"]
+}

@@ -1,0 +1,26 @@
+{
+  "include": [
+    "specs/**/*.md",
+    "docs/**/*.md"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/.git/**",
+    ".coreflow/**",
+    "**/dist/**"
+  ],
+  "prefixes": {
+    "EV": "evidence",
+    "INS": "insight",
+    "REQ": "requirement",
+    "FR": "requirement",
+    "NFR": "requirement",
+    "SC": "requirement",
+    "US": "requirement",
+    "DEC": "decision",
+    "ART": "artifact",
+    "DES": "design",
+    "SPEC": "spec"
+  },
+  "testPattern": "(^|/)(__tests__|tests?)/|\\.(test|spec)\\.[cm]?[jt]sx?$|(^|/)test_[^/]*\\.py$|_test\\.(py|go)$"
+}

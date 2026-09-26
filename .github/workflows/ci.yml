@@ -18,3 +18,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
       - run: pnpm test
+      - name: Plugin bundles are up to date
+        run: pnpm bundle && git diff --exit-code plugins/coreflow/scripts
+      - name: Nothing in this repo's own traces is suspect
+        run: node plugins/coreflow/scripts/coreflow.mjs suspects --check

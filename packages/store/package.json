@@ -1,8 +1,8 @@
 {
-  "name": "@coreflow/gates",
+  "name": "@coreflow/store",
   "version": "0.1.0",
   "private": true,
-  "description": "Lifecycle gate checks: evidence quality, completeness, freshness and approval",
+  "description": "Reads and writes a project's trace data: Markdown definitions, file nodes, .coreflow/traces.json and agent sessions",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@coreflow/trace": "workspace:*",
+    "tinyglobby": "^0.2.17",
+    "yaml": "^2.9.1",
     "zod": "^3.25.0"
   }
 }
