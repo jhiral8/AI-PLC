@@ -80,9 +80,15 @@ importers:
 
   packages/store:
     dependencies:
+      '@coreflow/gates':
+        specifier: workspace:*
+        version: link:../gates
       '@coreflow/trace':
         specifier: workspace:*
         version: link:../trace
+      picomatch:
+        specifier: ^4.0.7
+        version: 4.0.7
       tinyglobby:
         specifier: ^0.2.17
         version: 0.2.17
@@ -92,6 +98,10 @@ importers:
       zod:
         specifier: ^3.25.0
         version: 3.25.76
+    devDependencies:
+      '@types/picomatch':
+        specifier: ^4.0.3
+        version: 4.0.3
 
   packages/trace:
     dependencies:
@@ -433,6 +443,9 @@ packages:
 
   '@types/node@22.20.4':
     resolution: {integrity: sha512-zJRE40jpHtKqE/C4fgHrAKQLJuSpzEnP9ff9Y7YtoR3Wd2pwqzlekDeEuUQXjRd+QCYnVnNwuJYmhdk9XV8gvA==}
+
+  '@types/picomatch@4.0.3':
+    resolution: {integrity: sha512-iG0T6+nYJ9FAPmx9SsUlnwcq1ZVRuCXcVEvWnntoPlrOpwtSTKNDC9uVAxTsC3PUvJ+99n4RpAcNgBbHX3JSnQ==}
 
   '@vitest/expect@3.2.7':
     resolution: {integrity: sha512-E8eBXaKibuvH2pSZErOjdVb5vF4PbKYcrnluBTYxEk1l/VhhwZg1kZQsdtjq+CsF5CFydf2Rdkz7jDHKSisi3w==}
@@ -1333,6 +1346,8 @@ snapshots:
   '@types/node@22.20.4':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/picomatch@4.0.3': {}
 
   '@vitest/expect@3.2.7':
     dependencies:

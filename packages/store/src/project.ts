@@ -8,6 +8,7 @@
  * disk, and `.coreflow/traces.json` holds the links and the hashes they were confirmed at.
  */
 
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import {
@@ -18,8 +19,9 @@ import {
   type TraceLink,
   type TraceNode,
 } from "@coreflow/trace";
+import picomatch from "picomatch";
 import { glob } from "tinyglobby";
-import { CoreflowConfig } from "./config";
+import { CoreflowConfig, type CoreflowConfigInput } from "./config";
 import { extractDefinitions, ID_PATTERN, type MarkdownDefinition } from "./markdown";
 
 export const COREFLOW_DIR = ".coreflow";
@@ -35,6 +37,7 @@ export interface ScanResult {
   changed: string[];
   removed: string[];
   linked: string[];
+  unlinked: string[];
   warnings: string[];
 }
 
@@ -64,23 +67,29 @@ function writeAtomic(path: string, text: string): void {
   renameSync(tmp, path);
 }
 
-function simpleMatch(pattern: string, path: string): boolean {
-  // Glob to RegExp for the handful of patterns config uses: **, *, ?.
-  let re = "";
-  for (let i = 0; i < pattern.length; i++) {
-    const c = pattern[i]!;
-    if (c === "*") {
-      if (pattern[i + 1] === "*") {
-        const slash = pattern[i + 2] === "/";
-        re += slash ? "(?:.*/)?" : ".*";
-        i += slash ? 2 : 1;
-      } else {
-        re += "[^/]*";
-      }
-    } else if (c === "?") re += "[^/]";
-    else re += c.replace(/[.+^${}()|[\]\\]/g, "\\$&");
+function emptyScan(): ScanResult {
+  return { added: [], changed: [], removed: [], linked: [], unlinked: [], warnings: [] };
+}
+
+/** File nodes are named by their path; definitions are named by their ID. */
+function isFileNode(node: TraceNode): boolean {
+  return node.location !== undefined && node.id === node.location;
+}
+
+/** Text files hash like definitions (line endings and trailing spaces ignored); binary files hash by bytes. */
+export function fileHash(abs: string): string {
+  const bytes = readFileSync(abs);
+  if (bytes.subarray(0, 8000).includes(0)) {
+    return `sha256:${createHash("sha256").update(bytes).digest("hex").slice(0, 16)}`;
   }
-  return new RegExp(`^${re}$`).test(path);
+  return contentHash(bytes.toString("utf8"));
+}
+
+const matchers = new Map<string, (path: string) => boolean>();
+function matches(pattern: string, path: string): boolean {
+  let m = matchers.get(pattern);
+  if (!m) matchers.set(pattern, (m = picomatch(pattern, { dot: true })));
+  return m(path);
 }
 
 export class Project {
@@ -130,7 +139,7 @@ export class Project {
   }
 
   /** Creates `.coreflow/` with a default config. Leaves an existing config alone. */
-  static init(root: string, options: { now?: () => Date; config?: Partial<CoreflowConfig> } = {}): Project {
+  static init(root: string, options: { now?: () => Date; config?: CoreflowConfigInput } = {}): Project {
     const dir = join(root, COREFLOW_DIR);
     const configPath = join(dir, CONFIG_FILE);
     if (!existsSync(configPath)) {
@@ -158,71 +167,68 @@ export class Project {
   }
 
   isExcluded(rel: string): boolean {
-    return this.config.exclude.some((p) => simpleMatch(p, rel)) || rel.startsWith(`${COREFLOW_DIR}/`);
+    return this.config.exclude.some((p) => matches(p, rel)) || rel.startsWith(`${COREFLOW_DIR}/`);
   }
 
   isDefinitionFile(rel: string): boolean {
-    return this.config.include.some((p) => simpleMatch(p, rel));
+    return this.config.include.some((p) => matches(p, rel));
   }
 
   fileType(rel: string): NodeType {
-    return new RegExp(this.config.testPattern).test(rel) ? "test" : "code";
+    if (new RegExp(this.config.testPattern).test(rel)) return "test";
+    return this.config.fileTypes.find((t) => matches(t.glob, rel))?.type ?? "code";
   }
 
   // ---------------------------------------------------------------- scanning
 
-  /** Brings the graph in line with the files: new and changed definitions, deleted files. */
+  /** Brings the graph in line with the files: definitions, citations, sections, file hashes. */
   async scan(): Promise<ScanResult> {
-    const result: ScanResult = { added: [], changed: [], removed: [], linked: [], warnings: [] };
-    const files = await glob(this.config.include, {
-      cwd: this.root,
-      ignore: this.config.exclude,
-      onlyFiles: true,
-    });
-    const seen = new Set<string>();
-    const scannedFiles = new Set(files.map(toPosix));
-    for (const file of [...scannedFiles].sort()) {
-      this.applyDefinitions(file, seen, result);
-    }
+    const result = emptyScan();
+    const files = await glob(this.config.include, { cwd: this.root, ignore: this.config.exclude, onlyFiles: true });
+    const scanned = [...new Set(files.map(toPosix))].sort();
+    const defs = scanned.flatMap((file) => this.readDefinitions(file, result));
+    const seen = this.applyNodes(defs, result);
+    this.applyLinks(defs, seen, result);
 
     for (const node of this.graph.listNodes()) {
       if (seen.has(node.id)) continue;
-      if (isMarkdownLocation(node.location)) {
-        const file = node.location!.split("#")[0]!;
-        this.markRemoved(node, existsSync(join(this.root, file)) ? `definition removed from ${file}` : `${file} deleted`, result);
-      } else if (node.location && (node.type === "code" || node.type === "test")) {
-        this.refreshFile(node, result);
-      }
+      if (isFileNode(node)) this.refreshFile(node, result);
+      else if (isMarkdownLocation(node.location)) this.handleMissing(node, result);
     }
     return result;
   }
 
   /** Re-reads one Markdown file. */
   scanFile(rel: string): ScanResult {
-    const result: ScanResult = { added: [], changed: [], removed: [], linked: [], warnings: [] };
-    const seen = new Set<string>();
-    this.applyDefinitions(rel, seen, result);
+    const result = emptyScan();
+    const defs = this.readDefinitions(rel, result);
+    const seen = this.applyNodes(defs, result);
+    this.applyLinks(defs, seen, result);
     for (const node of this.graph.listNodes()) {
-      if (seen.has(node.id) || !isMarkdownLocation(node.location)) continue;
-      if (node.location!.split("#")[0] === rel) this.markRemoved(node, `definition removed from ${rel}`, result);
+      if (seen.has(node.id) || isFileNode(node) || !isMarkdownLocation(node.location)) continue;
+      if (node.location!.split("#")[0] === rel) this.handleMissing(node, result);
     }
     return result;
   }
 
-  private applyDefinitions(rel: string, seen: Set<string>, result: ScanResult): void {
+  private readDefinitions(rel: string, result: ScanResult): MarkdownDefinition[] {
     const abs = join(this.root, rel);
-    if (!existsSync(abs)) return;
-    let defs: MarkdownDefinition[];
+    if (!existsSync(abs)) return [];
     try {
-      defs = extractDefinitions(rel, readFileSync(abs, "utf8"), this.config.prefixes);
+      return extractDefinitions(rel, readFileSync(abs, "utf8"), this.config.prefixes);
     } catch (error) {
       result.warnings.push(`${rel}: ${(error as Error).message}`);
-      return;
+      return [];
     }
+  }
+
+  private applyNodes(defs: MarkdownDefinition[], result: ScanResult): Set<string> {
+    const seen = new Set<string>();
     for (const def of defs) {
       if (seen.has(def.node.id)) {
         const first = this.graph.getNode(def.node.id)?.location;
-        result.warnings.push(`${def.node.id} is defined in ${first} and again in ${rel}:${def.line}; using the first`);
+        result.warnings.push(`${def.node.id} is defined in ${first} and again in ${def.node.location} (line ${def.line}); using the first`);
+        def.duplicate = true;
         continue;
       }
       seen.add(def.node.id);
@@ -239,20 +245,59 @@ export class Project {
         }
       }
     }
-    // Declared links go in after every node in the file exists.
+    return seen;
+  }
+
+  /**
+   * Makes the links written in the files match the graph: `derived_from` from front-matter,
+   * `cites` from `[ID]` citations, and `depends_on` from each section to its document.
+   * Links that were written in a file and are no longer there are removed.
+   */
+  private applyLinks(defs: MarkdownDefinition[], seen: Set<string>, result: ScanResult): void {
     for (const def of defs) {
-      for (const upstream of def.derivedFrom) {
-        if (!this.graph.getNode(upstream)) {
-          result.warnings.push(`${def.node.id} is derived from ${upstream}, which is not defined anywhere scanned`);
+      if (def.duplicate) continue;
+      const to = def.node.id;
+      const wanted: { from: string; type: LinkType }[] = [
+        ...def.derivedFrom.map((from) => ({ from, type: "derived_from" as const })),
+        ...def.cites.map((from) => ({ from, type: "cites" as const })),
+      ];
+      const keep = new Set<string>();
+      for (const { from, type } of wanted) {
+        if (!this.graph.getNode(from)) {
+          const how = type === "cites" ? "cites" : "is derived from";
+          result.warnings.push(`${to} ${how} ${from}, which is not defined anywhere scanned`);
           continue;
         }
-        const exists = this.graph.linksTo(def.node.id).some((l) => l.from === upstream && l.type === "derived_from");
-        if (!exists) {
-          this.graph.link({ from: upstream, to: def.node.id, type: "derived_from" });
-          result.linked.push(`${upstream} -> ${def.node.id}`);
-        }
+        if (from === to) continue;
+        keep.add(`${from} ${type}`);
+        this.addTextLink(from, to, type, result);
+      }
+      // A document depends on each of its sections.
+      if (def.partOf && seen.has(def.partOf)) this.addTextLink(to, def.partOf, "depends_on", result);
+
+      for (const link of this.graph.linksTo(to)) {
+        if (!link.fromText || link.type === "depends_on" || keep.has(`${link.from} ${link.type}`)) continue;
+        this.graph.unlink(link.from, to, link.type);
+        result.unlinked.push(`${link.from} -> ${to}`);
       }
     }
+  }
+
+  private addTextLink(from: string, to: string, type: LinkType, result: ScanResult): void {
+    if (this.graph.linksTo(to).some((l) => l.from === from && l.type === type)) return;
+    this.graph.link({ from, to, type, fromText: true });
+    result.linked.push(`${from} -> ${to}`);
+  }
+
+  /** A definition that is gone. Sections just disappear (their document changed too); anything else is marked changed. */
+  private handleMissing(node: TraceNode, result: ScanResult): void {
+    if (node.kind === "section") {
+      this.graph.removeNode(node.id);
+      result.removed.push(node.id);
+      return;
+    }
+    const file = node.location!.split("#")[0]!;
+    this.markRemoved(node, existsSync(join(this.root, file)) ? `definition removed from ${file}` : `${file} deleted`, result);
   }
 
   private markRemoved(node: TraceNode, reason: string, result: ScanResult): void {
@@ -267,17 +312,17 @@ export class Project {
       this.markRemoved(node, `${node.location} deleted`, result);
       return;
     }
-    const hash = contentHash(readFileSync(abs, "utf8"));
+    const hash = fileHash(abs);
     if (hash !== node.hash) {
       this.graph.updateContent(node.id, hash);
       result.changed.push(node.id);
     }
   }
 
-  /** Adds or rehashes a code or test file node. The node ID is the repo-relative path. */
+  /** Adds or rehashes a file node (code, test, deck, PDF...). The node ID is the repo-relative path. */
   ensureFileNode(rel: string): TraceNode {
     const abs = join(this.root, rel);
-    const hash = existsSync(abs) ? contentHash(readFileSync(abs, "utf8")) : undefined;
+    const hash = existsSync(abs) ? fileHash(abs) : undefined;
     const existing = this.graph.getNode(rel);
     if (existing) {
       if (hash && existing.hash !== hash) return this.graph.updateContent(rel, hash);

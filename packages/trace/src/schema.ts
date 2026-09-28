@@ -54,6 +54,10 @@ export const TraceNode = z.object({
   location: z.string().optional(),
   /** Content hash of the node's current text. Absent for nodes whose content is not tracked. */
   hash: z.string().optional(),
+  /** Finer grouping than `type`, e.g. "business-case" or "deck" for artifacts, "section" for parts of a document. */
+  kind: z.string().optional(),
+  /** Lifecycle stage the node belongs to, e.g. "business-case". Gates collect their stage's nodes by this. */
+  stage: z.string().optional(),
   /** Set when a node changed in a way a hash cannot show, e.g. a finding was retracted. */
   changed: z
     .object({ reason: z.string(), at: z.string() })
@@ -72,6 +76,8 @@ export const TraceLink = z.object({
   upstreamHash: z.string().optional(),
   createdAt: z.string(),
   confirmedAt: z.string().optional(),
+  /** True when the link is written in the files (a citation or `derived_from`); scans add and remove it to match. */
+  fromText: z.boolean().optional(),
 });
 export type TraceLink = z.infer<typeof TraceLink>;
 export type TraceLinkInput = z.input<typeof TraceLink>;

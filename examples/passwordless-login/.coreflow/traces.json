@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "ART-1",
+      "type": "artifact",
+      "title": "Passwordless login",
+      "location": "docs/artifacts/art-1-passwordless-login.md",
+      "hash": "sha256:30a1883edec68417",
+      "kind": "business-case",
+      "stage": "business-case"
+    },
+    {
+      "id": "ART-1#costs",
+      "type": "artifact",
+      "title": "Costs",
+      "location": "docs/artifacts/art-1-passwordless-login.md#costs",
+      "hash": "sha256:f134b3976e633619",
+      "kind": "section"
+    },
+    {
+      "id": "ART-1#decision-requested",
+      "type": "artifact",
+      "title": "Decision requested",
+      "location": "docs/artifacts/art-1-passwordless-login.md#decision-requested",
+      "hash": "sha256:e61bab3e708ba7dc",
+      "kind": "section"
+    },
+    {
+      "id": "ART-1#opportunity",
+      "type": "artifact",
+      "title": "Opportunity",
+      "location": "docs/artifacts/art-1-passwordless-login.md#opportunity",
+      "hash": "sha256:335c4a5d959370b4",
+      "kind": "section"
+    },
+    {
+      "id": "ART-1#problem",
+      "type": "artifact",
+      "title": "Problem",
+      "location": "docs/artifacts/art-1-passwordless-login.md#problem",
+      "hash": "sha256:8782251e3cb896ff",
+      "kind": "section"
+    },
+    {
+      "id": "ART-1#proposed-solution",
+      "type": "artifact",
+      "title": "Proposed solution",
+      "location": "docs/artifacts/art-1-passwordless-login.md#proposed-solution",
+      "hash": "sha256:862acd43c4481103",
+      "kind": "section"
+    },
+    {
+      "id": "ART-1#risks-and-mitigations",
+      "type": "artifact",
+      "title": "Risks and mitigations",
+      "location": "docs/artifacts/art-1-passwordless-login.md#risks-and-mitigations",
+      "hash": "sha256:237cb851d7bf5c3e",
+      "kind": "section"
+    },
+    {
+      "id": "ART-2",
+      "type": "artifact",
+      "title": "Passwordless login: pitch",
+      "location": "docs/artifacts/art-2-passwordless-pitch.md",
+      "hash": "sha256:33f6c3820834e655",
+      "kind": "deck",
+      "stage": "business-case"
+    },
+    {
+      "id": "ART-2#the-decision-we-need",
+      "type": "artifact",
+      "title": "The decision we need",
+      "location": "docs/artifacts/art-2-passwordless-pitch.md#the-decision-we-need",
+      "hash": "sha256:a5263ef2e9d30857",
+      "kind": "section"
+    },
+    {
+      "id": "ART-2#the-opportunity",
+      "type": "artifact",
+      "title": "The opportunity",
+      "location": "docs/artifacts/art-2-passwordless-pitch.md#the-opportunity",
+      "hash": "sha256:14f315e29db32c4d",
+      "kind": "section"
+    },
+    {
+      "id": "ART-2#the-problem",
+      "type": "artifact",
+      "title": "The problem",
+      "location": "docs/artifacts/art-2-passwordless-pitch.md#the-problem",
+      "hash": "sha256:104be59f5b34da1e",
+      "kind": "section"
+    },
+    {
+      "id": "EV-1",
+      "type": "evidence",
+      "title": "Interviews with 6 mobile customers, 8-12 Sep 2026. 4 of 6 said they had abandoned a purchase at t...",
+      "location": "research/interviews.md#EV-1",
+      "hash": "sha256:a51e0aceded42b06"
+    },
+    {
+      "id": "EV-2",
+      "type": "evidence",
+      "title": "Support ticket export, Aug 2026. 1,840 of 6,120 tickets (30%) were password resets.",
+      "location": "research/interviews.md#EV-2",
+      "hash": "sha256:d29e63e663b2527e"
+    },
+    {
+      "id": "EV-3",
+      "type": "evidence",
+      "title": "Analytics funnel, Aug 2026. 22% of mobile sessions that reach login leave without signing in, aga...",
+      "location": "research/interviews.md#EV-3",
+      "hash": "sha256:bf6febec331a67b0"
+    },
+    {
+      "id": "INS-1",
+      "type": "insight",
+      "title": "Mobile users drop out at the password step far more than desktop users.",
+      "location": "docs/insights.md#INS-1",
+      "hash": "sha256:2accca70d6fb60a4"
+    },
+    {
+      "id": "INS-2",
+      "type": "insight",
+      "title": "Password resets are the largest single source of support tickets.",
+      "location": "docs/insights.md#INS-2",
+      "hash": "sha256:5fa2dac79a19e7f5"
+    }
+  ],
+  "links": [
+    {
+      "from": "ART-1",
+      "to": "ART-2",
+      "type": "derived_from",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:30a1883edec68417",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#costs",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:f134b3976e633619",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#decision-requested",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e61bab3e708ba7dc",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#opportunity",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:335c4a5d959370b4",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#problem",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:8782251e3cb896ff",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#proposed-solution",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:862acd43c4481103",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-1#risks-and-mitigations",
+      "to": "ART-1",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:237cb851d7bf5c3e",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-2#the-decision-we-need",
+      "to": "ART-2",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:a5263ef2e9d30857",
+      "createdAt": "2026-09-28T07:58:40.532Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-2#the-opportunity",
+      "to": "ART-2",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:14f315e29db32c4d",
+      "createdAt": "2026-09-28T07:58:40.532Z",
+      "fromText": true
+    },
+    {
+      "from": "ART-2#the-problem",
+      "to": "ART-2",
+      "type": "depends_on",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:104be59f5b34da1e",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "EV-1",
+      "to": "INS-1",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:a51e0aceded42b06",
+      "createdAt": "2026-09-28T07:58:40.532Z",
+      "fromText": true
+    },
+    {
+      "from": "EV-2",
+      "to": "INS-2",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:d29e63e663b2527e",
+      "createdAt": "2026-09-28T07:58:40.532Z",
+      "fromText": true
+    },
+    {
+      "from": "EV-3",
+      "to": "INS-1",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:bf6febec331a67b0",
+      "createdAt": "2026-09-28T07:58:40.532Z",
+      "fromText": true
+    },
+    {
+      "from": "INS-1",
+      "to": "ART-1#problem",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:2accca70d6fb60a4",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "INS-1",
+      "to": "ART-2#the-problem",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:2accca70d6fb60a4",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "INS-2",
+      "to": "ART-1#opportunity",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5fa2dac79a19e7f5",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    },
+    {
+      "from": "INS-2",
+      "to": "ART-2#the-opportunity",
+      "type": "cites",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:5fa2dac79a19e7f5",
+      "createdAt": "2026-09-28T07:58:40.531Z",
+      "fromText": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "approvals": [
+    {
+      "gate": "G-BC",
+      "by": "example-pm",
+      "at": "2026-09-28T07:58:45.904Z",
+      "hashes": {
+        "ART-1": "sha256:30a1883edec68417",
+        "ART-2": "sha256:33f6c3820834e655"
+      }
+    }
+  ]
+}

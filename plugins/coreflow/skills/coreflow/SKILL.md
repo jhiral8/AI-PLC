@@ -1,6 +1,6 @@
 ---
 name: coreflow
-description: Use when working on a requirement, insight, spec or other ID such as REQ-7, FR-006 or INS-3; when asked what a change affects, what is stale or suspect, or where something came from; or before building on a requirement. Traces research to requirements to specs, code and tests with CoreFlow.
+description: Use when working on a requirement, insight, spec or other ID such as REQ-7, FR-006 or INS-3; when writing a PM artifact (market sizing, competitive analysis, business case, deck); when asked what a change affects, what is stale or suspect, whether a stage gate passes, or where something came from. Traces research to insights, requirements, PM artifacts, specs, code and tests with CoreFlow.
 ---
 
 # CoreFlow traces
@@ -15,10 +15,33 @@ IDs are defined in Markdown under `specs/` and `docs/` (configurable in `.corefl
 
 - Bold inline: `- **FR-006**: The system MUST ...`
 - Headings: `### REQ-12: Passwordless login`
-- Front-matter: `id: ART-2` and `type: artifact`, with `derived_from: [INS-1]` for upstream links
+- Front-matter: `id: ART-2`, `type: artifact`, optional `kind`, `stage` and
+  `derived_from: [INS-1]`. Each `##` section becomes its own node, such as `ART-2#problem`.
+
+Citations are bracketed IDs anywhere in the text: `[INS-3]` or `[INS-3, EV-2]`. Each one links
+the cited item to the section (or definition) it appears in, so a change flags exactly the
+sections and slides that relied on it. Deleting a citation removes the link.
 
 Prefixes map to types: EV evidence, INS insight, REQ/FR/NFR/SC/US requirement, DEC decision,
-ART artifact, DES design, SPEC spec. Code and test files are nodes named by their path.
+ART artifact, DES design, SPEC spec. Files linked by path are named by their path: code,
+tests, and artifacts such as decks and PDFs (files under `research/` or `evidence/` are evidence).
+
+## PM artifacts
+
+- Create them with `coreflow_new_artifact` (templates: market-sizing, competitive-analysis,
+  business-case, deck, plus any in `.coreflow/templates/`). Pass `from` with what the artifact
+  is based on, such as the business case a deck presents.
+- Fill every section. Cite the insight or evidence behind each claim in that section. If a
+  claim has no source, say so to the user instead of inventing one.
+- A deck is Markdown with one `##` section per slide, so each slide traces to its sources.
+
+## Gates
+
+`coreflow_gate` checks whether a stage can close: required artifacts exist, trace back to
+evidence, nothing is suspect, and a person approved the current content. Report each failing
+check and what would fix it. Never approve a gate or suggest you can: approval is a person's
+decision, recorded with `coreflow approve <gate> --by <name>` in a terminal, and it lapses
+when approved content changes.
 
 ## While you work
 
@@ -48,6 +71,8 @@ ART artifact, DES design, SPEC spec. Code and test files are nodes named by thei
 | `coreflow_confirm` | Mark a reviewed item as still holding. |
 | `coreflow_mark_changed` | Flag a change a hash cannot show. |
 | `coreflow_work` | Set the IDs new files are linked to. |
+| `coreflow_new_artifact` | Create a PM artifact from a template. |
+| `coreflow_gate` | Check whether a lifecycle stage can close. |
 
-The same operations are available as a CLI: `coreflow scan|link|trace|suspects|confirm|mark-changed|work`.
+The same operations are available as a CLI: `coreflow scan|link|trace|suspects|confirm|mark-changed|work|new|gate`, plus `approve` for people.
 `coreflow suspects --check` exits 1 when anything is suspect, for CI.

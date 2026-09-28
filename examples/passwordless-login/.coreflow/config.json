@@ -1,0 +1,14 @@
+{
+  "include": ["research/**/*.md", "docs/**/*.md"],
+  "gates": [
+    {
+      "id": "G-BC",
+      "stage": "business-case",
+      "title": "Business case ready for funding",
+      "requires": [
+        { "kind": "business-case", "label": "business case" },
+        { "kind": "deck", "label": "pitch deck" }
+      ]
+    }
+  ]
+}

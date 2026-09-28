@@ -3,6 +3,8 @@
  */
 
 import type { SuspectItem, TraceGraph, TraceNode } from "@coreflow/trace";
+import type { GateReport } from "./gates";
+import type { ScanResult } from "./project";
 
 function label(node: TraceNode): string {
   const title = node.title ? ` ${node.title}` : "";
@@ -43,16 +45,31 @@ export function formatTrace(graph: TraceGraph, id: string, direction: "up" | "do
   return lines.join("\n");
 }
 
-export function formatScan(result: { added: string[]; changed: string[]; removed: string[]; linked: string[]; warnings: string[] }): string {
+export function formatScan(result: ScanResult): string {
   const parts = [
     `${result.added.length} added`,
     `${result.changed.length} changed`,
     `${result.removed.length} removed`,
-    `${result.linked.length} declared links added`,
+    `${result.linked.length} links from the text added`,
   ];
+  if (result.unlinked.length) parts.push(`${result.unlinked.length} removed from the text`);
   const lines = [`Scanned: ${parts.join(", ")}.`];
   if (result.changed.length) lines.push(`Changed: ${result.changed.join(", ")}`);
   if (result.removed.length) lines.push(`Removed: ${result.removed.join(", ")}`);
   for (const w of result.warnings) lines.push(`Warning: ${w}`);
+  return lines.join("\n");
+}
+
+export function formatGate(report: GateReport): string {
+  const verdict = { passed: "PASSED", blocked: "BLOCKED", warning: "PASSED WITH WARNINGS" }[report.status];
+  const lines = [`Gate ${report.gateId}${report.title ? ` (${report.title})` : ""}, stage "${report.stage}": ${verdict}`];
+  lines.push(`  Items: ${report.items.length ? report.items.join(", ") : "(none)"}`);
+  for (const check of report.checks) {
+    lines.push(`  ${check.passed ? "ok  " : check.severity === "error" ? "FAIL" : "warn"} ${check.name}: ${check.message}`);
+  }
+  for (const stale of report.staleApprovals) {
+    lines.push(`  Approval by ${stale.by} no longer counts: ${stale.reason}`);
+  }
+  for (const rec of report.recommendations) lines.push(`  Next: ${rec}`);
   return lines.join("\n");
 }

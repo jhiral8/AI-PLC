@@ -8,9 +8,9 @@ and lifecycle gates won't pass until those items are reviewed.
 It is built to run inside the coding agents people already use (Claude Code, Kiro, and tools
 that load the Agent Plugins format) rather than as another IDE.
 
-> Status: early. The trace graph, CLI, MCP server and the Claude Code plugin / Kiro power work
-> and are tested. Lifecycle stages, research and artifact generation are next. See
-> [spec 006](specs/006-coreflow-evidence-lifecycle/spec.md).
+> Status: early. The trace graph, CLI, MCP server, Claude Code plugin / Kiro power, PM artifact
+> templates with citations, and stage gates work and are tested. Research ingestion and deck
+> rendering are next. See [spec 006](specs/006-coreflow-evidence-lifecycle/spec.md).
 
 ## Try it
 
@@ -33,6 +33,36 @@ CoreFlow reads IDs from Markdown under `specs/` and `docs/`: `- **FR-001**: ...`
 or front-matter `id:` / `type:` / `derived_from:`. Once installed, naming an ID in a prompt
 ("implement REQ-7") links the files the agent writes to it. Change REQ-7 later and
 `coreflow suspects` lists those files and tests until someone confirms them.
+
+## PM artifacts and gates
+
+```bash
+coreflow new --list
+coreflow new business-case "Passwordless login" --from INS-1
+coreflow new deck "Passwordless pitch" --from ART-1
+coreflow gate                          # which stages can close, and why not
+coreflow approve business-case --by craig
+```
+
+Artifacts are Markdown with front-matter (`id`, `type: artifact`, `kind`, `stage`,
+`derived_from`). Every `##` section is traced on its own, and a citation such as `[INS-3]` in a
+section links that insight to it, so when INS-3 changes only the sections and slides that cite
+it are flagged. Gates are defined in `.coreflow/config.json`:
+
+```json
+"gates": [{
+  "id": "G-BC", "stage": "business-case",
+  "requires": [{ "kind": "business-case" }, { "kind": "deck" }]
+}]
+```
+
+A gate passes when the stage's artifacts exist, trace back to evidence, nothing in them is
+suspect, and a person has approved the current content. Approvals lapse when approved content
+changes. Agents can run gates but not approve them. Templates: market sizing and competitive
+analysis (adapted from [pm-skills](https://github.com/product-on-purpose/pm-skills), Apache-2.0,
+see [notices](THIRD_PARTY_NOTICES.md)), business case and deck. Add your own in
+`.coreflow/templates/`. [examples/passwordless-login](examples/passwordless-login) walks
+through one idea from evidence to a passing gate.
 
 This repository traces itself: `.coreflow/traces.json` links spec 006's requirements to the
 code and tests that implement them, and CI fails if any of them is suspect.
@@ -74,7 +104,7 @@ Requires Node 22+ and pnpm 9.
 ```bash
 pnpm install
 pnpm check    # typecheck + tests
-pnpm bundle   # rebuild plugins/coreflow/scripts after changing cli, mcp, store or trace
+pnpm bundle   # rebuild plugins/coreflow/scripts after changing cli, mcp, store, gates or trace
 pnpm coreflow suspects   # run the CLI from source
 ```
 

@@ -40,6 +40,1782 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/constants.js
+var require_constants = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/constants.js"(exports, module) {
+    "use strict";
+    var WIN_SLASH = "\\\\/";
+    var WIN_NO_SLASH = `[^${WIN_SLASH}]`;
+    var DEFAULT_MAX_EXTGLOB_RECURSION = 0;
+    var DOT_LITERAL = "\\.";
+    var PLUS_LITERAL = "\\+";
+    var QMARK_LITERAL = "\\?";
+    var SLASH_LITERAL = "\\/";
+    var ONE_CHAR = "(?=.)";
+    var QMARK = "[^/]";
+    var END_ANCHOR = `(?:${SLASH_LITERAL}|$)`;
+    var START_ANCHOR = `(?:^|${SLASH_LITERAL})`;
+    var DOTS_SLASH = `${DOT_LITERAL}{1,2}${END_ANCHOR}`;
+    var NO_DOT = `(?!${DOT_LITERAL})`;
+    var NO_DOTS = `(?!${START_ANCHOR}${DOTS_SLASH})`;
+    var NO_DOT_SLASH = `(?!${DOT_LITERAL}{0,1}${END_ANCHOR})`;
+    var NO_DOTS_SLASH = `(?!${DOTS_SLASH})`;
+    var QMARK_NO_DOT = `[^.${SLASH_LITERAL}]`;
+    var STAR = `${QMARK}*?`;
+    var SEP = "/";
+    var POSIX_CHARS = {
+      DOT_LITERAL,
+      PLUS_LITERAL,
+      QMARK_LITERAL,
+      SLASH_LITERAL,
+      ONE_CHAR,
+      QMARK,
+      END_ANCHOR,
+      DOTS_SLASH,
+      NO_DOT,
+      NO_DOTS,
+      NO_DOT_SLASH,
+      NO_DOTS_SLASH,
+      QMARK_NO_DOT,
+      STAR,
+      START_ANCHOR,
+      SEP
+    };
+    var WINDOWS_CHARS = {
+      ...POSIX_CHARS,
+      SLASH_LITERAL: `[${WIN_SLASH}]`,
+      QMARK: WIN_NO_SLASH,
+      STAR: `${WIN_NO_SLASH}*?`,
+      DOTS_SLASH: `${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$)`,
+      NO_DOT: `(?!${DOT_LITERAL})`,
+      NO_DOTS: `(?!(?:^|[${WIN_SLASH}])${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
+      NO_DOT_SLASH: `(?!${DOT_LITERAL}{0,1}(?:[${WIN_SLASH}]|$))`,
+      NO_DOTS_SLASH: `(?!${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
+      QMARK_NO_DOT: `[^.${WIN_SLASH}]`,
+      START_ANCHOR: `(?:^|[${WIN_SLASH}])`,
+      END_ANCHOR: `(?:[${WIN_SLASH}]|$)`,
+      SEP: "\\"
+    };
+    var POSIX_REGEX_SOURCE = {
+      __proto__: null,
+      alnum: "a-zA-Z0-9",
+      alpha: "a-zA-Z",
+      ascii: "\\x00-\\x7F",
+      blank: " \\t",
+      cntrl: "\\x00-\\x1F\\x7F",
+      digit: "0-9",
+      graph: "\\x21-\\x7E",
+      lower: "a-z",
+      print: "\\x20-\\x7E ",
+      punct: "\\-!\"#$%&'()\\*+,./:;<=>?@[\\]^_`{|}~",
+      space: " \\t\\r\\n\\v\\f",
+      upper: "A-Z",
+      word: "A-Za-z0-9_",
+      xdigit: "A-Fa-f0-9"
+    };
+    module.exports = {
+      DEFAULT_MAX_EXTGLOB_RECURSION,
+      MAX_LENGTH: 1024 * 64,
+      POSIX_REGEX_SOURCE,
+      // regular expressions
+      REGEX_BACKSLASH: /\\(?![*+?^${}(|)[\]])/g,
+      REGEX_NON_SPECIAL_CHARS: /^[^@![\].,$*+?^{}()|\\/]+/,
+      REGEX_SPECIAL_CHARS: /[-*+?.^${}(|)[\]]/,
+      REGEX_SPECIAL_CHARS_BACKREF: /(\\?)((\W)(\3*))/g,
+      REGEX_SPECIAL_CHARS_GLOBAL: /([-*+?.^${}(|)[\]])/g,
+      REGEX_REMOVE_BACKSLASH: /(?:\[.*?[^\\]\]|\\(?=.))/g,
+      // Replace globs with equivalent patterns to reduce parsing time.
+      REPLACEMENTS: {
+        __proto__: null,
+        "***": "*",
+        "**/**": "**",
+        "**/**/**": "**"
+      },
+      // Digits
+      CHAR_0: 48,
+      /* 0 */
+      CHAR_9: 57,
+      /* 9 */
+      // Alphabet chars.
+      CHAR_UPPERCASE_A: 65,
+      /* A */
+      CHAR_LOWERCASE_A: 97,
+      /* a */
+      CHAR_UPPERCASE_Z: 90,
+      /* Z */
+      CHAR_LOWERCASE_Z: 122,
+      /* z */
+      CHAR_LEFT_PARENTHESES: 40,
+      /* ( */
+      CHAR_RIGHT_PARENTHESES: 41,
+      /* ) */
+      CHAR_ASTERISK: 42,
+      /* * */
+      // Non-alphabetic chars.
+      CHAR_AMPERSAND: 38,
+      /* & */
+      CHAR_AT: 64,
+      /* @ */
+      CHAR_BACKWARD_SLASH: 92,
+      /* \ */
+      CHAR_CARRIAGE_RETURN: 13,
+      /* \r */
+      CHAR_CIRCUMFLEX_ACCENT: 94,
+      /* ^ */
+      CHAR_COLON: 58,
+      /* : */
+      CHAR_COMMA: 44,
+      /* , */
+      CHAR_DOT: 46,
+      /* . */
+      CHAR_DOUBLE_QUOTE: 34,
+      /* " */
+      CHAR_EQUAL: 61,
+      /* = */
+      CHAR_EXCLAMATION_MARK: 33,
+      /* ! */
+      CHAR_FORM_FEED: 12,
+      /* \f */
+      CHAR_FORWARD_SLASH: 47,
+      /* / */
+      CHAR_GRAVE_ACCENT: 96,
+      /* ` */
+      CHAR_HASH: 35,
+      /* # */
+      CHAR_HYPHEN_MINUS: 45,
+      /* - */
+      CHAR_LEFT_ANGLE_BRACKET: 60,
+      /* < */
+      CHAR_LEFT_CURLY_BRACE: 123,
+      /* { */
+      CHAR_LEFT_SQUARE_BRACKET: 91,
+      /* [ */
+      CHAR_LINE_FEED: 10,
+      /* \n */
+      CHAR_NO_BREAK_SPACE: 160,
+      /* \u00A0 */
+      CHAR_PERCENT: 37,
+      /* % */
+      CHAR_PLUS: 43,
+      /* + */
+      CHAR_QUESTION_MARK: 63,
+      /* ? */
+      CHAR_RIGHT_ANGLE_BRACKET: 62,
+      /* > */
+      CHAR_RIGHT_CURLY_BRACE: 125,
+      /* } */
+      CHAR_RIGHT_SQUARE_BRACKET: 93,
+      /* ] */
+      CHAR_SEMICOLON: 59,
+      /* ; */
+      CHAR_SINGLE_QUOTE: 39,
+      /* ' */
+      CHAR_SPACE: 32,
+      /*   */
+      CHAR_TAB: 9,
+      /* \t */
+      CHAR_UNDERSCORE: 95,
+      /* _ */
+      CHAR_VERTICAL_LINE: 124,
+      /* | */
+      CHAR_ZERO_WIDTH_NOBREAK_SPACE: 65279,
+      /* \uFEFF */
+      /**
+       * Create EXTGLOB_CHARS
+       */
+      extglobChars(chars) {
+        return {
+          "!": { type: "negate", open: "(?:(?!(?:", close: `))${chars.STAR})` },
+          "?": { type: "qmark", open: "(?:", close: ")?" },
+          "+": { type: "plus", open: "(?:", close: ")+" },
+          "*": { type: "star", open: "(?:", close: ")*" },
+          "@": { type: "at", open: "(?:", close: ")" }
+        };
+      },
+      /**
+       * Create GLOB_CHARS
+       */
+      globChars(win32) {
+        return win32 === true ? WINDOWS_CHARS : POSIX_CHARS;
+      }
+    };
+  }
+});
+
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/utils.js
+var require_utils = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/utils.js"(exports) {
+    "use strict";
+    var {
+      REGEX_BACKSLASH,
+      REGEX_REMOVE_BACKSLASH,
+      REGEX_SPECIAL_CHARS,
+      REGEX_SPECIAL_CHARS_GLOBAL
+    } = require_constants();
+    exports.isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
+    exports.hasRegexChars = (str) => REGEX_SPECIAL_CHARS.test(str);
+    exports.isRegexChar = (str) => str.length === 1 && exports.hasRegexChars(str);
+    exports.escapeRegex = (str) => str.replace(REGEX_SPECIAL_CHARS_GLOBAL, "\\$1");
+    exports.toPosixSlashes = (str) => str.replace(REGEX_BACKSLASH, "/");
+    exports.isWindows = () => {
+      if (typeof navigator !== "undefined" && navigator.platform) {
+        const platform = navigator.platform.toLowerCase();
+        return platform === "win32" || platform === "windows";
+      }
+      if (typeof process !== "undefined" && process.platform) {
+        return process.platform === "win32";
+      }
+      return false;
+    };
+    exports.removeBackslashes = (str) => {
+      return str.replace(REGEX_REMOVE_BACKSLASH, (match) => {
+        return match === "\\" ? "" : match;
+      });
+    };
+    exports.escapeLast = (input, char, lastIdx) => {
+      const idx = input.lastIndexOf(char, lastIdx);
+      if (idx === -1) return input;
+      if (input[idx - 1] === "\\") return exports.escapeLast(input, char, idx - 1);
+      return `${input.slice(0, idx)}\\${input.slice(idx)}`;
+    };
+    exports.removePrefix = (input, state = {}) => {
+      let output = input;
+      if (output.startsWith("./")) {
+        output = output.slice(2);
+        state.prefix = "./";
+      }
+      return output;
+    };
+    exports.wrapOutput = (input, state = {}, options = {}) => {
+      const prepend = options.contains ? "" : "^";
+      const append = options.contains ? "" : "$";
+      let output = `${prepend}(?:${input})${append}`;
+      if (state.negated === true) {
+        output = `(?:^(?!${output}).*$)`;
+      }
+      return output;
+    };
+    exports.basename = (path, { windows } = {}) => {
+      const segs = path.split(windows ? /[\\/]/ : "/");
+      const last = segs[segs.length - 1];
+      if (last === "") {
+        return segs[segs.length - 2];
+      }
+      return last;
+    };
+  }
+});
+
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/scan.js
+var require_scan = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/scan.js"(exports, module) {
+    "use strict";
+    var utils = require_utils();
+    var {
+      CHAR_ASTERISK,
+      /* * */
+      CHAR_AT,
+      /* @ */
+      CHAR_BACKWARD_SLASH,
+      /* \ */
+      CHAR_COMMA,
+      /* , */
+      CHAR_DOT,
+      /* . */
+      CHAR_EXCLAMATION_MARK,
+      /* ! */
+      CHAR_FORWARD_SLASH,
+      /* / */
+      CHAR_LEFT_CURLY_BRACE,
+      /* { */
+      CHAR_LEFT_PARENTHESES,
+      /* ( */
+      CHAR_LEFT_SQUARE_BRACKET,
+      /* [ */
+      CHAR_PLUS,
+      /* + */
+      CHAR_QUESTION_MARK,
+      /* ? */
+      CHAR_RIGHT_CURLY_BRACE,
+      /* } */
+      CHAR_RIGHT_PARENTHESES,
+      /* ) */
+      CHAR_RIGHT_SQUARE_BRACKET
+      /* ] */
+    } = require_constants();
+    var isPathSeparator = (code) => {
+      return code === CHAR_FORWARD_SLASH || code === CHAR_BACKWARD_SLASH;
+    };
+    var depth = (token) => {
+      if (token.isPrefix !== true) {
+        token.depth = token.isGlobstar ? Infinity : 1;
+      }
+    };
+    var scan = (input, options) => {
+      const opts = options || {};
+      const length = input.length - 1;
+      const scanToEnd = opts.parts === true || opts.tokens === true || opts.scanToEnd === true;
+      const slashes = [];
+      const tokens = [];
+      const parts = [];
+      let str = input;
+      let index = -1;
+      let start = 0;
+      let lastIndex = 0;
+      let isBrace = false;
+      let isBracket = false;
+      let isGlob = false;
+      let isExtglob = false;
+      let isGlobstar = false;
+      let braceEscaped = false;
+      let backslashes = false;
+      let negated = false;
+      let negatedExtglob = false;
+      let finished = false;
+      let braces = 0;
+      let prev;
+      let code;
+      let token = { value: "", depth: 0, isGlob: false };
+      const eos = () => index >= length;
+      const peek = () => str.charCodeAt(index + 1);
+      const advance = () => {
+        prev = code;
+        return str.charCodeAt(++index);
+      };
+      while (index < length) {
+        code = advance();
+        let next;
+        if (code === CHAR_BACKWARD_SLASH) {
+          backslashes = token.backslashes = true;
+          code = advance();
+          if (code === CHAR_LEFT_CURLY_BRACE) {
+            braceEscaped = true;
+          }
+          continue;
+        }
+        if (braceEscaped === true || code === CHAR_LEFT_CURLY_BRACE) {
+          braces++;
+          while (eos() !== true && (code = advance())) {
+            if (code === CHAR_BACKWARD_SLASH) {
+              backslashes = token.backslashes = true;
+              advance();
+              continue;
+            }
+            if (code === CHAR_LEFT_CURLY_BRACE) {
+              braces++;
+              continue;
+            }
+            if (braceEscaped !== true && code === CHAR_DOT && (code = advance()) === CHAR_DOT) {
+              isBrace = token.isBrace = true;
+              isGlob = token.isGlob = true;
+              finished = true;
+              if (scanToEnd === true) {
+                continue;
+              }
+              break;
+            }
+            if (braceEscaped !== true && code === CHAR_COMMA) {
+              isBrace = token.isBrace = true;
+              isGlob = token.isGlob = true;
+              finished = true;
+              if (scanToEnd === true) {
+                continue;
+              }
+              break;
+            }
+            if (code === CHAR_RIGHT_CURLY_BRACE) {
+              braces--;
+              if (braces === 0) {
+                braceEscaped = false;
+                isBrace = token.isBrace = true;
+                finished = true;
+                break;
+              }
+            }
+          }
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+        if (code === CHAR_FORWARD_SLASH) {
+          slashes.push(index);
+          tokens.push(token);
+          token = { value: "", depth: 0, isGlob: false };
+          if (finished === true) continue;
+          if (prev === CHAR_DOT && index === start + 1) {
+            start += 2;
+            continue;
+          }
+          lastIndex = index + 1;
+          continue;
+        }
+        if (opts.noext !== true) {
+          const isExtglobChar = code === CHAR_PLUS || code === CHAR_AT || code === CHAR_ASTERISK || code === CHAR_QUESTION_MARK || code === CHAR_EXCLAMATION_MARK;
+          if (isExtglobChar === true && peek() === CHAR_LEFT_PARENTHESES) {
+            isGlob = token.isGlob = true;
+            isExtglob = token.isExtglob = true;
+            finished = true;
+            if (code === CHAR_EXCLAMATION_MARK && index === start) {
+              negatedExtglob = true;
+            }
+            if (scanToEnd === true) {
+              let parens = 0;
+              while (eos() !== true && (code = advance())) {
+                if (code === CHAR_BACKWARD_SLASH) {
+                  backslashes = token.backslashes = true;
+                  advance();
+                  continue;
+                }
+                if (code === CHAR_LEFT_PARENTHESES) {
+                  parens++;
+                  continue;
+                }
+                if (code === CHAR_RIGHT_PARENTHESES && --parens === 0) {
+                  finished = true;
+                  break;
+                }
+              }
+              continue;
+            }
+            break;
+          }
+        }
+        if (code === CHAR_ASTERISK) {
+          if (prev === CHAR_ASTERISK) isGlobstar = token.isGlobstar = true;
+          isGlob = token.isGlob = true;
+          finished = true;
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+        if (code === CHAR_QUESTION_MARK) {
+          isGlob = token.isGlob = true;
+          finished = true;
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+        if (code === CHAR_LEFT_SQUARE_BRACKET) {
+          while (eos() !== true && (next = advance())) {
+            if (next === CHAR_BACKWARD_SLASH) {
+              backslashes = token.backslashes = true;
+              advance();
+              continue;
+            }
+            if (next === CHAR_RIGHT_SQUARE_BRACKET) {
+              isBracket = token.isBracket = true;
+              isGlob = token.isGlob = true;
+              finished = true;
+              break;
+            }
+          }
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+        if (opts.nonegate !== true && code === CHAR_EXCLAMATION_MARK && index === start) {
+          negated = token.negated = true;
+          start++;
+          continue;
+        }
+        if (opts.noparen !== true && code === CHAR_LEFT_PARENTHESES) {
+          isGlob = token.isGlob = true;
+          if (scanToEnd === true) {
+            let parens = 1;
+            while (eos() !== true && (code = advance())) {
+              if (code === CHAR_BACKWARD_SLASH) {
+                backslashes = token.backslashes = true;
+                advance();
+                continue;
+              }
+              if (code === CHAR_LEFT_PARENTHESES) {
+                parens++;
+                continue;
+              }
+              if (code === CHAR_RIGHT_PARENTHESES && --parens === 0) {
+                finished = true;
+                break;
+              }
+            }
+            continue;
+          }
+          break;
+        }
+        if (isGlob === true) {
+          finished = true;
+          if (scanToEnd === true) {
+            continue;
+          }
+          break;
+        }
+      }
+      if (opts.noext === true) {
+        isExtglob = false;
+        isGlob = false;
+      }
+      let base = str;
+      let prefix = "";
+      let glob2 = "";
+      if (start > 0) {
+        prefix = str.slice(0, start);
+        str = str.slice(start);
+        lastIndex -= start;
+      }
+      if (base && isGlob === true && lastIndex > 0) {
+        base = str.slice(0, lastIndex);
+        glob2 = str.slice(lastIndex);
+      } else if (isGlob === true) {
+        base = "";
+        glob2 = str;
+      } else {
+        base = str;
+      }
+      if (base && base !== "" && base !== "/" && base !== str) {
+        if (isPathSeparator(base.charCodeAt(base.length - 1))) {
+          base = base.slice(0, -1);
+        }
+      }
+      if (opts.unescape === true) {
+        if (glob2) glob2 = utils.removeBackslashes(glob2);
+        if (base && backslashes === true) {
+          base = utils.removeBackslashes(base);
+        }
+      }
+      const state = {
+        prefix,
+        input,
+        start,
+        base,
+        glob: glob2,
+        isBrace,
+        isBracket,
+        isGlob,
+        isExtglob,
+        isGlobstar,
+        negated,
+        negatedExtglob
+      };
+      if (opts.tokens === true) {
+        state.maxDepth = 0;
+        if (!isPathSeparator(code)) {
+          tokens.push(token);
+        }
+        state.tokens = tokens;
+      }
+      if (opts.parts === true || opts.tokens === true) {
+        let prevIndex;
+        for (let idx = 0; idx < slashes.length; idx++) {
+          const n2 = prevIndex !== void 0 ? prevIndex + 1 : start;
+          const i = slashes[idx];
+          const value2 = input.slice(n2, i);
+          if (opts.tokens) {
+            if (idx === 0 && start !== 0) {
+              tokens[idx].isPrefix = true;
+              tokens[idx].value = prefix;
+            } else {
+              tokens[idx].value = value2;
+            }
+            depth(tokens[idx]);
+            state.maxDepth += tokens[idx].depth;
+          }
+          if (i >= start) {
+            parts.push(value2);
+            prevIndex = i;
+          }
+        }
+        const n = prevIndex !== void 0 ? prevIndex + 1 : start;
+        const value = input.slice(n);
+        parts.push(value);
+        if (opts.tokens && prevIndex && prevIndex + 1 < input.length) {
+          tokens[tokens.length - 1].value = value;
+          depth(tokens[tokens.length - 1]);
+          state.maxDepth += tokens[tokens.length - 1].depth;
+        }
+        state.slashes = slashes;
+        state.parts = parts;
+      }
+      return state;
+    };
+    module.exports = scan;
+  }
+});
+
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/parse.js
+var require_parse = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/parse.js"(exports, module) {
+    "use strict";
+    var constants = require_constants();
+    var utils = require_utils();
+    var {
+      MAX_LENGTH,
+      POSIX_REGEX_SOURCE,
+      REGEX_NON_SPECIAL_CHARS,
+      REGEX_SPECIAL_CHARS_BACKREF,
+      REPLACEMENTS
+    } = constants;
+    var expandRange = (args, options) => {
+      if (typeof options.expandRange === "function") {
+        return options.expandRange(...args, options);
+      }
+      args.sort();
+      const value = `[${args.join("-")}]`;
+      try {
+        new RegExp(value);
+      } catch (ex) {
+        return args.map((v) => utils.escapeRegex(v)).join("..");
+      }
+      return value;
+    };
+    var syntaxError = (type, char) => {
+      return `Missing ${type}: "${char}" - use "\\\\${char}" to match literal characters`;
+    };
+    var splitTopLevel = (input) => {
+      const parts = [];
+      let bracket = 0;
+      let paren = 0;
+      let quote = 0;
+      let value = "";
+      let escaped = false;
+      for (const ch of input) {
+        if (escaped === true) {
+          value += ch;
+          escaped = false;
+          continue;
+        }
+        if (ch === "\\") {
+          value += ch;
+          escaped = true;
+          continue;
+        }
+        if (ch === '"') {
+          quote = quote === 1 ? 0 : 1;
+          value += ch;
+          continue;
+        }
+        if (quote === 0) {
+          if (ch === "[") {
+            bracket++;
+          } else if (ch === "]" && bracket > 0) {
+            bracket--;
+          } else if (bracket === 0) {
+            if (ch === "(") {
+              paren++;
+            } else if (ch === ")" && paren > 0) {
+              paren--;
+            } else if (ch === "|" && paren === 0) {
+              parts.push(value);
+              value = "";
+              continue;
+            }
+          }
+        }
+        value += ch;
+      }
+      parts.push(value);
+      return parts;
+    };
+    var isPlainBranch = (branch) => {
+      let escaped = false;
+      for (const ch of branch) {
+        if (escaped === true) {
+          escaped = false;
+          continue;
+        }
+        if (ch === "\\") {
+          escaped = true;
+          continue;
+        }
+        if (/[?*+@!()[\]{}]/.test(ch)) {
+          return false;
+        }
+      }
+      return true;
+    };
+    var normalizeSimpleBranch = (branch) => {
+      let value = branch.trim();
+      let changed = true;
+      while (changed === true) {
+        changed = false;
+        if (/^@\([^\\()[\]{}|]+\)$/.test(value)) {
+          value = value.slice(2, -1);
+          changed = true;
+        }
+      }
+      if (!isPlainBranch(value)) {
+        return;
+      }
+      return value.replace(/\\(.)/g, "$1");
+    };
+    var hasRepeatedCharPrefixOverlap = (branches) => {
+      const values = branches.map(normalizeSimpleBranch).filter(Boolean);
+      for (let i = 0; i < values.length; i++) {
+        for (let j = i + 1; j < values.length; j++) {
+          const a = values[i];
+          const b = values[j];
+          const char = a[0];
+          if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {
+            continue;
+          }
+          if (a === b || a.startsWith(b) || b.startsWith(a)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+    var parseRepeatedExtglob = (pattern, requireEnd = true) => {
+      if (pattern[0] !== "+" && pattern[0] !== "*" || pattern[1] !== "(") {
+        return;
+      }
+      let bracket = 0;
+      let paren = 0;
+      let quote = 0;
+      let escaped = false;
+      for (let i = 1; i < pattern.length; i++) {
+        const ch = pattern[i];
+        if (escaped === true) {
+          escaped = false;
+          continue;
+        }
+        if (ch === "\\") {
+          escaped = true;
+          continue;
+        }
+        if (ch === '"') {
+          quote = quote === 1 ? 0 : 1;
+          continue;
+        }
+        if (quote === 1) {
+          continue;
+        }
+        if (ch === "[") {
+          bracket++;
+          continue;
+        }
+        if (ch === "]" && bracket > 0) {
+          bracket--;
+          continue;
+        }
+        if (bracket > 0) {
+          continue;
+        }
+        if (ch === "(") {
+          paren++;
+          continue;
+        }
+        if (ch === ")") {
+          paren--;
+          if (paren === 0) {
+            if (requireEnd === true && i !== pattern.length - 1) {
+              return;
+            }
+            return {
+              type: pattern[0],
+              body: pattern.slice(2, i),
+              end: i
+            };
+          }
+        }
+      }
+    };
+    var buildCharClassStar = (chars) => {
+      const source = chars.length === 1 ? utils.escapeRegex(chars[0]) : `[${chars.map((ch) => utils.escapeRegex(ch)).join("")}]`;
+      return `${source}*`;
+    };
+    var getStarExtglobSequenceChars = (pattern) => {
+      let index = 0;
+      const chars = [];
+      while (index < pattern.length) {
+        const match = parseRepeatedExtglob(pattern.slice(index), false);
+        if (!match || match.type !== "*") {
+          return;
+        }
+        const branches = splitTopLevel(match.body).map((branch2) => branch2.trim());
+        if (branches.length !== 1) {
+          return;
+        }
+        const branch = normalizeSimpleBranch(branches[0]);
+        if (!branch || branch.length !== 1) {
+          return;
+        }
+        chars.push(branch);
+        index += match.end + 1;
+      }
+      if (chars.length < 1) {
+        return;
+      }
+      return chars;
+    };
+    var repeatedExtglobRecursion = (pattern) => {
+      let depth = 0;
+      let value = pattern.trim();
+      let match = parseRepeatedExtglob(value);
+      while (match) {
+        depth++;
+        value = match.body.trim();
+        match = parseRepeatedExtglob(value);
+      }
+      return depth;
+    };
+    var analyzeRepeatedExtglob = (body, options) => {
+      if (options.maxExtglobRecursion === false) {
+        return { risky: false };
+      }
+      const max = typeof options.maxExtglobRecursion === "number" ? options.maxExtglobRecursion : constants.DEFAULT_MAX_EXTGLOB_RECURSION;
+      const branches = splitTopLevel(body).map((branch) => branch.trim());
+      if (branches.length > 1) {
+        if (branches.some((branch) => branch === "") || branches.some((branch) => /^[*?]+$/.test(branch)) || hasRepeatedCharPrefixOverlap(branches)) {
+          return { risky: true };
+        }
+      }
+      const safeChars = [];
+      let sawStarSequence = false;
+      let combinable = true;
+      for (const branch of branches) {
+        const chars = getStarExtglobSequenceChars(branch);
+        if (chars) {
+          sawStarSequence = true;
+          safeChars.push(...chars);
+          continue;
+        }
+        const literal2 = normalizeSimpleBranch(branch);
+        if (literal2 && literal2.length === 1) {
+          safeChars.push(literal2);
+          continue;
+        }
+        combinable = false;
+        if (repeatedExtglobRecursion(branch) > max) {
+          return { risky: true };
+        }
+      }
+      if (sawStarSequence) {
+        return combinable ? { risky: true, safeOutput: buildCharClassStar([...new Set(safeChars)]) } : { risky: true };
+      }
+      return { risky: false };
+    };
+    var parse3 = (input, options) => {
+      if (typeof input !== "string") {
+        throw new TypeError("Expected a string");
+      }
+      input = REPLACEMENTS[input] || input;
+      const opts = { ...options };
+      const max = typeof opts.maxLength === "number" ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
+      let len = input.length;
+      if (len > max) {
+        throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
+      }
+      const bos = { type: "bos", value: "", output: opts.prepend || "" };
+      const tokens = [bos];
+      const capture = opts.capture ? "" : "?:";
+      const PLATFORM_CHARS = constants.globChars(opts.windows);
+      const EXTGLOB_CHARS = constants.extglobChars(PLATFORM_CHARS);
+      const {
+        DOT_LITERAL,
+        PLUS_LITERAL,
+        SLASH_LITERAL,
+        ONE_CHAR,
+        DOTS_SLASH,
+        NO_DOT,
+        NO_DOT_SLASH,
+        NO_DOTS_SLASH,
+        QMARK,
+        QMARK_NO_DOT,
+        STAR,
+        START_ANCHOR
+      } = PLATFORM_CHARS;
+      const globstar = (opts2) => {
+        return `(${capture}(?:(?!${START_ANCHOR}${opts2.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
+      };
+      const nodot = opts.dot ? "" : NO_DOT;
+      const qmarkNoDot = opts.dot ? QMARK : QMARK_NO_DOT;
+      let star = opts.bash === true ? globstar(opts) : STAR;
+      if (opts.capture) {
+        star = `(${star})`;
+      }
+      if (typeof opts.noext === "boolean") {
+        opts.noextglob = opts.noext;
+      }
+      const state = {
+        input,
+        index: -1,
+        start: 0,
+        dot: opts.dot === true,
+        consumed: "",
+        output: "",
+        prefix: "",
+        backtrack: false,
+        negated: false,
+        brackets: 0,
+        braces: 0,
+        parens: 0,
+        quotes: 0,
+        globstar: false,
+        tokens
+      };
+      input = utils.removePrefix(input, state);
+      len = input.length;
+      const extglobs = [];
+      const braces = [];
+      const stack = [];
+      let prev = bos;
+      let value;
+      const eos = () => state.index === len - 1;
+      const peek = state.peek = (n = 1) => input[state.index + n];
+      const advance = state.advance = () => input[++state.index] || "";
+      const remaining = () => input.slice(state.index + 1);
+      const consume = (value2 = "", num = 0) => {
+        state.consumed += value2;
+        state.index += num;
+      };
+      const append = (token) => {
+        state.output += token.output != null ? token.output : token.value;
+        consume(token.value);
+      };
+      const negate = () => {
+        let count = 1;
+        while (peek() === "!" && (peek(2) !== "(" || peek(3) === "?")) {
+          advance();
+          state.start++;
+          count++;
+        }
+        if (count % 2 === 0) {
+          return false;
+        }
+        state.negated = true;
+        state.start++;
+        return true;
+      };
+      const increment = (type) => {
+        state[type]++;
+        stack.push(type);
+      };
+      const decrement = (type) => {
+        state[type]--;
+        stack.pop();
+      };
+      const push = (tok) => {
+        if (prev.type === "globstar") {
+          const isBrace = state.braces > 0 && (tok.type === "comma" || tok.type === "brace");
+          const isExtglob = tok.extglob === true || extglobs.length && (tok.type === "pipe" || tok.type === "paren");
+          if (tok.type !== "slash" && tok.type !== "paren" && !isBrace && !isExtglob) {
+            state.output = state.output.slice(0, -prev.output.length);
+            prev.type = "star";
+            prev.value = "*";
+            prev.output = star;
+            state.output += prev.output;
+          }
+        }
+        if (extglobs.length && tok.type !== "paren") {
+          extglobs[extglobs.length - 1].inner += tok.value;
+        }
+        if (tok.value || tok.output) append(tok);
+        if (prev && prev.type === "text" && tok.type === "text") {
+          prev.output = (prev.output || prev.value) + tok.value;
+          prev.value += tok.value;
+          return;
+        }
+        tok.prev = prev;
+        tokens.push(tok);
+        prev = tok;
+      };
+      const extglobOpen = (type, value2) => {
+        const token = { ...EXTGLOB_CHARS[value2], conditions: 1, inner: "" };
+        token.prev = prev;
+        token.parens = state.parens;
+        token.output = state.output;
+        token.startIndex = state.index;
+        token.tokensIndex = tokens.length;
+        const output = (opts.capture ? "(" : "") + token.open;
+        increment("parens");
+        push({ type, value: value2, output: state.output ? "" : ONE_CHAR });
+        push({ type: "paren", extglob: true, value: advance(), output });
+        extglobs.push(token);
+      };
+      const extglobClose = (token) => {
+        const literal2 = input.slice(token.startIndex, state.index + 1);
+        const body = input.slice(token.startIndex + 2, state.index);
+        const analysis = analyzeRepeatedExtglob(body, opts);
+        if ((token.type === "plus" || token.type === "star") && analysis.risky) {
+          const safeOutput = analysis.safeOutput ? (token.output ? "" : ONE_CHAR) + (opts.capture ? `(${analysis.safeOutput})` : analysis.safeOutput) : void 0;
+          const open = tokens[token.tokensIndex];
+          open.type = "text";
+          open.value = literal2;
+          open.output = safeOutput || utils.escapeRegex(literal2);
+          for (let i = token.tokensIndex + 1; i < tokens.length; i++) {
+            tokens[i].value = "";
+            tokens[i].output = "";
+            delete tokens[i].suffix;
+          }
+          state.output = token.output + open.output;
+          state.backtrack = true;
+          push({ type: "paren", extglob: true, value, output: "" });
+          decrement("parens");
+          return;
+        }
+        let output = token.close + (opts.capture ? ")" : "");
+        let rest;
+        if (token.type === "negate") {
+          let extglobStar = star;
+          if (token.inner && token.inner.length > 1 && token.inner.includes("/")) {
+            extglobStar = globstar(opts);
+          }
+          if (extglobStar !== star || eos() || /^\)+$/.test(remaining())) {
+            output = token.close = `)$))${extglobStar}`;
+          }
+          if (token.inner.includes("*") && (rest = remaining()) && /^\.[^\\/.]+$/.test(rest)) {
+            const expression = parse3(rest, { ...options, fastpaths: false }).output;
+            output = token.close = `)${expression})${extglobStar})`;
+          }
+          if (token.prev.type === "bos") {
+            state.negatedExtglob = true;
+          }
+        }
+        push({ type: "paren", extglob: true, value, output });
+        decrement("parens");
+      };
+      if (opts.fastpaths !== false && !/(^[*!]|[/()[\]{}"])/.test(input)) {
+        let backslashes = false;
+        let output = input.replace(REGEX_SPECIAL_CHARS_BACKREF, (m, esc2, chars, first, rest, index) => {
+          if (first === "\\") {
+            backslashes = true;
+            return m;
+          }
+          if (first === "?") {
+            if (esc2) {
+              return esc2 + first + (rest ? QMARK.repeat(rest.length) : "");
+            }
+            if (index === 0) {
+              return qmarkNoDot + (rest ? QMARK.repeat(rest.length) : "");
+            }
+            return QMARK.repeat(chars.length);
+          }
+          if (first === ".") {
+            return DOT_LITERAL.repeat(chars.length);
+          }
+          if (first === "*") {
+            if (esc2) {
+              return esc2 + first + (rest ? star : "");
+            }
+            return star;
+          }
+          return esc2 ? m : `\\${m}`;
+        });
+        if (backslashes === true) {
+          if (opts.unescape === true) {
+            output = output.replace(/\\/g, "");
+          } else {
+            output = output.replace(/\\+/g, (m) => {
+              return m.length % 2 === 0 ? "\\\\" : m ? "\\" : "";
+            });
+          }
+        }
+        if (output === input && opts.contains === true) {
+          state.output = input;
+          return state;
+        }
+        state.output = utils.wrapOutput(output, state, options);
+        return state;
+      }
+      while (!eos()) {
+        value = advance();
+        if (value === "\0") {
+          continue;
+        }
+        if (value === "\\") {
+          const next = peek();
+          if (next === "/" && opts.bash !== true) {
+            continue;
+          }
+          if (next === "." || next === ";") {
+            continue;
+          }
+          if (!next) {
+            value += "\\";
+            push({ type: "text", value });
+            continue;
+          }
+          const match = /^\\+/.exec(remaining());
+          let slashes = 0;
+          if (match && match[0].length > 2) {
+            slashes = match[0].length;
+            state.index += slashes;
+            if (slashes % 2 !== 0) {
+              value += "\\";
+            }
+          }
+          if (opts.unescape === true) {
+            value = advance();
+          } else {
+            value += advance();
+          }
+          if (state.brackets === 0) {
+            push({ type: "text", value });
+            continue;
+          }
+        }
+        if (state.brackets > 0 && (value !== "]" || prev.value === "[" || prev.value === "[^")) {
+          if (opts.posix !== false && value === ":") {
+            const inner = prev.value.slice(1);
+            if (inner.includes("[")) {
+              prev.posix = true;
+              if (inner.includes(":")) {
+                const idx = prev.value.lastIndexOf("[");
+                const pre = prev.value.slice(0, idx);
+                const rest2 = prev.value.slice(idx + 2);
+                const posix2 = POSIX_REGEX_SOURCE[rest2];
+                if (posix2) {
+                  prev.value = pre + posix2;
+                  state.backtrack = true;
+                  advance();
+                  if (!bos.output && tokens.indexOf(prev) === 1) {
+                    bos.output = ONE_CHAR;
+                  }
+                  continue;
+                }
+              }
+            }
+          }
+          if (value === "[" && peek() !== ":" || value === "-" && peek() === "]") {
+            value = `\\${value}`;
+          }
+          if (value === "]" && (prev.value === "[" || prev.value === "[^")) {
+            value = `\\${value}`;
+          }
+          if (opts.posix === true && value === "!" && prev.value === "[") {
+            value = "^";
+          }
+          prev.value += value;
+          append({ value });
+          continue;
+        }
+        if (state.quotes === 1 && value !== '"') {
+          value = utils.escapeRegex(value);
+          prev.value += value;
+          append({ value });
+          continue;
+        }
+        if (value === '"') {
+          state.quotes = state.quotes === 1 ? 0 : 1;
+          if (opts.keepQuotes === true) {
+            push({ type: "text", value });
+          }
+          continue;
+        }
+        if (value === "(") {
+          increment("parens");
+          push({ type: "paren", value });
+          continue;
+        }
+        if (value === ")") {
+          if (state.parens === 0 && opts.strictBrackets === true) {
+            throw new SyntaxError(syntaxError("opening", "("));
+          }
+          const extglob = extglobs[extglobs.length - 1];
+          if (extglob && state.parens === extglob.parens + 1) {
+            extglobClose(extglobs.pop());
+            continue;
+          }
+          push({ type: "paren", value, output: state.parens ? ")" : "\\)" });
+          decrement("parens");
+          continue;
+        }
+        if (value === "[") {
+          if (opts.nobracket === true || !remaining().includes("]")) {
+            if (opts.nobracket !== true && opts.strictBrackets === true) {
+              throw new SyntaxError(syntaxError("closing", "]"));
+            }
+            value = `\\${value}`;
+          } else {
+            increment("brackets");
+          }
+          push({ type: "bracket", value });
+          continue;
+        }
+        if (value === "]") {
+          if (opts.nobracket === true || prev && prev.type === "bracket" && prev.value.length === 1) {
+            push({ type: "text", value, output: `\\${value}` });
+            continue;
+          }
+          if (state.brackets === 0) {
+            if (opts.strictBrackets === true) {
+              throw new SyntaxError(syntaxError("opening", "["));
+            }
+            push({ type: "text", value, output: `\\${value}` });
+            continue;
+          }
+          decrement("brackets");
+          const prevValue = prev.value.slice(1);
+          if (prev.posix !== true && prevValue[0] === "^" && !prevValue.includes("/")) {
+            value = `/${value}`;
+          }
+          prev.value += value;
+          append({ value });
+          if (opts.literalBrackets === false || utils.hasRegexChars(prevValue)) {
+            continue;
+          }
+          const escaped = utils.escapeRegex(prev.value);
+          state.output = state.output.slice(0, -prev.value.length);
+          if (opts.literalBrackets === true) {
+            state.output += escaped;
+            prev.value = escaped;
+            continue;
+          }
+          prev.value = `(${capture}${escaped}|${prev.value})`;
+          state.output += prev.value;
+          continue;
+        }
+        if (value === "{" && opts.nobrace !== true) {
+          increment("braces");
+          const open = {
+            type: "brace",
+            value,
+            output: "(",
+            outputIndex: state.output.length,
+            tokensIndex: state.tokens.length
+          };
+          braces.push(open);
+          push(open);
+          continue;
+        }
+        if (value === "}") {
+          const brace = braces[braces.length - 1];
+          if (opts.nobrace === true || !brace) {
+            push({ type: "text", value, output: value });
+            continue;
+          }
+          let output = ")";
+          if (brace.dots === true) {
+            const arr = tokens.slice();
+            const range = [];
+            for (let i = arr.length - 1; i >= 0; i--) {
+              tokens.pop();
+              if (arr[i].type === "brace") {
+                break;
+              }
+              if (arr[i].type !== "dots") {
+                range.unshift(arr[i].value);
+              }
+            }
+            output = expandRange(range, opts);
+            state.backtrack = true;
+          }
+          if (brace.comma !== true && brace.dots !== true) {
+            const out = state.output.slice(0, brace.outputIndex);
+            const toks = state.tokens.slice(brace.tokensIndex);
+            brace.value = brace.output = "\\{";
+            value = output = "\\}";
+            state.output = out;
+            for (const t of toks) {
+              state.output += t.output || t.value;
+            }
+          }
+          push({ type: "brace", value, output });
+          decrement("braces");
+          braces.pop();
+          continue;
+        }
+        if (value === "|") {
+          if (extglobs.length > 0) {
+            extglobs[extglobs.length - 1].conditions++;
+          }
+          push({ type: "text", value });
+          continue;
+        }
+        if (value === ",") {
+          let output = value;
+          const brace = braces[braces.length - 1];
+          if (brace && stack[stack.length - 1] === "braces") {
+            brace.comma = true;
+            output = "|";
+          }
+          push({ type: "comma", value, output });
+          continue;
+        }
+        if (value === "/") {
+          if (prev.type === "dot" && state.index === state.start + 1) {
+            state.start = state.index + 1;
+            state.consumed = "";
+            state.output = "";
+            tokens.pop();
+            prev = bos;
+            continue;
+          }
+          push({ type: "slash", value, output: SLASH_LITERAL });
+          continue;
+        }
+        if (value === ".") {
+          if (state.braces > 0 && prev.type === "dot") {
+            if (prev.value === ".") prev.output = DOT_LITERAL;
+            const brace = braces[braces.length - 1];
+            prev.type = "dots";
+            prev.output += value;
+            prev.value += value;
+            brace.dots = true;
+            continue;
+          }
+          if (state.braces + state.parens === 0 && prev.type !== "bos" && prev.type !== "slash") {
+            push({ type: "text", value, output: DOT_LITERAL });
+            continue;
+          }
+          push({ type: "dot", value, output: DOT_LITERAL });
+          continue;
+        }
+        if (value === "?") {
+          const isGroup = prev && prev.value === "(";
+          if (!isGroup && opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
+            extglobOpen("qmark", value);
+            continue;
+          }
+          if (prev && prev.type === "paren") {
+            const next = peek();
+            let output = value;
+            if (prev.value === "(" && !/[!=<:]/.test(next) || next === "<" && !/<([!=]|\w+>)/.test(remaining())) {
+              output = `\\${value}`;
+            }
+            push({ type: "text", value, output });
+            continue;
+          }
+          if (opts.dot !== true && (prev.type === "slash" || prev.type === "bos")) {
+            push({ type: "qmark", value, output: QMARK_NO_DOT });
+            continue;
+          }
+          push({ type: "qmark", value, output: QMARK });
+          continue;
+        }
+        if (value === "!") {
+          if (opts.noextglob !== true && peek() === "(") {
+            if (peek(2) !== "?" || !/[!=<:]/.test(peek(3))) {
+              extglobOpen("negate", value);
+              continue;
+            }
+          }
+          if (opts.nonegate !== true && state.index === 0) {
+            negate();
+            continue;
+          }
+        }
+        if (value === "+") {
+          if (opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
+            extglobOpen("plus", value);
+            continue;
+          }
+          if (prev && prev.value === "(" || opts.regex === false) {
+            push({ type: "plus", value, output: PLUS_LITERAL });
+            continue;
+          }
+          if (prev && (prev.type === "bracket" || prev.type === "paren" || prev.type === "brace") || state.parens > 0) {
+            push({ type: "plus", value });
+            continue;
+          }
+          push({ type: "plus", value: PLUS_LITERAL });
+          continue;
+        }
+        if (value === "@") {
+          if (opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
+            push({ type: "at", extglob: true, value, output: "" });
+            continue;
+          }
+          push({ type: "text", value });
+          continue;
+        }
+        if (value !== "*") {
+          if (value === "$" || value === "^") {
+            value = `\\${value}`;
+          }
+          const match = REGEX_NON_SPECIAL_CHARS.exec(remaining());
+          if (match) {
+            value += match[0];
+            state.index += match[0].length;
+          }
+          push({ type: "text", value });
+          continue;
+        }
+        if (prev && (prev.type === "globstar" || prev.star === true)) {
+          prev.type = "star";
+          prev.star = true;
+          prev.value += value;
+          prev.output = star;
+          state.backtrack = true;
+          state.globstar = true;
+          consume(value);
+          continue;
+        }
+        let rest = remaining();
+        if (opts.noextglob !== true && /^\([^?]/.test(rest)) {
+          extglobOpen("star", value);
+          continue;
+        }
+        if (prev.type === "star") {
+          if (opts.noglobstar === true) {
+            consume(value);
+            continue;
+          }
+          const prior = prev.prev;
+          const before = prior.prev;
+          const isStart = prior.type === "slash" || prior.type === "bos";
+          const afterStar = before && (before.type === "star" || before.type === "globstar");
+          if (opts.bash === true && (!isStart || rest[0] && rest[0] !== "/")) {
+            push({ type: "star", value, output: "" });
+            continue;
+          }
+          const isBrace = state.braces > 0 && (prior.type === "comma" || prior.type === "brace");
+          const isExtglob = extglobs.length && (prior.type === "pipe" || prior.type === "paren");
+          if (!isStart && prior.type !== "paren" && !isBrace && !isExtglob) {
+            push({ type: "star", value, output: "" });
+            continue;
+          }
+          while (rest.slice(0, 3) === "/**") {
+            const after = input[state.index + 4];
+            if (after && after !== "/") {
+              break;
+            }
+            rest = rest.slice(3);
+            consume("/**", 3);
+          }
+          const isEnd = eos() || state.parens > 0 && rest === ")".repeat(state.parens) && !extglobs.some((extglob) => extglob.type === "negate");
+          if (prior.type === "bos" && eos()) {
+            prev.type = "globstar";
+            prev.value += value;
+            prev.output = globstar(opts);
+            state.output = prev.output;
+            state.globstar = true;
+            consume(value);
+            continue;
+          }
+          if (prior.type === "slash" && prior.prev.type !== "bos" && !afterStar && isEnd) {
+            state.output = state.output.slice(0, -(prior.output + prev.output).length);
+            prior.output = `(?:${prior.output}`;
+            prev.type = "globstar";
+            prev.output = globstar(opts) + (opts.strictSlashes ? ")" : "|$)");
+            prev.value += value;
+            state.globstar = true;
+            state.output += prior.output + prev.output;
+            consume(value);
+            continue;
+          }
+          if (prior.type === "slash" && prior.prev.type !== "bos" && rest[0] === "/") {
+            const end = rest[1] !== void 0 ? "|$" : "";
+            state.output = state.output.slice(0, -(prior.output + prev.output).length);
+            prior.output = `(?:${prior.output}`;
+            prev.type = "globstar";
+            prev.output = `${globstar(opts)}${SLASH_LITERAL}|${SLASH_LITERAL}${end})`;
+            prev.value += value;
+            state.output += prior.output + prev.output;
+            state.globstar = true;
+            consume(value + advance());
+            push({ type: "slash", value: "/", output: "" });
+            continue;
+          }
+          if (prior.type === "bos" && rest[0] === "/") {
+            prev.type = "globstar";
+            prev.value += value;
+            prev.output = `(?:^|${SLASH_LITERAL}|${globstar(opts)}${SLASH_LITERAL})`;
+            state.output = prev.output;
+            state.globstar = true;
+            consume(value + advance());
+            push({ type: "slash", value: "/", output: "" });
+            continue;
+          }
+          state.output = state.output.slice(0, -prev.output.length);
+          prev.type = "globstar";
+          prev.output = globstar(opts);
+          prev.value += value;
+          state.output += prev.output;
+          state.globstar = true;
+          consume(value);
+          continue;
+        }
+        const token = { type: "star", value, output: star };
+        if (opts.bash === true) {
+          token.output = ".*?";
+          if (prev.type === "bos" || prev.type === "slash") {
+            token.output = nodot + token.output;
+          }
+          push(token);
+          continue;
+        }
+        if (prev && (prev.type === "bracket" || prev.type === "paren") && opts.regex === true) {
+          token.output = value;
+          push(token);
+          continue;
+        }
+        if (state.index === state.start || prev.type === "slash" || prev.type === "dot") {
+          if (prev.type === "dot") {
+            state.output += NO_DOT_SLASH;
+            prev.output += NO_DOT_SLASH;
+          } else if (opts.dot === true) {
+            state.output += NO_DOTS_SLASH;
+            prev.output += NO_DOTS_SLASH;
+          } else {
+            state.output += nodot;
+            prev.output += nodot;
+          }
+          if (peek() !== "*") {
+            state.output += ONE_CHAR;
+            prev.output += ONE_CHAR;
+          }
+        }
+        push(token);
+      }
+      while (state.brackets > 0) {
+        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", "]"));
+        state.output = utils.escapeLast(state.output, "[");
+        decrement("brackets");
+      }
+      while (state.parens > 0) {
+        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", ")"));
+        state.output = utils.escapeLast(state.output, "(");
+        decrement("parens");
+      }
+      while (state.braces > 0) {
+        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", "}"));
+        state.output = utils.escapeLast(state.output, "{");
+        decrement("braces");
+      }
+      if (opts.strictSlashes !== true && (prev.type === "star" || prev.type === "bracket")) {
+        push({ type: "maybe_slash", value: "", output: `${SLASH_LITERAL}?` });
+      }
+      if (state.backtrack === true) {
+        state.output = "";
+        for (const token of state.tokens) {
+          state.output += token.output != null ? token.output : token.value;
+          if (token.suffix) {
+            state.output += token.suffix;
+          }
+        }
+      }
+      return state;
+    };
+    parse3.fastpaths = (input, options) => {
+      const opts = { ...options };
+      const max = typeof opts.maxLength === "number" ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
+      const len = input.length;
+      if (len > max) {
+        throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
+      }
+      input = REPLACEMENTS[input] || input;
+      const {
+        DOT_LITERAL,
+        SLASH_LITERAL,
+        ONE_CHAR,
+        DOTS_SLASH,
+        NO_DOT,
+        NO_DOTS,
+        NO_DOTS_SLASH,
+        STAR,
+        START_ANCHOR
+      } = constants.globChars(opts.windows);
+      const nodot = opts.dot ? NO_DOTS : NO_DOT;
+      const slashDot = opts.dot ? NO_DOTS_SLASH : NO_DOT;
+      const capture = opts.capture ? "" : "?:";
+      const state = { negated: false, prefix: "" };
+      let star = opts.bash === true ? ".*?" : STAR;
+      if (opts.capture) {
+        star = `(${star})`;
+      }
+      const globstar = (opts2) => {
+        if (opts2.noglobstar === true) return star;
+        return `(${capture}(?:(?!${START_ANCHOR}${opts2.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
+      };
+      const create = (str) => {
+        switch (str) {
+          case "*":
+            return `${nodot}${ONE_CHAR}${star}`;
+          case ".*":
+            return `${DOT_LITERAL}${ONE_CHAR}${star}`;
+          case "*.*":
+            return `${nodot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
+          case "*/*":
+            return `${nodot}${star}${SLASH_LITERAL}${ONE_CHAR}${slashDot}${star}`;
+          case "**":
+            return nodot + globstar(opts);
+          case "**/*":
+            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${ONE_CHAR}${star}`;
+          case "**/*.*":
+            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
+          case "**/.*":
+            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${DOT_LITERAL}${ONE_CHAR}${star}`;
+          default: {
+            const match = /^(.*?)\.(\w+)$/.exec(str);
+            if (!match) return;
+            const source2 = create(match[1]);
+            if (!source2) return;
+            return source2 + DOT_LITERAL + match[2];
+          }
+        }
+      };
+      const output = utils.removePrefix(input, state);
+      let source = create(output);
+      if (source && opts.strictSlashes !== true) {
+        source += `${SLASH_LITERAL}?`;
+      }
+      return source;
+    };
+    module.exports = parse3;
+  }
+});
+
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/picomatch.js
+var require_picomatch = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/picomatch.js"(exports, module) {
+    "use strict";
+    var scan = require_scan();
+    var parse3 = require_parse();
+    var utils = require_utils();
+    var constants = require_constants();
+    var isObject2 = (val) => val && typeof val === "object" && !Array.isArray(val);
+    var picomatch3 = (glob2, options, returnState = false) => {
+      if (Array.isArray(glob2)) {
+        const fns = glob2.map((input) => picomatch3(input, options, returnState));
+        const arrayMatcher = (str) => {
+          for (const isMatch of fns) {
+            const state2 = isMatch(str);
+            if (state2) return state2;
+          }
+          return false;
+        };
+        return arrayMatcher;
+      }
+      const isState = isObject2(glob2) && glob2.tokens && glob2.input;
+      if (glob2 === "" || typeof glob2 !== "string" && !isState) {
+        throw new TypeError("Expected pattern to be a non-empty string");
+      }
+      const opts = options || {};
+      const posix2 = opts.windows;
+      const regex = isState ? picomatch3.compileRe(glob2, options) : picomatch3.makeRe(glob2, options, false, true);
+      const state = regex.state;
+      delete regex.state;
+      let isIgnored = () => false;
+      if (opts.ignore) {
+        const ignoreOpts = { ...options, ignore: null, onMatch: null, onResult: null };
+        isIgnored = picomatch3(opts.ignore, ignoreOpts, returnState);
+      }
+      const matcher = (input, returnObject = false) => {
+        const { isMatch, match, output } = picomatch3.test(input, regex, options, { glob: glob2, posix: posix2 });
+        const result = { glob: glob2, state, regex, posix: posix2, input, output, match, isMatch };
+        if (typeof opts.onResult === "function") {
+          opts.onResult(result);
+        }
+        if (isMatch === false) {
+          result.isMatch = false;
+          return returnObject ? result : false;
+        }
+        if (isIgnored(input)) {
+          if (typeof opts.onIgnore === "function") {
+            opts.onIgnore(result);
+          }
+          result.isMatch = false;
+          return returnObject ? result : false;
+        }
+        if (typeof opts.onMatch === "function") {
+          opts.onMatch(result);
+        }
+        return returnObject ? result : true;
+      };
+      if (returnState) {
+        matcher.state = state;
+      }
+      return matcher;
+    };
+    picomatch3.test = (input, regex, options, { glob: glob2, posix: posix2 } = {}) => {
+      if (typeof input !== "string") {
+        throw new TypeError("Expected input to be a string");
+      }
+      if (input === "") {
+        return { isMatch: false, output: "" };
+      }
+      const opts = options || {};
+      const format = opts.format || (posix2 ? utils.toPosixSlashes : null);
+      let match = input === glob2;
+      let output = match && format ? format(input) : input;
+      if (match === false) {
+        output = format ? format(input) : input;
+        match = output === glob2;
+      }
+      if (match === false || opts.capture === true) {
+        if (opts.matchBase === true || opts.basename === true) {
+          match = picomatch3.matchBase(input, regex, options, posix2);
+        } else {
+          match = regex.exec(output);
+        }
+      }
+      return { isMatch: Boolean(match), match, output };
+    };
+    picomatch3.matchBase = (input, glob2, options, posix2 = options && options.windows) => {
+      const regex = glob2 instanceof RegExp ? glob2 : picomatch3.makeRe(glob2, options);
+      return regex.test(utils.basename(input, { windows: posix2 }));
+    };
+    picomatch3.isMatch = (str, patterns, options) => picomatch3(patterns, options)(str);
+    picomatch3.parse = (pattern, options) => {
+      if (Array.isArray(pattern)) return pattern.map((p) => picomatch3.parse(p, options));
+      return parse3(pattern, { ...options, fastpaths: false });
+    };
+    picomatch3.scan = (input, options) => scan(input, options);
+    picomatch3.compileRe = (state, options, returnOutput = false, returnState = false) => {
+      if (returnOutput === true) {
+        return state.output;
+      }
+      const opts = options || {};
+      const prepend = opts.contains ? "" : "^";
+      const append = opts.contains ? "" : "$";
+      let source = `${prepend}(?:${state.output})${append}`;
+      if (state && state.negated === true) {
+        source = `^(?!${source}).*$`;
+      }
+      const regex = picomatch3.toRegex(source, options);
+      if (returnState === true) {
+        regex.state = state;
+      }
+      return regex;
+    };
+    picomatch3.makeRe = (input, options = {}, returnOutput = false, returnState = false) => {
+      if (!input || typeof input !== "string") {
+        throw new TypeError("Expected a non-empty string");
+      }
+      let parsed = { negated: false, fastpaths: true };
+      if (options.fastpaths !== false && (input[0] === "." || input[0] === "*")) {
+        parsed.output = parse3.fastpaths(input, options);
+      }
+      if (!parsed.output) {
+        parsed = parse3(input, options);
+      }
+      return picomatch3.compileRe(parsed, options, returnOutput, returnState);
+    };
+    picomatch3.toRegex = (source, options) => {
+      try {
+        const opts = options || {};
+        return new RegExp(source, opts.flags || (opts.nocase ? "i" : ""));
+      } catch (err) {
+        if (options && options.debug === true) throw err;
+        return /$^/;
+      }
+    };
+    picomatch3.constants = constants;
+    module.exports = picomatch3;
+  }
+});
+
+// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/index.js
+var require_picomatch2 = __commonJS({
+  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/index.js"(exports, module) {
+    "use strict";
+    var pico = require_picomatch();
+    var utils = require_utils();
+    function picomatch3(glob2, options, returnState = false) {
+      if (options && (options.windows === null || options.windows === void 0)) {
+        options = { ...options, windows: utils.isWindows() };
+      }
+      return pico(glob2, options, returnState);
+    }
+    Object.assign(picomatch3, pico);
+    module.exports = picomatch3;
+  }
+});
+
 // node_modules/.pnpm/yaml@2.9.1/node_modules/yaml/dist/nodes/identity.js
 var require_identity = __commonJS({
   "node_modules/.pnpm/yaml@2.9.1/node_modules/yaml/dist/nodes/identity.js"(exports) {
@@ -7370,1782 +9146,6 @@ var require_dist = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/constants.js
-var require_constants = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/constants.js"(exports, module) {
-    "use strict";
-    var WIN_SLASH = "\\\\/";
-    var WIN_NO_SLASH = `[^${WIN_SLASH}]`;
-    var DEFAULT_MAX_EXTGLOB_RECURSION = 0;
-    var DOT_LITERAL = "\\.";
-    var PLUS_LITERAL = "\\+";
-    var QMARK_LITERAL = "\\?";
-    var SLASH_LITERAL = "\\/";
-    var ONE_CHAR = "(?=.)";
-    var QMARK = "[^/]";
-    var END_ANCHOR = `(?:${SLASH_LITERAL}|$)`;
-    var START_ANCHOR = `(?:^|${SLASH_LITERAL})`;
-    var DOTS_SLASH = `${DOT_LITERAL}{1,2}${END_ANCHOR}`;
-    var NO_DOT = `(?!${DOT_LITERAL})`;
-    var NO_DOTS = `(?!${START_ANCHOR}${DOTS_SLASH})`;
-    var NO_DOT_SLASH = `(?!${DOT_LITERAL}{0,1}${END_ANCHOR})`;
-    var NO_DOTS_SLASH = `(?!${DOTS_SLASH})`;
-    var QMARK_NO_DOT = `[^.${SLASH_LITERAL}]`;
-    var STAR = `${QMARK}*?`;
-    var SEP = "/";
-    var POSIX_CHARS = {
-      DOT_LITERAL,
-      PLUS_LITERAL,
-      QMARK_LITERAL,
-      SLASH_LITERAL,
-      ONE_CHAR,
-      QMARK,
-      END_ANCHOR,
-      DOTS_SLASH,
-      NO_DOT,
-      NO_DOTS,
-      NO_DOT_SLASH,
-      NO_DOTS_SLASH,
-      QMARK_NO_DOT,
-      STAR,
-      START_ANCHOR,
-      SEP
-    };
-    var WINDOWS_CHARS = {
-      ...POSIX_CHARS,
-      SLASH_LITERAL: `[${WIN_SLASH}]`,
-      QMARK: WIN_NO_SLASH,
-      STAR: `${WIN_NO_SLASH}*?`,
-      DOTS_SLASH: `${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$)`,
-      NO_DOT: `(?!${DOT_LITERAL})`,
-      NO_DOTS: `(?!(?:^|[${WIN_SLASH}])${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
-      NO_DOT_SLASH: `(?!${DOT_LITERAL}{0,1}(?:[${WIN_SLASH}]|$))`,
-      NO_DOTS_SLASH: `(?!${DOT_LITERAL}{1,2}(?:[${WIN_SLASH}]|$))`,
-      QMARK_NO_DOT: `[^.${WIN_SLASH}]`,
-      START_ANCHOR: `(?:^|[${WIN_SLASH}])`,
-      END_ANCHOR: `(?:[${WIN_SLASH}]|$)`,
-      SEP: "\\"
-    };
-    var POSIX_REGEX_SOURCE = {
-      __proto__: null,
-      alnum: "a-zA-Z0-9",
-      alpha: "a-zA-Z",
-      ascii: "\\x00-\\x7F",
-      blank: " \\t",
-      cntrl: "\\x00-\\x1F\\x7F",
-      digit: "0-9",
-      graph: "\\x21-\\x7E",
-      lower: "a-z",
-      print: "\\x20-\\x7E ",
-      punct: "\\-!\"#$%&'()\\*+,./:;<=>?@[\\]^_`{|}~",
-      space: " \\t\\r\\n\\v\\f",
-      upper: "A-Z",
-      word: "A-Za-z0-9_",
-      xdigit: "A-Fa-f0-9"
-    };
-    module.exports = {
-      DEFAULT_MAX_EXTGLOB_RECURSION,
-      MAX_LENGTH: 1024 * 64,
-      POSIX_REGEX_SOURCE,
-      // regular expressions
-      REGEX_BACKSLASH: /\\(?![*+?^${}(|)[\]])/g,
-      REGEX_NON_SPECIAL_CHARS: /^[^@![\].,$*+?^{}()|\\/]+/,
-      REGEX_SPECIAL_CHARS: /[-*+?.^${}(|)[\]]/,
-      REGEX_SPECIAL_CHARS_BACKREF: /(\\?)((\W)(\3*))/g,
-      REGEX_SPECIAL_CHARS_GLOBAL: /([-*+?.^${}(|)[\]])/g,
-      REGEX_REMOVE_BACKSLASH: /(?:\[.*?[^\\]\]|\\(?=.))/g,
-      // Replace globs with equivalent patterns to reduce parsing time.
-      REPLACEMENTS: {
-        __proto__: null,
-        "***": "*",
-        "**/**": "**",
-        "**/**/**": "**"
-      },
-      // Digits
-      CHAR_0: 48,
-      /* 0 */
-      CHAR_9: 57,
-      /* 9 */
-      // Alphabet chars.
-      CHAR_UPPERCASE_A: 65,
-      /* A */
-      CHAR_LOWERCASE_A: 97,
-      /* a */
-      CHAR_UPPERCASE_Z: 90,
-      /* Z */
-      CHAR_LOWERCASE_Z: 122,
-      /* z */
-      CHAR_LEFT_PARENTHESES: 40,
-      /* ( */
-      CHAR_RIGHT_PARENTHESES: 41,
-      /* ) */
-      CHAR_ASTERISK: 42,
-      /* * */
-      // Non-alphabetic chars.
-      CHAR_AMPERSAND: 38,
-      /* & */
-      CHAR_AT: 64,
-      /* @ */
-      CHAR_BACKWARD_SLASH: 92,
-      /* \ */
-      CHAR_CARRIAGE_RETURN: 13,
-      /* \r */
-      CHAR_CIRCUMFLEX_ACCENT: 94,
-      /* ^ */
-      CHAR_COLON: 58,
-      /* : */
-      CHAR_COMMA: 44,
-      /* , */
-      CHAR_DOT: 46,
-      /* . */
-      CHAR_DOUBLE_QUOTE: 34,
-      /* " */
-      CHAR_EQUAL: 61,
-      /* = */
-      CHAR_EXCLAMATION_MARK: 33,
-      /* ! */
-      CHAR_FORM_FEED: 12,
-      /* \f */
-      CHAR_FORWARD_SLASH: 47,
-      /* / */
-      CHAR_GRAVE_ACCENT: 96,
-      /* ` */
-      CHAR_HASH: 35,
-      /* # */
-      CHAR_HYPHEN_MINUS: 45,
-      /* - */
-      CHAR_LEFT_ANGLE_BRACKET: 60,
-      /* < */
-      CHAR_LEFT_CURLY_BRACE: 123,
-      /* { */
-      CHAR_LEFT_SQUARE_BRACKET: 91,
-      /* [ */
-      CHAR_LINE_FEED: 10,
-      /* \n */
-      CHAR_NO_BREAK_SPACE: 160,
-      /* \u00A0 */
-      CHAR_PERCENT: 37,
-      /* % */
-      CHAR_PLUS: 43,
-      /* + */
-      CHAR_QUESTION_MARK: 63,
-      /* ? */
-      CHAR_RIGHT_ANGLE_BRACKET: 62,
-      /* > */
-      CHAR_RIGHT_CURLY_BRACE: 125,
-      /* } */
-      CHAR_RIGHT_SQUARE_BRACKET: 93,
-      /* ] */
-      CHAR_SEMICOLON: 59,
-      /* ; */
-      CHAR_SINGLE_QUOTE: 39,
-      /* ' */
-      CHAR_SPACE: 32,
-      /*   */
-      CHAR_TAB: 9,
-      /* \t */
-      CHAR_UNDERSCORE: 95,
-      /* _ */
-      CHAR_VERTICAL_LINE: 124,
-      /* | */
-      CHAR_ZERO_WIDTH_NOBREAK_SPACE: 65279,
-      /* \uFEFF */
-      /**
-       * Create EXTGLOB_CHARS
-       */
-      extglobChars(chars) {
-        return {
-          "!": { type: "negate", open: "(?:(?!(?:", close: `))${chars.STAR})` },
-          "?": { type: "qmark", open: "(?:", close: ")?" },
-          "+": { type: "plus", open: "(?:", close: ")+" },
-          "*": { type: "star", open: "(?:", close: ")*" },
-          "@": { type: "at", open: "(?:", close: ")" }
-        };
-      },
-      /**
-       * Create GLOB_CHARS
-       */
-      globChars(win32) {
-        return win32 === true ? WINDOWS_CHARS : POSIX_CHARS;
-      }
-    };
-  }
-});
-
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/utils.js
-var require_utils = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/utils.js"(exports) {
-    "use strict";
-    var {
-      REGEX_BACKSLASH,
-      REGEX_REMOVE_BACKSLASH,
-      REGEX_SPECIAL_CHARS,
-      REGEX_SPECIAL_CHARS_GLOBAL
-    } = require_constants();
-    exports.isObject = (val) => val !== null && typeof val === "object" && !Array.isArray(val);
-    exports.hasRegexChars = (str) => REGEX_SPECIAL_CHARS.test(str);
-    exports.isRegexChar = (str) => str.length === 1 && exports.hasRegexChars(str);
-    exports.escapeRegex = (str) => str.replace(REGEX_SPECIAL_CHARS_GLOBAL, "\\$1");
-    exports.toPosixSlashes = (str) => str.replace(REGEX_BACKSLASH, "/");
-    exports.isWindows = () => {
-      if (typeof navigator !== "undefined" && navigator.platform) {
-        const platform = navigator.platform.toLowerCase();
-        return platform === "win32" || platform === "windows";
-      }
-      if (typeof process !== "undefined" && process.platform) {
-        return process.platform === "win32";
-      }
-      return false;
-    };
-    exports.removeBackslashes = (str) => {
-      return str.replace(REGEX_REMOVE_BACKSLASH, (match) => {
-        return match === "\\" ? "" : match;
-      });
-    };
-    exports.escapeLast = (input, char, lastIdx) => {
-      const idx = input.lastIndexOf(char, lastIdx);
-      if (idx === -1) return input;
-      if (input[idx - 1] === "\\") return exports.escapeLast(input, char, idx - 1);
-      return `${input.slice(0, idx)}\\${input.slice(idx)}`;
-    };
-    exports.removePrefix = (input, state = {}) => {
-      let output = input;
-      if (output.startsWith("./")) {
-        output = output.slice(2);
-        state.prefix = "./";
-      }
-      return output;
-    };
-    exports.wrapOutput = (input, state = {}, options = {}) => {
-      const prepend = options.contains ? "" : "^";
-      const append = options.contains ? "" : "$";
-      let output = `${prepend}(?:${input})${append}`;
-      if (state.negated === true) {
-        output = `(?:^(?!${output}).*$)`;
-      }
-      return output;
-    };
-    exports.basename = (path, { windows } = {}) => {
-      const segs = path.split(windows ? /[\\/]/ : "/");
-      const last = segs[segs.length - 1];
-      if (last === "") {
-        return segs[segs.length - 2];
-      }
-      return last;
-    };
-  }
-});
-
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/scan.js
-var require_scan = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/scan.js"(exports, module) {
-    "use strict";
-    var utils = require_utils();
-    var {
-      CHAR_ASTERISK,
-      /* * */
-      CHAR_AT,
-      /* @ */
-      CHAR_BACKWARD_SLASH,
-      /* \ */
-      CHAR_COMMA,
-      /* , */
-      CHAR_DOT,
-      /* . */
-      CHAR_EXCLAMATION_MARK,
-      /* ! */
-      CHAR_FORWARD_SLASH,
-      /* / */
-      CHAR_LEFT_CURLY_BRACE,
-      /* { */
-      CHAR_LEFT_PARENTHESES,
-      /* ( */
-      CHAR_LEFT_SQUARE_BRACKET,
-      /* [ */
-      CHAR_PLUS,
-      /* + */
-      CHAR_QUESTION_MARK,
-      /* ? */
-      CHAR_RIGHT_CURLY_BRACE,
-      /* } */
-      CHAR_RIGHT_PARENTHESES,
-      /* ) */
-      CHAR_RIGHT_SQUARE_BRACKET
-      /* ] */
-    } = require_constants();
-    var isPathSeparator = (code) => {
-      return code === CHAR_FORWARD_SLASH || code === CHAR_BACKWARD_SLASH;
-    };
-    var depth = (token) => {
-      if (token.isPrefix !== true) {
-        token.depth = token.isGlobstar ? Infinity : 1;
-      }
-    };
-    var scan = (input, options) => {
-      const opts = options || {};
-      const length = input.length - 1;
-      const scanToEnd = opts.parts === true || opts.tokens === true || opts.scanToEnd === true;
-      const slashes = [];
-      const tokens = [];
-      const parts = [];
-      let str = input;
-      let index = -1;
-      let start = 0;
-      let lastIndex = 0;
-      let isBrace = false;
-      let isBracket = false;
-      let isGlob = false;
-      let isExtglob = false;
-      let isGlobstar = false;
-      let braceEscaped = false;
-      let backslashes = false;
-      let negated = false;
-      let negatedExtglob = false;
-      let finished = false;
-      let braces = 0;
-      let prev;
-      let code;
-      let token = { value: "", depth: 0, isGlob: false };
-      const eos = () => index >= length;
-      const peek = () => str.charCodeAt(index + 1);
-      const advance = () => {
-        prev = code;
-        return str.charCodeAt(++index);
-      };
-      while (index < length) {
-        code = advance();
-        let next;
-        if (code === CHAR_BACKWARD_SLASH) {
-          backslashes = token.backslashes = true;
-          code = advance();
-          if (code === CHAR_LEFT_CURLY_BRACE) {
-            braceEscaped = true;
-          }
-          continue;
-        }
-        if (braceEscaped === true || code === CHAR_LEFT_CURLY_BRACE) {
-          braces++;
-          while (eos() !== true && (code = advance())) {
-            if (code === CHAR_BACKWARD_SLASH) {
-              backslashes = token.backslashes = true;
-              advance();
-              continue;
-            }
-            if (code === CHAR_LEFT_CURLY_BRACE) {
-              braces++;
-              continue;
-            }
-            if (braceEscaped !== true && code === CHAR_DOT && (code = advance()) === CHAR_DOT) {
-              isBrace = token.isBrace = true;
-              isGlob = token.isGlob = true;
-              finished = true;
-              if (scanToEnd === true) {
-                continue;
-              }
-              break;
-            }
-            if (braceEscaped !== true && code === CHAR_COMMA) {
-              isBrace = token.isBrace = true;
-              isGlob = token.isGlob = true;
-              finished = true;
-              if (scanToEnd === true) {
-                continue;
-              }
-              break;
-            }
-            if (code === CHAR_RIGHT_CURLY_BRACE) {
-              braces--;
-              if (braces === 0) {
-                braceEscaped = false;
-                isBrace = token.isBrace = true;
-                finished = true;
-                break;
-              }
-            }
-          }
-          if (scanToEnd === true) {
-            continue;
-          }
-          break;
-        }
-        if (code === CHAR_FORWARD_SLASH) {
-          slashes.push(index);
-          tokens.push(token);
-          token = { value: "", depth: 0, isGlob: false };
-          if (finished === true) continue;
-          if (prev === CHAR_DOT && index === start + 1) {
-            start += 2;
-            continue;
-          }
-          lastIndex = index + 1;
-          continue;
-        }
-        if (opts.noext !== true) {
-          const isExtglobChar = code === CHAR_PLUS || code === CHAR_AT || code === CHAR_ASTERISK || code === CHAR_QUESTION_MARK || code === CHAR_EXCLAMATION_MARK;
-          if (isExtglobChar === true && peek() === CHAR_LEFT_PARENTHESES) {
-            isGlob = token.isGlob = true;
-            isExtglob = token.isExtglob = true;
-            finished = true;
-            if (code === CHAR_EXCLAMATION_MARK && index === start) {
-              negatedExtglob = true;
-            }
-            if (scanToEnd === true) {
-              let parens = 0;
-              while (eos() !== true && (code = advance())) {
-                if (code === CHAR_BACKWARD_SLASH) {
-                  backslashes = token.backslashes = true;
-                  advance();
-                  continue;
-                }
-                if (code === CHAR_LEFT_PARENTHESES) {
-                  parens++;
-                  continue;
-                }
-                if (code === CHAR_RIGHT_PARENTHESES && --parens === 0) {
-                  finished = true;
-                  break;
-                }
-              }
-              continue;
-            }
-            break;
-          }
-        }
-        if (code === CHAR_ASTERISK) {
-          if (prev === CHAR_ASTERISK) isGlobstar = token.isGlobstar = true;
-          isGlob = token.isGlob = true;
-          finished = true;
-          if (scanToEnd === true) {
-            continue;
-          }
-          break;
-        }
-        if (code === CHAR_QUESTION_MARK) {
-          isGlob = token.isGlob = true;
-          finished = true;
-          if (scanToEnd === true) {
-            continue;
-          }
-          break;
-        }
-        if (code === CHAR_LEFT_SQUARE_BRACKET) {
-          while (eos() !== true && (next = advance())) {
-            if (next === CHAR_BACKWARD_SLASH) {
-              backslashes = token.backslashes = true;
-              advance();
-              continue;
-            }
-            if (next === CHAR_RIGHT_SQUARE_BRACKET) {
-              isBracket = token.isBracket = true;
-              isGlob = token.isGlob = true;
-              finished = true;
-              break;
-            }
-          }
-          if (scanToEnd === true) {
-            continue;
-          }
-          break;
-        }
-        if (opts.nonegate !== true && code === CHAR_EXCLAMATION_MARK && index === start) {
-          negated = token.negated = true;
-          start++;
-          continue;
-        }
-        if (opts.noparen !== true && code === CHAR_LEFT_PARENTHESES) {
-          isGlob = token.isGlob = true;
-          if (scanToEnd === true) {
-            let parens = 1;
-            while (eos() !== true && (code = advance())) {
-              if (code === CHAR_BACKWARD_SLASH) {
-                backslashes = token.backslashes = true;
-                advance();
-                continue;
-              }
-              if (code === CHAR_LEFT_PARENTHESES) {
-                parens++;
-                continue;
-              }
-              if (code === CHAR_RIGHT_PARENTHESES && --parens === 0) {
-                finished = true;
-                break;
-              }
-            }
-            continue;
-          }
-          break;
-        }
-        if (isGlob === true) {
-          finished = true;
-          if (scanToEnd === true) {
-            continue;
-          }
-          break;
-        }
-      }
-      if (opts.noext === true) {
-        isExtglob = false;
-        isGlob = false;
-      }
-      let base = str;
-      let prefix = "";
-      let glob2 = "";
-      if (start > 0) {
-        prefix = str.slice(0, start);
-        str = str.slice(start);
-        lastIndex -= start;
-      }
-      if (base && isGlob === true && lastIndex > 0) {
-        base = str.slice(0, lastIndex);
-        glob2 = str.slice(lastIndex);
-      } else if (isGlob === true) {
-        base = "";
-        glob2 = str;
-      } else {
-        base = str;
-      }
-      if (base && base !== "" && base !== "/" && base !== str) {
-        if (isPathSeparator(base.charCodeAt(base.length - 1))) {
-          base = base.slice(0, -1);
-        }
-      }
-      if (opts.unescape === true) {
-        if (glob2) glob2 = utils.removeBackslashes(glob2);
-        if (base && backslashes === true) {
-          base = utils.removeBackslashes(base);
-        }
-      }
-      const state = {
-        prefix,
-        input,
-        start,
-        base,
-        glob: glob2,
-        isBrace,
-        isBracket,
-        isGlob,
-        isExtglob,
-        isGlobstar,
-        negated,
-        negatedExtglob
-      };
-      if (opts.tokens === true) {
-        state.maxDepth = 0;
-        if (!isPathSeparator(code)) {
-          tokens.push(token);
-        }
-        state.tokens = tokens;
-      }
-      if (opts.parts === true || opts.tokens === true) {
-        let prevIndex;
-        for (let idx = 0; idx < slashes.length; idx++) {
-          const n2 = prevIndex !== void 0 ? prevIndex + 1 : start;
-          const i = slashes[idx];
-          const value2 = input.slice(n2, i);
-          if (opts.tokens) {
-            if (idx === 0 && start !== 0) {
-              tokens[idx].isPrefix = true;
-              tokens[idx].value = prefix;
-            } else {
-              tokens[idx].value = value2;
-            }
-            depth(tokens[idx]);
-            state.maxDepth += tokens[idx].depth;
-          }
-          if (i >= start) {
-            parts.push(value2);
-            prevIndex = i;
-          }
-        }
-        const n = prevIndex !== void 0 ? prevIndex + 1 : start;
-        const value = input.slice(n);
-        parts.push(value);
-        if (opts.tokens && prevIndex && prevIndex + 1 < input.length) {
-          tokens[tokens.length - 1].value = value;
-          depth(tokens[tokens.length - 1]);
-          state.maxDepth += tokens[tokens.length - 1].depth;
-        }
-        state.slashes = slashes;
-        state.parts = parts;
-      }
-      return state;
-    };
-    module.exports = scan;
-  }
-});
-
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/parse.js
-var require_parse = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/parse.js"(exports, module) {
-    "use strict";
-    var constants = require_constants();
-    var utils = require_utils();
-    var {
-      MAX_LENGTH,
-      POSIX_REGEX_SOURCE,
-      REGEX_NON_SPECIAL_CHARS,
-      REGEX_SPECIAL_CHARS_BACKREF,
-      REPLACEMENTS
-    } = constants;
-    var expandRange = (args, options) => {
-      if (typeof options.expandRange === "function") {
-        return options.expandRange(...args, options);
-      }
-      args.sort();
-      const value = `[${args.join("-")}]`;
-      try {
-        new RegExp(value);
-      } catch (ex) {
-        return args.map((v) => utils.escapeRegex(v)).join("..");
-      }
-      return value;
-    };
-    var syntaxError = (type, char) => {
-      return `Missing ${type}: "${char}" - use "\\\\${char}" to match literal characters`;
-    };
-    var splitTopLevel = (input) => {
-      const parts = [];
-      let bracket = 0;
-      let paren = 0;
-      let quote = 0;
-      let value = "";
-      let escaped = false;
-      for (const ch of input) {
-        if (escaped === true) {
-          value += ch;
-          escaped = false;
-          continue;
-        }
-        if (ch === "\\") {
-          value += ch;
-          escaped = true;
-          continue;
-        }
-        if (ch === '"') {
-          quote = quote === 1 ? 0 : 1;
-          value += ch;
-          continue;
-        }
-        if (quote === 0) {
-          if (ch === "[") {
-            bracket++;
-          } else if (ch === "]" && bracket > 0) {
-            bracket--;
-          } else if (bracket === 0) {
-            if (ch === "(") {
-              paren++;
-            } else if (ch === ")" && paren > 0) {
-              paren--;
-            } else if (ch === "|" && paren === 0) {
-              parts.push(value);
-              value = "";
-              continue;
-            }
-          }
-        }
-        value += ch;
-      }
-      parts.push(value);
-      return parts;
-    };
-    var isPlainBranch = (branch) => {
-      let escaped = false;
-      for (const ch of branch) {
-        if (escaped === true) {
-          escaped = false;
-          continue;
-        }
-        if (ch === "\\") {
-          escaped = true;
-          continue;
-        }
-        if (/[?*+@!()[\]{}]/.test(ch)) {
-          return false;
-        }
-      }
-      return true;
-    };
-    var normalizeSimpleBranch = (branch) => {
-      let value = branch.trim();
-      let changed = true;
-      while (changed === true) {
-        changed = false;
-        if (/^@\([^\\()[\]{}|]+\)$/.test(value)) {
-          value = value.slice(2, -1);
-          changed = true;
-        }
-      }
-      if (!isPlainBranch(value)) {
-        return;
-      }
-      return value.replace(/\\(.)/g, "$1");
-    };
-    var hasRepeatedCharPrefixOverlap = (branches) => {
-      const values = branches.map(normalizeSimpleBranch).filter(Boolean);
-      for (let i = 0; i < values.length; i++) {
-        for (let j = i + 1; j < values.length; j++) {
-          const a = values[i];
-          const b = values[j];
-          const char = a[0];
-          if (!char || a !== char.repeat(a.length) || b !== char.repeat(b.length)) {
-            continue;
-          }
-          if (a === b || a.startsWith(b) || b.startsWith(a)) {
-            return true;
-          }
-        }
-      }
-      return false;
-    };
-    var parseRepeatedExtglob = (pattern, requireEnd = true) => {
-      if (pattern[0] !== "+" && pattern[0] !== "*" || pattern[1] !== "(") {
-        return;
-      }
-      let bracket = 0;
-      let paren = 0;
-      let quote = 0;
-      let escaped = false;
-      for (let i = 1; i < pattern.length; i++) {
-        const ch = pattern[i];
-        if (escaped === true) {
-          escaped = false;
-          continue;
-        }
-        if (ch === "\\") {
-          escaped = true;
-          continue;
-        }
-        if (ch === '"') {
-          quote = quote === 1 ? 0 : 1;
-          continue;
-        }
-        if (quote === 1) {
-          continue;
-        }
-        if (ch === "[") {
-          bracket++;
-          continue;
-        }
-        if (ch === "]" && bracket > 0) {
-          bracket--;
-          continue;
-        }
-        if (bracket > 0) {
-          continue;
-        }
-        if (ch === "(") {
-          paren++;
-          continue;
-        }
-        if (ch === ")") {
-          paren--;
-          if (paren === 0) {
-            if (requireEnd === true && i !== pattern.length - 1) {
-              return;
-            }
-            return {
-              type: pattern[0],
-              body: pattern.slice(2, i),
-              end: i
-            };
-          }
-        }
-      }
-    };
-    var buildCharClassStar = (chars) => {
-      const source = chars.length === 1 ? utils.escapeRegex(chars[0]) : `[${chars.map((ch) => utils.escapeRegex(ch)).join("")}]`;
-      return `${source}*`;
-    };
-    var getStarExtglobSequenceChars = (pattern) => {
-      let index = 0;
-      const chars = [];
-      while (index < pattern.length) {
-        const match = parseRepeatedExtglob(pattern.slice(index), false);
-        if (!match || match.type !== "*") {
-          return;
-        }
-        const branches = splitTopLevel(match.body).map((branch2) => branch2.trim());
-        if (branches.length !== 1) {
-          return;
-        }
-        const branch = normalizeSimpleBranch(branches[0]);
-        if (!branch || branch.length !== 1) {
-          return;
-        }
-        chars.push(branch);
-        index += match.end + 1;
-      }
-      if (chars.length < 1) {
-        return;
-      }
-      return chars;
-    };
-    var repeatedExtglobRecursion = (pattern) => {
-      let depth = 0;
-      let value = pattern.trim();
-      let match = parseRepeatedExtglob(value);
-      while (match) {
-        depth++;
-        value = match.body.trim();
-        match = parseRepeatedExtglob(value);
-      }
-      return depth;
-    };
-    var analyzeRepeatedExtglob = (body, options) => {
-      if (options.maxExtglobRecursion === false) {
-        return { risky: false };
-      }
-      const max = typeof options.maxExtglobRecursion === "number" ? options.maxExtglobRecursion : constants.DEFAULT_MAX_EXTGLOB_RECURSION;
-      const branches = splitTopLevel(body).map((branch) => branch.trim());
-      if (branches.length > 1) {
-        if (branches.some((branch) => branch === "") || branches.some((branch) => /^[*?]+$/.test(branch)) || hasRepeatedCharPrefixOverlap(branches)) {
-          return { risky: true };
-        }
-      }
-      const safeChars = [];
-      let sawStarSequence = false;
-      let combinable = true;
-      for (const branch of branches) {
-        const chars = getStarExtglobSequenceChars(branch);
-        if (chars) {
-          sawStarSequence = true;
-          safeChars.push(...chars);
-          continue;
-        }
-        const literal2 = normalizeSimpleBranch(branch);
-        if (literal2 && literal2.length === 1) {
-          safeChars.push(literal2);
-          continue;
-        }
-        combinable = false;
-        if (repeatedExtglobRecursion(branch) > max) {
-          return { risky: true };
-        }
-      }
-      if (sawStarSequence) {
-        return combinable ? { risky: true, safeOutput: buildCharClassStar([...new Set(safeChars)]) } : { risky: true };
-      }
-      return { risky: false };
-    };
-    var parse3 = (input, options) => {
-      if (typeof input !== "string") {
-        throw new TypeError("Expected a string");
-      }
-      input = REPLACEMENTS[input] || input;
-      const opts = { ...options };
-      const max = typeof opts.maxLength === "number" ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
-      let len = input.length;
-      if (len > max) {
-        throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
-      }
-      const bos = { type: "bos", value: "", output: opts.prepend || "" };
-      const tokens = [bos];
-      const capture = opts.capture ? "" : "?:";
-      const PLATFORM_CHARS = constants.globChars(opts.windows);
-      const EXTGLOB_CHARS = constants.extglobChars(PLATFORM_CHARS);
-      const {
-        DOT_LITERAL,
-        PLUS_LITERAL,
-        SLASH_LITERAL,
-        ONE_CHAR,
-        DOTS_SLASH,
-        NO_DOT,
-        NO_DOT_SLASH,
-        NO_DOTS_SLASH,
-        QMARK,
-        QMARK_NO_DOT,
-        STAR,
-        START_ANCHOR
-      } = PLATFORM_CHARS;
-      const globstar = (opts2) => {
-        return `(${capture}(?:(?!${START_ANCHOR}${opts2.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
-      };
-      const nodot = opts.dot ? "" : NO_DOT;
-      const qmarkNoDot = opts.dot ? QMARK : QMARK_NO_DOT;
-      let star = opts.bash === true ? globstar(opts) : STAR;
-      if (opts.capture) {
-        star = `(${star})`;
-      }
-      if (typeof opts.noext === "boolean") {
-        opts.noextglob = opts.noext;
-      }
-      const state = {
-        input,
-        index: -1,
-        start: 0,
-        dot: opts.dot === true,
-        consumed: "",
-        output: "",
-        prefix: "",
-        backtrack: false,
-        negated: false,
-        brackets: 0,
-        braces: 0,
-        parens: 0,
-        quotes: 0,
-        globstar: false,
-        tokens
-      };
-      input = utils.removePrefix(input, state);
-      len = input.length;
-      const extglobs = [];
-      const braces = [];
-      const stack = [];
-      let prev = bos;
-      let value;
-      const eos = () => state.index === len - 1;
-      const peek = state.peek = (n = 1) => input[state.index + n];
-      const advance = state.advance = () => input[++state.index] || "";
-      const remaining = () => input.slice(state.index + 1);
-      const consume = (value2 = "", num = 0) => {
-        state.consumed += value2;
-        state.index += num;
-      };
-      const append = (token) => {
-        state.output += token.output != null ? token.output : token.value;
-        consume(token.value);
-      };
-      const negate = () => {
-        let count = 1;
-        while (peek() === "!" && (peek(2) !== "(" || peek(3) === "?")) {
-          advance();
-          state.start++;
-          count++;
-        }
-        if (count % 2 === 0) {
-          return false;
-        }
-        state.negated = true;
-        state.start++;
-        return true;
-      };
-      const increment = (type) => {
-        state[type]++;
-        stack.push(type);
-      };
-      const decrement = (type) => {
-        state[type]--;
-        stack.pop();
-      };
-      const push = (tok) => {
-        if (prev.type === "globstar") {
-          const isBrace = state.braces > 0 && (tok.type === "comma" || tok.type === "brace");
-          const isExtglob = tok.extglob === true || extglobs.length && (tok.type === "pipe" || tok.type === "paren");
-          if (tok.type !== "slash" && tok.type !== "paren" && !isBrace && !isExtglob) {
-            state.output = state.output.slice(0, -prev.output.length);
-            prev.type = "star";
-            prev.value = "*";
-            prev.output = star;
-            state.output += prev.output;
-          }
-        }
-        if (extglobs.length && tok.type !== "paren") {
-          extglobs[extglobs.length - 1].inner += tok.value;
-        }
-        if (tok.value || tok.output) append(tok);
-        if (prev && prev.type === "text" && tok.type === "text") {
-          prev.output = (prev.output || prev.value) + tok.value;
-          prev.value += tok.value;
-          return;
-        }
-        tok.prev = prev;
-        tokens.push(tok);
-        prev = tok;
-      };
-      const extglobOpen = (type, value2) => {
-        const token = { ...EXTGLOB_CHARS[value2], conditions: 1, inner: "" };
-        token.prev = prev;
-        token.parens = state.parens;
-        token.output = state.output;
-        token.startIndex = state.index;
-        token.tokensIndex = tokens.length;
-        const output = (opts.capture ? "(" : "") + token.open;
-        increment("parens");
-        push({ type, value: value2, output: state.output ? "" : ONE_CHAR });
-        push({ type: "paren", extglob: true, value: advance(), output });
-        extglobs.push(token);
-      };
-      const extglobClose = (token) => {
-        const literal2 = input.slice(token.startIndex, state.index + 1);
-        const body = input.slice(token.startIndex + 2, state.index);
-        const analysis = analyzeRepeatedExtglob(body, opts);
-        if ((token.type === "plus" || token.type === "star") && analysis.risky) {
-          const safeOutput = analysis.safeOutput ? (token.output ? "" : ONE_CHAR) + (opts.capture ? `(${analysis.safeOutput})` : analysis.safeOutput) : void 0;
-          const open = tokens[token.tokensIndex];
-          open.type = "text";
-          open.value = literal2;
-          open.output = safeOutput || utils.escapeRegex(literal2);
-          for (let i = token.tokensIndex + 1; i < tokens.length; i++) {
-            tokens[i].value = "";
-            tokens[i].output = "";
-            delete tokens[i].suffix;
-          }
-          state.output = token.output + open.output;
-          state.backtrack = true;
-          push({ type: "paren", extglob: true, value, output: "" });
-          decrement("parens");
-          return;
-        }
-        let output = token.close + (opts.capture ? ")" : "");
-        let rest;
-        if (token.type === "negate") {
-          let extglobStar = star;
-          if (token.inner && token.inner.length > 1 && token.inner.includes("/")) {
-            extglobStar = globstar(opts);
-          }
-          if (extglobStar !== star || eos() || /^\)+$/.test(remaining())) {
-            output = token.close = `)$))${extglobStar}`;
-          }
-          if (token.inner.includes("*") && (rest = remaining()) && /^\.[^\\/.]+$/.test(rest)) {
-            const expression = parse3(rest, { ...options, fastpaths: false }).output;
-            output = token.close = `)${expression})${extglobStar})`;
-          }
-          if (token.prev.type === "bos") {
-            state.negatedExtglob = true;
-          }
-        }
-        push({ type: "paren", extglob: true, value, output });
-        decrement("parens");
-      };
-      if (opts.fastpaths !== false && !/(^[*!]|[/()[\]{}"])/.test(input)) {
-        let backslashes = false;
-        let output = input.replace(REGEX_SPECIAL_CHARS_BACKREF, (m, esc2, chars, first, rest, index) => {
-          if (first === "\\") {
-            backslashes = true;
-            return m;
-          }
-          if (first === "?") {
-            if (esc2) {
-              return esc2 + first + (rest ? QMARK.repeat(rest.length) : "");
-            }
-            if (index === 0) {
-              return qmarkNoDot + (rest ? QMARK.repeat(rest.length) : "");
-            }
-            return QMARK.repeat(chars.length);
-          }
-          if (first === ".") {
-            return DOT_LITERAL.repeat(chars.length);
-          }
-          if (first === "*") {
-            if (esc2) {
-              return esc2 + first + (rest ? star : "");
-            }
-            return star;
-          }
-          return esc2 ? m : `\\${m}`;
-        });
-        if (backslashes === true) {
-          if (opts.unescape === true) {
-            output = output.replace(/\\/g, "");
-          } else {
-            output = output.replace(/\\+/g, (m) => {
-              return m.length % 2 === 0 ? "\\\\" : m ? "\\" : "";
-            });
-          }
-        }
-        if (output === input && opts.contains === true) {
-          state.output = input;
-          return state;
-        }
-        state.output = utils.wrapOutput(output, state, options);
-        return state;
-      }
-      while (!eos()) {
-        value = advance();
-        if (value === "\0") {
-          continue;
-        }
-        if (value === "\\") {
-          const next = peek();
-          if (next === "/" && opts.bash !== true) {
-            continue;
-          }
-          if (next === "." || next === ";") {
-            continue;
-          }
-          if (!next) {
-            value += "\\";
-            push({ type: "text", value });
-            continue;
-          }
-          const match = /^\\+/.exec(remaining());
-          let slashes = 0;
-          if (match && match[0].length > 2) {
-            slashes = match[0].length;
-            state.index += slashes;
-            if (slashes % 2 !== 0) {
-              value += "\\";
-            }
-          }
-          if (opts.unescape === true) {
-            value = advance();
-          } else {
-            value += advance();
-          }
-          if (state.brackets === 0) {
-            push({ type: "text", value });
-            continue;
-          }
-        }
-        if (state.brackets > 0 && (value !== "]" || prev.value === "[" || prev.value === "[^")) {
-          if (opts.posix !== false && value === ":") {
-            const inner = prev.value.slice(1);
-            if (inner.includes("[")) {
-              prev.posix = true;
-              if (inner.includes(":")) {
-                const idx = prev.value.lastIndexOf("[");
-                const pre = prev.value.slice(0, idx);
-                const rest2 = prev.value.slice(idx + 2);
-                const posix2 = POSIX_REGEX_SOURCE[rest2];
-                if (posix2) {
-                  prev.value = pre + posix2;
-                  state.backtrack = true;
-                  advance();
-                  if (!bos.output && tokens.indexOf(prev) === 1) {
-                    bos.output = ONE_CHAR;
-                  }
-                  continue;
-                }
-              }
-            }
-          }
-          if (value === "[" && peek() !== ":" || value === "-" && peek() === "]") {
-            value = `\\${value}`;
-          }
-          if (value === "]" && (prev.value === "[" || prev.value === "[^")) {
-            value = `\\${value}`;
-          }
-          if (opts.posix === true && value === "!" && prev.value === "[") {
-            value = "^";
-          }
-          prev.value += value;
-          append({ value });
-          continue;
-        }
-        if (state.quotes === 1 && value !== '"') {
-          value = utils.escapeRegex(value);
-          prev.value += value;
-          append({ value });
-          continue;
-        }
-        if (value === '"') {
-          state.quotes = state.quotes === 1 ? 0 : 1;
-          if (opts.keepQuotes === true) {
-            push({ type: "text", value });
-          }
-          continue;
-        }
-        if (value === "(") {
-          increment("parens");
-          push({ type: "paren", value });
-          continue;
-        }
-        if (value === ")") {
-          if (state.parens === 0 && opts.strictBrackets === true) {
-            throw new SyntaxError(syntaxError("opening", "("));
-          }
-          const extglob = extglobs[extglobs.length - 1];
-          if (extglob && state.parens === extglob.parens + 1) {
-            extglobClose(extglobs.pop());
-            continue;
-          }
-          push({ type: "paren", value, output: state.parens ? ")" : "\\)" });
-          decrement("parens");
-          continue;
-        }
-        if (value === "[") {
-          if (opts.nobracket === true || !remaining().includes("]")) {
-            if (opts.nobracket !== true && opts.strictBrackets === true) {
-              throw new SyntaxError(syntaxError("closing", "]"));
-            }
-            value = `\\${value}`;
-          } else {
-            increment("brackets");
-          }
-          push({ type: "bracket", value });
-          continue;
-        }
-        if (value === "]") {
-          if (opts.nobracket === true || prev && prev.type === "bracket" && prev.value.length === 1) {
-            push({ type: "text", value, output: `\\${value}` });
-            continue;
-          }
-          if (state.brackets === 0) {
-            if (opts.strictBrackets === true) {
-              throw new SyntaxError(syntaxError("opening", "["));
-            }
-            push({ type: "text", value, output: `\\${value}` });
-            continue;
-          }
-          decrement("brackets");
-          const prevValue = prev.value.slice(1);
-          if (prev.posix !== true && prevValue[0] === "^" && !prevValue.includes("/")) {
-            value = `/${value}`;
-          }
-          prev.value += value;
-          append({ value });
-          if (opts.literalBrackets === false || utils.hasRegexChars(prevValue)) {
-            continue;
-          }
-          const escaped = utils.escapeRegex(prev.value);
-          state.output = state.output.slice(0, -prev.value.length);
-          if (opts.literalBrackets === true) {
-            state.output += escaped;
-            prev.value = escaped;
-            continue;
-          }
-          prev.value = `(${capture}${escaped}|${prev.value})`;
-          state.output += prev.value;
-          continue;
-        }
-        if (value === "{" && opts.nobrace !== true) {
-          increment("braces");
-          const open = {
-            type: "brace",
-            value,
-            output: "(",
-            outputIndex: state.output.length,
-            tokensIndex: state.tokens.length
-          };
-          braces.push(open);
-          push(open);
-          continue;
-        }
-        if (value === "}") {
-          const brace = braces[braces.length - 1];
-          if (opts.nobrace === true || !brace) {
-            push({ type: "text", value, output: value });
-            continue;
-          }
-          let output = ")";
-          if (brace.dots === true) {
-            const arr = tokens.slice();
-            const range = [];
-            for (let i = arr.length - 1; i >= 0; i--) {
-              tokens.pop();
-              if (arr[i].type === "brace") {
-                break;
-              }
-              if (arr[i].type !== "dots") {
-                range.unshift(arr[i].value);
-              }
-            }
-            output = expandRange(range, opts);
-            state.backtrack = true;
-          }
-          if (brace.comma !== true && brace.dots !== true) {
-            const out = state.output.slice(0, brace.outputIndex);
-            const toks = state.tokens.slice(brace.tokensIndex);
-            brace.value = brace.output = "\\{";
-            value = output = "\\}";
-            state.output = out;
-            for (const t of toks) {
-              state.output += t.output || t.value;
-            }
-          }
-          push({ type: "brace", value, output });
-          decrement("braces");
-          braces.pop();
-          continue;
-        }
-        if (value === "|") {
-          if (extglobs.length > 0) {
-            extglobs[extglobs.length - 1].conditions++;
-          }
-          push({ type: "text", value });
-          continue;
-        }
-        if (value === ",") {
-          let output = value;
-          const brace = braces[braces.length - 1];
-          if (brace && stack[stack.length - 1] === "braces") {
-            brace.comma = true;
-            output = "|";
-          }
-          push({ type: "comma", value, output });
-          continue;
-        }
-        if (value === "/") {
-          if (prev.type === "dot" && state.index === state.start + 1) {
-            state.start = state.index + 1;
-            state.consumed = "";
-            state.output = "";
-            tokens.pop();
-            prev = bos;
-            continue;
-          }
-          push({ type: "slash", value, output: SLASH_LITERAL });
-          continue;
-        }
-        if (value === ".") {
-          if (state.braces > 0 && prev.type === "dot") {
-            if (prev.value === ".") prev.output = DOT_LITERAL;
-            const brace = braces[braces.length - 1];
-            prev.type = "dots";
-            prev.output += value;
-            prev.value += value;
-            brace.dots = true;
-            continue;
-          }
-          if (state.braces + state.parens === 0 && prev.type !== "bos" && prev.type !== "slash") {
-            push({ type: "text", value, output: DOT_LITERAL });
-            continue;
-          }
-          push({ type: "dot", value, output: DOT_LITERAL });
-          continue;
-        }
-        if (value === "?") {
-          const isGroup = prev && prev.value === "(";
-          if (!isGroup && opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
-            extglobOpen("qmark", value);
-            continue;
-          }
-          if (prev && prev.type === "paren") {
-            const next = peek();
-            let output = value;
-            if (prev.value === "(" && !/[!=<:]/.test(next) || next === "<" && !/<([!=]|\w+>)/.test(remaining())) {
-              output = `\\${value}`;
-            }
-            push({ type: "text", value, output });
-            continue;
-          }
-          if (opts.dot !== true && (prev.type === "slash" || prev.type === "bos")) {
-            push({ type: "qmark", value, output: QMARK_NO_DOT });
-            continue;
-          }
-          push({ type: "qmark", value, output: QMARK });
-          continue;
-        }
-        if (value === "!") {
-          if (opts.noextglob !== true && peek() === "(") {
-            if (peek(2) !== "?" || !/[!=<:]/.test(peek(3))) {
-              extglobOpen("negate", value);
-              continue;
-            }
-          }
-          if (opts.nonegate !== true && state.index === 0) {
-            negate();
-            continue;
-          }
-        }
-        if (value === "+") {
-          if (opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
-            extglobOpen("plus", value);
-            continue;
-          }
-          if (prev && prev.value === "(" || opts.regex === false) {
-            push({ type: "plus", value, output: PLUS_LITERAL });
-            continue;
-          }
-          if (prev && (prev.type === "bracket" || prev.type === "paren" || prev.type === "brace") || state.parens > 0) {
-            push({ type: "plus", value });
-            continue;
-          }
-          push({ type: "plus", value: PLUS_LITERAL });
-          continue;
-        }
-        if (value === "@") {
-          if (opts.noextglob !== true && peek() === "(" && peek(2) !== "?") {
-            push({ type: "at", extglob: true, value, output: "" });
-            continue;
-          }
-          push({ type: "text", value });
-          continue;
-        }
-        if (value !== "*") {
-          if (value === "$" || value === "^") {
-            value = `\\${value}`;
-          }
-          const match = REGEX_NON_SPECIAL_CHARS.exec(remaining());
-          if (match) {
-            value += match[0];
-            state.index += match[0].length;
-          }
-          push({ type: "text", value });
-          continue;
-        }
-        if (prev && (prev.type === "globstar" || prev.star === true)) {
-          prev.type = "star";
-          prev.star = true;
-          prev.value += value;
-          prev.output = star;
-          state.backtrack = true;
-          state.globstar = true;
-          consume(value);
-          continue;
-        }
-        let rest = remaining();
-        if (opts.noextglob !== true && /^\([^?]/.test(rest)) {
-          extglobOpen("star", value);
-          continue;
-        }
-        if (prev.type === "star") {
-          if (opts.noglobstar === true) {
-            consume(value);
-            continue;
-          }
-          const prior = prev.prev;
-          const before = prior.prev;
-          const isStart = prior.type === "slash" || prior.type === "bos";
-          const afterStar = before && (before.type === "star" || before.type === "globstar");
-          if (opts.bash === true && (!isStart || rest[0] && rest[0] !== "/")) {
-            push({ type: "star", value, output: "" });
-            continue;
-          }
-          const isBrace = state.braces > 0 && (prior.type === "comma" || prior.type === "brace");
-          const isExtglob = extglobs.length && (prior.type === "pipe" || prior.type === "paren");
-          if (!isStart && prior.type !== "paren" && !isBrace && !isExtglob) {
-            push({ type: "star", value, output: "" });
-            continue;
-          }
-          while (rest.slice(0, 3) === "/**") {
-            const after = input[state.index + 4];
-            if (after && after !== "/") {
-              break;
-            }
-            rest = rest.slice(3);
-            consume("/**", 3);
-          }
-          const isEnd = eos() || state.parens > 0 && rest === ")".repeat(state.parens) && !extglobs.some((extglob) => extglob.type === "negate");
-          if (prior.type === "bos" && eos()) {
-            prev.type = "globstar";
-            prev.value += value;
-            prev.output = globstar(opts);
-            state.output = prev.output;
-            state.globstar = true;
-            consume(value);
-            continue;
-          }
-          if (prior.type === "slash" && prior.prev.type !== "bos" && !afterStar && isEnd) {
-            state.output = state.output.slice(0, -(prior.output + prev.output).length);
-            prior.output = `(?:${prior.output}`;
-            prev.type = "globstar";
-            prev.output = globstar(opts) + (opts.strictSlashes ? ")" : "|$)");
-            prev.value += value;
-            state.globstar = true;
-            state.output += prior.output + prev.output;
-            consume(value);
-            continue;
-          }
-          if (prior.type === "slash" && prior.prev.type !== "bos" && rest[0] === "/") {
-            const end = rest[1] !== void 0 ? "|$" : "";
-            state.output = state.output.slice(0, -(prior.output + prev.output).length);
-            prior.output = `(?:${prior.output}`;
-            prev.type = "globstar";
-            prev.output = `${globstar(opts)}${SLASH_LITERAL}|${SLASH_LITERAL}${end})`;
-            prev.value += value;
-            state.output += prior.output + prev.output;
-            state.globstar = true;
-            consume(value + advance());
-            push({ type: "slash", value: "/", output: "" });
-            continue;
-          }
-          if (prior.type === "bos" && rest[0] === "/") {
-            prev.type = "globstar";
-            prev.value += value;
-            prev.output = `(?:^|${SLASH_LITERAL}|${globstar(opts)}${SLASH_LITERAL})`;
-            state.output = prev.output;
-            state.globstar = true;
-            consume(value + advance());
-            push({ type: "slash", value: "/", output: "" });
-            continue;
-          }
-          state.output = state.output.slice(0, -prev.output.length);
-          prev.type = "globstar";
-          prev.output = globstar(opts);
-          prev.value += value;
-          state.output += prev.output;
-          state.globstar = true;
-          consume(value);
-          continue;
-        }
-        const token = { type: "star", value, output: star };
-        if (opts.bash === true) {
-          token.output = ".*?";
-          if (prev.type === "bos" || prev.type === "slash") {
-            token.output = nodot + token.output;
-          }
-          push(token);
-          continue;
-        }
-        if (prev && (prev.type === "bracket" || prev.type === "paren") && opts.regex === true) {
-          token.output = value;
-          push(token);
-          continue;
-        }
-        if (state.index === state.start || prev.type === "slash" || prev.type === "dot") {
-          if (prev.type === "dot") {
-            state.output += NO_DOT_SLASH;
-            prev.output += NO_DOT_SLASH;
-          } else if (opts.dot === true) {
-            state.output += NO_DOTS_SLASH;
-            prev.output += NO_DOTS_SLASH;
-          } else {
-            state.output += nodot;
-            prev.output += nodot;
-          }
-          if (peek() !== "*") {
-            state.output += ONE_CHAR;
-            prev.output += ONE_CHAR;
-          }
-        }
-        push(token);
-      }
-      while (state.brackets > 0) {
-        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", "]"));
-        state.output = utils.escapeLast(state.output, "[");
-        decrement("brackets");
-      }
-      while (state.parens > 0) {
-        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", ")"));
-        state.output = utils.escapeLast(state.output, "(");
-        decrement("parens");
-      }
-      while (state.braces > 0) {
-        if (opts.strictBrackets === true) throw new SyntaxError(syntaxError("closing", "}"));
-        state.output = utils.escapeLast(state.output, "{");
-        decrement("braces");
-      }
-      if (opts.strictSlashes !== true && (prev.type === "star" || prev.type === "bracket")) {
-        push({ type: "maybe_slash", value: "", output: `${SLASH_LITERAL}?` });
-      }
-      if (state.backtrack === true) {
-        state.output = "";
-        for (const token of state.tokens) {
-          state.output += token.output != null ? token.output : token.value;
-          if (token.suffix) {
-            state.output += token.suffix;
-          }
-        }
-      }
-      return state;
-    };
-    parse3.fastpaths = (input, options) => {
-      const opts = { ...options };
-      const max = typeof opts.maxLength === "number" ? Math.min(MAX_LENGTH, opts.maxLength) : MAX_LENGTH;
-      const len = input.length;
-      if (len > max) {
-        throw new SyntaxError(`Input length: ${len}, exceeds maximum allowed length: ${max}`);
-      }
-      input = REPLACEMENTS[input] || input;
-      const {
-        DOT_LITERAL,
-        SLASH_LITERAL,
-        ONE_CHAR,
-        DOTS_SLASH,
-        NO_DOT,
-        NO_DOTS,
-        NO_DOTS_SLASH,
-        STAR,
-        START_ANCHOR
-      } = constants.globChars(opts.windows);
-      const nodot = opts.dot ? NO_DOTS : NO_DOT;
-      const slashDot = opts.dot ? NO_DOTS_SLASH : NO_DOT;
-      const capture = opts.capture ? "" : "?:";
-      const state = { negated: false, prefix: "" };
-      let star = opts.bash === true ? ".*?" : STAR;
-      if (opts.capture) {
-        star = `(${star})`;
-      }
-      const globstar = (opts2) => {
-        if (opts2.noglobstar === true) return star;
-        return `(${capture}(?:(?!${START_ANCHOR}${opts2.dot ? DOTS_SLASH : DOT_LITERAL}).)*?)`;
-      };
-      const create = (str) => {
-        switch (str) {
-          case "*":
-            return `${nodot}${ONE_CHAR}${star}`;
-          case ".*":
-            return `${DOT_LITERAL}${ONE_CHAR}${star}`;
-          case "*.*":
-            return `${nodot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
-          case "*/*":
-            return `${nodot}${star}${SLASH_LITERAL}${ONE_CHAR}${slashDot}${star}`;
-          case "**":
-            return nodot + globstar(opts);
-          case "**/*":
-            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${ONE_CHAR}${star}`;
-          case "**/*.*":
-            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${slashDot}${star}${DOT_LITERAL}${ONE_CHAR}${star}`;
-          case "**/.*":
-            return `(?:${nodot}${globstar(opts)}${SLASH_LITERAL})?${DOT_LITERAL}${ONE_CHAR}${star}`;
-          default: {
-            const match = /^(.*?)\.(\w+)$/.exec(str);
-            if (!match) return;
-            const source2 = create(match[1]);
-            if (!source2) return;
-            return source2 + DOT_LITERAL + match[2];
-          }
-        }
-      };
-      const output = utils.removePrefix(input, state);
-      let source = create(output);
-      if (source && opts.strictSlashes !== true) {
-        source += `${SLASH_LITERAL}?`;
-      }
-      return source;
-    };
-    module.exports = parse3;
-  }
-});
-
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/picomatch.js
-var require_picomatch = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/lib/picomatch.js"(exports, module) {
-    "use strict";
-    var scan = require_scan();
-    var parse3 = require_parse();
-    var utils = require_utils();
-    var constants = require_constants();
-    var isObject2 = (val) => val && typeof val === "object" && !Array.isArray(val);
-    var picomatch2 = (glob2, options, returnState = false) => {
-      if (Array.isArray(glob2)) {
-        const fns = glob2.map((input) => picomatch2(input, options, returnState));
-        const arrayMatcher = (str) => {
-          for (const isMatch of fns) {
-            const state2 = isMatch(str);
-            if (state2) return state2;
-          }
-          return false;
-        };
-        return arrayMatcher;
-      }
-      const isState = isObject2(glob2) && glob2.tokens && glob2.input;
-      if (glob2 === "" || typeof glob2 !== "string" && !isState) {
-        throw new TypeError("Expected pattern to be a non-empty string");
-      }
-      const opts = options || {};
-      const posix2 = opts.windows;
-      const regex = isState ? picomatch2.compileRe(glob2, options) : picomatch2.makeRe(glob2, options, false, true);
-      const state = regex.state;
-      delete regex.state;
-      let isIgnored = () => false;
-      if (opts.ignore) {
-        const ignoreOpts = { ...options, ignore: null, onMatch: null, onResult: null };
-        isIgnored = picomatch2(opts.ignore, ignoreOpts, returnState);
-      }
-      const matcher = (input, returnObject = false) => {
-        const { isMatch, match, output } = picomatch2.test(input, regex, options, { glob: glob2, posix: posix2 });
-        const result = { glob: glob2, state, regex, posix: posix2, input, output, match, isMatch };
-        if (typeof opts.onResult === "function") {
-          opts.onResult(result);
-        }
-        if (isMatch === false) {
-          result.isMatch = false;
-          return returnObject ? result : false;
-        }
-        if (isIgnored(input)) {
-          if (typeof opts.onIgnore === "function") {
-            opts.onIgnore(result);
-          }
-          result.isMatch = false;
-          return returnObject ? result : false;
-        }
-        if (typeof opts.onMatch === "function") {
-          opts.onMatch(result);
-        }
-        return returnObject ? result : true;
-      };
-      if (returnState) {
-        matcher.state = state;
-      }
-      return matcher;
-    };
-    picomatch2.test = (input, regex, options, { glob: glob2, posix: posix2 } = {}) => {
-      if (typeof input !== "string") {
-        throw new TypeError("Expected input to be a string");
-      }
-      if (input === "") {
-        return { isMatch: false, output: "" };
-      }
-      const opts = options || {};
-      const format = opts.format || (posix2 ? utils.toPosixSlashes : null);
-      let match = input === glob2;
-      let output = match && format ? format(input) : input;
-      if (match === false) {
-        output = format ? format(input) : input;
-        match = output === glob2;
-      }
-      if (match === false || opts.capture === true) {
-        if (opts.matchBase === true || opts.basename === true) {
-          match = picomatch2.matchBase(input, regex, options, posix2);
-        } else {
-          match = regex.exec(output);
-        }
-      }
-      return { isMatch: Boolean(match), match, output };
-    };
-    picomatch2.matchBase = (input, glob2, options, posix2 = options && options.windows) => {
-      const regex = glob2 instanceof RegExp ? glob2 : picomatch2.makeRe(glob2, options);
-      return regex.test(utils.basename(input, { windows: posix2 }));
-    };
-    picomatch2.isMatch = (str, patterns, options) => picomatch2(patterns, options)(str);
-    picomatch2.parse = (pattern, options) => {
-      if (Array.isArray(pattern)) return pattern.map((p) => picomatch2.parse(p, options));
-      return parse3(pattern, { ...options, fastpaths: false });
-    };
-    picomatch2.scan = (input, options) => scan(input, options);
-    picomatch2.compileRe = (state, options, returnOutput = false, returnState = false) => {
-      if (returnOutput === true) {
-        return state.output;
-      }
-      const opts = options || {};
-      const prepend = opts.contains ? "" : "^";
-      const append = opts.contains ? "" : "$";
-      let source = `${prepend}(?:${state.output})${append}`;
-      if (state && state.negated === true) {
-        source = `^(?!${source}).*$`;
-      }
-      const regex = picomatch2.toRegex(source, options);
-      if (returnState === true) {
-        regex.state = state;
-      }
-      return regex;
-    };
-    picomatch2.makeRe = (input, options = {}, returnOutput = false, returnState = false) => {
-      if (!input || typeof input !== "string") {
-        throw new TypeError("Expected a non-empty string");
-      }
-      let parsed = { negated: false, fastpaths: true };
-      if (options.fastpaths !== false && (input[0] === "." || input[0] === "*")) {
-        parsed.output = parse3.fastpaths(input, options);
-      }
-      if (!parsed.output) {
-        parsed = parse3(input, options);
-      }
-      return picomatch2.compileRe(parsed, options, returnOutput, returnState);
-    };
-    picomatch2.toRegex = (source, options) => {
-      try {
-        const opts = options || {};
-        return new RegExp(source, opts.flags || (opts.nocase ? "i" : ""));
-      } catch (err) {
-        if (options && options.debug === true) throw err;
-        return /$^/;
-      }
-    };
-    picomatch2.constants = constants;
-    module.exports = picomatch2;
-  }
-});
-
-// node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/index.js
-var require_picomatch2 = __commonJS({
-  "node_modules/.pnpm/picomatch@4.0.7/node_modules/picomatch/index.js"(exports, module) {
-    "use strict";
-    var pico = require_picomatch();
-    var utils = require_utils();
-    function picomatch2(glob2, options, returnState = false) {
-      if (options && (options.windows === null || options.windows === void 0)) {
-        options = { ...options, windows: utils.isWindows() };
-      }
-      return pico(glob2, options, returnState);
-    }
-    Object.assign(picomatch2, pico);
-    module.exports = picomatch2;
-  }
-});
-
 // node_modules/.pnpm/ajv@8.20.0/node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
   "node_modules/.pnpm/ajv@8.20.0/node_modules/ajv/dist/compile/codegen/code.js"(exports) {
@@ -11907,11 +11907,11 @@ var require_validate = __commonJS({
         jsonPointer = $data;
         data = names_1.default.rootData;
       } else {
-        const matches = RELATIVE_JSON_POINTER.exec($data);
-        if (!matches)
+        const matches2 = RELATIVE_JSON_POINTER.exec($data);
+        if (!matches2)
           throw new Error(`Invalid JSON-pointer: ${$data}`);
-        const up = +matches[1];
-        jsonPointer = matches[2];
+        const up = +matches2[1];
+        jsonPointer = matches2[2];
         if (jsonPointer === "#") {
           if (up >= dataLevel)
             throw new Error(errorMsg("property/index", up));
@@ -12798,11 +12798,11 @@ var require_schemes = __commonJS({
         urnComponent.error = "URN can not be parsed";
         return urnComponent;
       }
-      const matches = urnComponent.path.match(URN_REG);
-      if (matches && matches[0] === urnComponent.path) {
+      const matches2 = urnComponent.path.match(URN_REG);
+      if (matches2 && matches2[0] === urnComponent.path) {
         const scheme = options.scheme || urnComponent.scheme || "urn";
-        urnComponent.nid = matches[1].toLowerCase();
-        urnComponent.nss = matches[2];
+        urnComponent.nid = matches2[1].toLowerCase();
+        urnComponent.nss = matches2[2];
         const urnScheme = `${scheme}:${options.nid || urnComponent.nid}`;
         const schemeHandler = getSchemeHandler(urnScheme);
         urnComponent.path = void 0;
@@ -13116,8 +13116,8 @@ var require_fast_uri = __commonJS({
     var URI_PARSE = /^(?:([^#/:?]+):)?(?:\/\/((?:([^#/?@]*)@)?(\[[^#/?\]]+\]|[^#/:?]*)(?::(\d*))?))?([^#?]*)(?:\?([^#]*))?(?:#((?:.|[\n\r])*))?/u;
     var AUTHORITY_PREFIX = /^(?:[^#/:?]+:)?\/\/([^/?#]*)/;
     var AUTHORITY_INTRODUCER_REGION = /^(?:[^#/:?]+:)?([/\\\t\n\r]*)/;
-    function getParseError(parsed, matches) {
-      if (matches[2] !== void 0 && parsed.path && parsed.path[0] !== "/") {
+    function getParseError(parsed, matches2) {
+      if (matches2[2] !== void 0 && parsed.path && parsed.path[0] !== "/") {
         return 'URI path must start with "/" when authority is present.';
       }
       if (typeof parsed.port === "number" && (parsed.port < 0 || parsed.port > 65535)) {
@@ -13139,9 +13139,9 @@ var require_fast_uri = __commonJS({
     function isIPLiteral(host) {
       return host[0] === "[" && host[host.length - 1] === "]";
     }
-    function hasMalformedComponentPercentEncoding(matches) {
-      const host = matches[4];
-      return hasMalformedPercentEncoding(matches[3]) || host !== void 0 && !isIPLiteral(host) && hasMalformedPercentEncoding(host) || hasMalformedPercentEncoding(matches[6]) || hasMalformedPercentEncoding(matches[7]) || hasMalformedPercentEncoding(matches[8]);
+    function hasMalformedComponentPercentEncoding(matches2) {
+      const host = matches2[4];
+      return hasMalformedPercentEncoding(matches2[3]) || host !== void 0 && !isIPLiteral(host) && hasMalformedPercentEncoding(host) || hasMalformedPercentEncoding(matches2[6]) || hasMalformedPercentEncoding(matches2[7]) || hasMalformedPercentEncoding(matches2[8]);
     }
     function canonicalizeHost(parsed, options, schemeHandler, isIP) {
       if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport) && parsed.host && !isIPLiteral(parsed.host) && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && nonSimpleDomain(parsed.host)) {
@@ -13198,15 +13198,15 @@ var require_fast_uri = __commonJS({
           }
         }
       }
-      const matches = uri.match(URI_PARSE);
-      if (matches) {
-        parsed.scheme = matches[1];
-        parsed.userinfo = matches[3];
-        parsed.host = matches[4];
-        parsed.port = parseInt(matches[5], 10);
-        parsed.path = matches[6] || "";
-        parsed.query = matches[7];
-        parsed.fragment = matches[8];
+      const matches2 = uri.match(URI_PARSE);
+      if (matches2) {
+        parsed.scheme = matches2[1];
+        parsed.userinfo = matches2[3];
+        parsed.host = matches2[4];
+        parsed.port = parseInt(matches2[5], 10);
+        parsed.path = matches2[6] || "";
+        parsed.query = matches2[7];
+        parsed.fragment = matches2[8];
         if (parsed.scheme !== void 0) {
           const decodedScheme = unescape(parsed.scheme);
           if (VALID_SCHEME.test(decodedScheme)) {
@@ -13216,14 +13216,14 @@ var require_fast_uri = __commonJS({
             malformedScheme = true;
           }
         }
-        malformedPercentEncoding = hasMalformedComponentPercentEncoding(matches);
+        malformedPercentEncoding = hasMalformedComponentPercentEncoding(matches2);
         if (malformedPercentEncoding) {
           parsed.error = parsed.error || "URI contains malformed percent-encoding.";
         }
         if (isNaN(parsed.port)) {
-          parsed.port = matches[5];
+          parsed.port = matches2[5];
         }
-        const parseError = getParseError(parsed, matches);
+        const parseError = getParseError(parsed, matches2);
         if (parseError !== void 0) {
           parsed.error = parsed.error || parseError;
           malformedAuthorityOrPort = true;
@@ -16073,12 +16073,12 @@ var require_formats = __commonJS({
     var DATE = /^(\d\d\d\d)-(\d\d)-(\d\d)$/;
     var DAYS = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     function date3(str) {
-      const matches = DATE.exec(str);
-      if (!matches)
+      const matches2 = DATE.exec(str);
+      if (!matches2)
         return false;
-      const year = +matches[1];
-      const month = +matches[2];
-      const day = +matches[3];
+      const year = +matches2[1];
+      const month = +matches2[2];
+      const day = +matches2[3];
       return month >= 1 && month <= 12 && day >= 1 && day <= (month === 2 && isLeapYear(year) ? 29 : DAYS[month]);
     }
     function compareDate(d1, d2) {
@@ -16093,16 +16093,16 @@ var require_formats = __commonJS({
     var TIME = /^(\d\d):(\d\d):(\d\d(?:\.\d+)?)(z|([+-])(\d\d)(?::?(\d\d))?)?$/i;
     function getTime(strictTimeZone) {
       return function time3(str) {
-        const matches = TIME.exec(str);
-        if (!matches)
+        const matches2 = TIME.exec(str);
+        if (!matches2)
           return false;
-        const hr = +matches[1];
-        const min = +matches[2];
-        const sec = +matches[3];
-        const tz = matches[4];
-        const tzSign = matches[5] === "-" ? -1 : 1;
-        const tzH = +(matches[6] || 0);
-        const tzM = +(matches[7] || 0);
+        const hr = +matches2[1];
+        const min = +matches2[2];
+        const sec = +matches2[3];
+        const tz = matches2[4];
+        const tzSign = matches2[5] === "-" ? -1 : 1;
+        const tzH = +(matches2[6] || 0);
+        const tzM = +(matches2[7] || 0);
         if (tzH > 23 || tzM > 59 || strictTimeZone && !tz)
           return false;
         if (hr <= 23 && min <= 59 && sec < 60)
@@ -22448,6 +22448,15 @@ var StdioServerTransport = class {
   }
 };
 
+// packages/store/src/artifacts.ts
+import { existsSync as existsSync2, mkdirSync as mkdirSync2, readdirSync as readdirSync2, readFileSync as readFileSync2, writeFileSync as writeFileSync2 } from "node:fs";
+import { join as join2 } from "node:path";
+
+// packages/store/src/project.ts
+import { createHash as createHash2 } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { dirname as dirname2, isAbsolute as isAbsolute2, join, relative as relative2, resolve as resolve3, sep as sep2 } from "node:path";
+
 // node_modules/.pnpm/zod@3.25.76/node_modules/zod/v3/external.js
 var external_exports = {};
 __export(external_exports, {
@@ -26525,6 +26534,10 @@ var TraceNode = external_exports.object({
   location: external_exports.string().optional(),
   /** Content hash of the node's current text. Absent for nodes whose content is not tracked. */
   hash: external_exports.string().optional(),
+  /** Finer grouping than `type`, e.g. "business-case" or "deck" for artifacts, "section" for parts of a document. */
+  kind: external_exports.string().optional(),
+  /** Lifecycle stage the node belongs to, e.g. "business-case". Gates collect their stage's nodes by this. */
+  stage: external_exports.string().optional(),
   /** Set when a node changed in a way a hash cannot show, e.g. a finding was retracted. */
   changed: external_exports.object({ reason: external_exports.string(), at: external_exports.string() }).optional()
 });
@@ -26538,7 +26551,9 @@ var TraceLink = external_exports.object({
   /** The `from` node's hash when this link was last confirmed. */
   upstreamHash: external_exports.string().optional(),
   createdAt: external_exports.string(),
-  confirmedAt: external_exports.string().optional()
+  confirmedAt: external_exports.string().optional(),
+  /** True when the link is written in the files (a citation or `derived_from`); scans add and remove it to match. */
+  fromText: external_exports.boolean().optional()
 });
 var TraceFile = external_exports.object({
   version: external_exports.literal(1),
@@ -26757,152 +26772,8 @@ var TraceGraph = class _TraceGraph {
   }
 };
 
-// packages/store/src/config.ts
-var DEFAULT_PREFIXES = {
-  EV: "evidence",
-  INS: "insight",
-  REQ: "requirement",
-  FR: "requirement",
-  NFR: "requirement",
-  SC: "requirement",
-  US: "requirement",
-  DEC: "decision",
-  ART: "artifact",
-  DES: "design",
-  SPEC: "spec"
-};
-var CoreflowConfig = external_exports.object({
-  /** Markdown files scanned for definitions. */
-  include: external_exports.array(external_exports.string()).default(["specs/**/*.md", "docs/**/*.md"]),
-  /** Never scanned, never linked by the edit hook. */
-  exclude: external_exports.array(external_exports.string()).default(["**/node_modules/**", "**/.git/**", ".coreflow/**", "**/dist/**"]),
-  /** ID prefix (the part before the dash) to node type. IDs with other prefixes are ignored. */
-  prefixes: external_exports.record(NodeType).default(DEFAULT_PREFIXES),
-  /** Regular expression on the repo-relative path that marks a file as a test. */
-  testPattern: external_exports.string().default(String.raw`(^|/)(__tests__|tests?)/|\.(test|spec)\.[cm]?[jt]sx?$|(^|/)test_[^/]*\.py$|_test\.(py|go)$`)
-});
-
-// packages/store/src/markdown.ts
-var import_yaml = __toESM(require_dist(), 1);
-var INLINE = /^\s*(?:[-*+]\s+|\d+[.)]\s+)?\*\*([A-Z][A-Z0-9]*-\d+):?\*\*\s*:?\s*(.*)$/;
-var HEADING = /^(#{1,6})\s+([A-Z][A-Z0-9]*-\d+)\b[\s:.–—-]*(.*)$/;
-var ANY_HEADING = /^(#{1,6})\s/;
-var FENCE = /^\s*(```|~~~)/;
-var ID_PATTERN = /\b[A-Z][A-Z0-9]*-\d+\b/g;
-function typeForId(id, prefixes) {
-  const prefix = id.slice(0, id.lastIndexOf("-"));
-  return prefixes[prefix];
-}
-function splitFrontMatter(text2) {
-  const normalised = text2.replace(/\r\n/g, "\n");
-  if (!normalised.startsWith("---\n")) return { data: void 0, body: normalised, offset: 0 };
-  const end = normalised.indexOf("\n---", 4);
-  if (end === -1) return { data: void 0, body: normalised, offset: 0 };
-  const after = normalised.indexOf("\n", end + 4);
-  const body = after === -1 ? "" : normalised.slice(after + 1);
-  try {
-    const data = (0, import_yaml.parse)(normalised.slice(4, end));
-    const offset = normalised.slice(0, after === -1 ? normalised.length : after + 1).split("\n").length - 1;
-    return { data: data && typeof data === "object" ? data : void 0, body, offset };
-  } catch {
-    return { data: void 0, body: normalised, offset: 0 };
-  }
-}
-function firstHeading(body) {
-  const match = body.match(/^#{1,6}\s+(.+)$/m);
-  return match?.[1]?.trim();
-}
-function toIdList(value) {
-  if (typeof value === "string") return value.split(/[\s,]+/).filter(Boolean);
-  if (Array.isArray(value)) return value.filter((v) => typeof v === "string");
-  return [];
-}
-function shortTitle(text2) {
-  const t = text2.replace(/\s+/g, " ").trim();
-  if (!t) return void 0;
-  return t.length > 100 ? `${t.slice(0, 97)}...` : t;
-}
-function extractDefinitions(path, text2, prefixes) {
-  const { data, body, offset } = splitFrontMatter(text2);
-  const defs = [];
-  if (data && typeof data.id === "string" && NodeType.safeParse(data.type).success) {
-    defs.push({
-      node: {
-        id: data.id,
-        type: NodeType.parse(data.type),
-        title: typeof data.title === "string" ? data.title : firstHeading(body),
-        location: path,
-        hash: contentHash(body)
-      },
-      derivedFrom: toIdList(data.derived_from),
-      line: 1
-    });
-  }
-  const lines = body.split("\n");
-  let inFence = false;
-  let open;
-  const close = () => {
-    if (!open) return;
-    const type = typeForId(open.id, prefixes);
-    if (type) {
-      defs.push({
-        node: {
-          id: open.id,
-          type,
-          title: shortTitle(open.title),
-          location: `${path}#${open.id}`,
-          hash: contentHash(open.lines.join("\n").trim())
-        },
-        derivedFrom: [],
-        line: open.start + offset + 1
-      });
-    }
-    open = void 0;
-  };
-  lines.forEach((line, i) => {
-    if (FENCE.test(line)) {
-      inFence = !inFence;
-      if (open && open.level === void 0) close();
-      else open?.lines.push(line);
-      return;
-    }
-    if (inFence) {
-      open?.lines.push(line);
-      return;
-    }
-    const heading = line.match(HEADING);
-    const anyHeading = line.match(ANY_HEADING);
-    if (anyHeading) {
-      const level = anyHeading[1].length;
-      if (open && (open.level === void 0 || level <= open.level)) close();
-      if (heading && typeForId(heading[2], prefixes)) {
-        open = { id: heading[2], title: heading[3] ?? "", start: i, lines: [line], level };
-      } else {
-        open?.lines.push(line);
-      }
-      return;
-    }
-    const inline = line.match(INLINE);
-    if (inline && typeForId(inline[1], prefixes)) {
-      if (open?.level === void 0) close();
-      if (!open) {
-        open = { id: inline[1], title: inline[2] ?? "", start: i, lines: [line] };
-        return;
-      }
-    }
-    if (open && open.level === void 0 && line.trim() === "") {
-      close();
-      return;
-    }
-    open?.lines.push(line);
-  });
-  close();
-  return defs;
-}
-
 // packages/store/src/project.ts
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
-import { dirname as dirname2, isAbsolute as isAbsolute2, join, relative as relative2, resolve as resolve3, sep as sep2 } from "node:path";
+var import_picomatch2 = __toESM(require_picomatch2(), 1);
 
 // node_modules/.pnpm/tinyglobby@0.2.17/node_modules/tinyglobby/dist/index.mjs
 import { readdir, readdirSync, realpath, realpathSync, stat, statSync } from "fs";
@@ -27428,7 +27299,7 @@ var ONLY_PARENT_DIRECTORIES = /^(\/?\.\.)+$/;
 function getPartialMatcher(patterns, options = {}) {
   const patternsCount = patterns.length;
   const patternsParts = Array(patternsCount);
-  const matchers = Array(patternsCount);
+  const matchers2 = Array(patternsCount);
   let i, j;
   for (i = 0; i < patternsCount; i++) {
     const parts = splitPattern(patterns[i]);
@@ -27436,14 +27307,14 @@ function getPartialMatcher(patterns, options = {}) {
     const partsCount = parts.length;
     const partMatchers = Array(partsCount);
     for (j = 0; j < partsCount; j++) partMatchers[j] = (0, import_picomatch.default)(parts[j], options);
-    matchers[i] = partMatchers;
+    matchers2[i] = partMatchers;
   }
   return (input) => {
     const inputParts = input.split("/");
     if (inputParts[0] === ".." && ONLY_PARENT_DIRECTORIES.test(input)) return true;
     for (i = 0; i < patternsCount; i++) {
       const patternParts = patternsParts[i];
-      const matcher = matchers[i];
+      const matcher = matchers2[i];
       const inputPatternCount = inputParts.length;
       const minParts = Math.min(inputPatternCount, patternParts.length);
       j = 0;
@@ -27608,9 +27479,9 @@ function buildCrawler(options, patterns) {
   const crawler = new Builder({
     filters: [debug ? (p, isDirectory) => {
       const path = format(p, isDirectory);
-      const matches = matcher(path) && !ignore(path);
-      if (matches) log(`matched ${path}`);
-      return matches;
+      const matches2 = matcher(path) && !ignore(path);
+      if (matches2) log(`matched ${path}`);
+      return matches2;
     } : (p, isDirectory) => {
       const path = format(p, isDirectory);
       return matcher(path) && !ignore(path);
@@ -27678,6 +27549,448 @@ async function glob(globInput, options) {
   return crawler ? formatPaths(await crawler.withPromise(), relative3) : [];
 }
 
+// packages/gates/src/evidence-quality.ts
+var EvidenceQualityConfig = external_exports.object({
+  minConfidenceThreshold: external_exports.number().min(0).max(1).default(0.6),
+  minInsightCount: external_exports.number().int().min(0).default(3),
+  minSourceCount: external_exports.number().int().min(0).default(2),
+  maxLowConfidenceRatio: external_exports.number().min(0).max(1).default(0.3),
+  requireVerifiedInsights: external_exports.boolean().default(false)
+});
+var HIGH_CONFIDENCE = 0.8;
+function measureEvidence(insights, lowConfidenceBelow = 0.6) {
+  const count = insights.length;
+  const sum = insights.reduce((acc, i) => acc + i.confidence, 0);
+  return {
+    averageConfidence: count ? sum / count : 0,
+    insightCount: count,
+    sourceCount: new Set(insights.flatMap((i) => i.sourceIds)).size,
+    highConfidenceCount: insights.filter((i) => i.confidence >= HIGH_CONFIDENCE).length,
+    lowConfidenceCount: insights.filter((i) => i.confidence < lowConfidenceBelow).length,
+    unverifiedCount: insights.filter((i) => !i.verified).length
+  };
+}
+var pct = (n) => `${Math.round(n * 100)}%`;
+function checkEvidenceQuality(insights, config2 = {}) {
+  const c = EvidenceQualityConfig.parse(config2);
+  const m = measureEvidence(insights, c.minConfidenceThreshold);
+  const checks = [];
+  const recommendations = [];
+  const confidenceOk = m.averageConfidence >= c.minConfidenceThreshold;
+  checks.push({
+    name: "Minimum Confidence",
+    passed: confidenceOk,
+    message: confidenceOk ? `Average confidence (${pct(m.averageConfidence)}) meets threshold` : `Average confidence (${pct(m.averageConfidence)}) is below ${pct(c.minConfidenceThreshold)} threshold`,
+    actual: m.averageConfidence,
+    threshold: c.minConfidenceThreshold,
+    severity: "error"
+  });
+  if (!confidenceOk) {
+    recommendations.push(
+      "Add more research sources to improve insight confidence",
+      "Review and verify low-confidence insights manually",
+      "Consider conducting additional user research"
+    );
+  }
+  const countOk = m.insightCount >= c.minInsightCount;
+  checks.push({
+    name: "Minimum Insights",
+    passed: countOk,
+    message: countOk ? `${m.insightCount} insights meet minimum of ${c.minInsightCount}` : `Only ${m.insightCount} insights found, need at least ${c.minInsightCount}`,
+    actual: m.insightCount,
+    threshold: c.minInsightCount,
+    severity: "error"
+  });
+  if (!countOk) {
+    recommendations.push(
+      "Upload additional research documents",
+      "Extract insights from existing documents that may have been missed"
+    );
+  }
+  const sourcesOk = m.sourceCount >= c.minSourceCount;
+  checks.push({
+    name: "Source Diversity",
+    passed: sourcesOk,
+    message: sourcesOk ? `${m.sourceCount} sources meet minimum of ${c.minSourceCount}` : `Only ${m.sourceCount} source(s) found, need at least ${c.minSourceCount} for diversity`,
+    actual: m.sourceCount,
+    threshold: c.minSourceCount,
+    severity: "warning"
+  });
+  if (!sourcesOk) {
+    recommendations.push(
+      "Add research from diverse sources (user interviews, competitor analysis, etc.)",
+      "Consider adding market research or analytics data"
+    );
+  }
+  const lowRatio = m.lowConfidenceCount / Math.max(m.insightCount, 1);
+  const lowOk = lowRatio <= c.maxLowConfidenceRatio;
+  checks.push({
+    name: "Low Confidence Ratio",
+    passed: lowOk,
+    message: lowOk ? `Only ${m.lowConfidenceCount} insights have low confidence` : `${m.lowConfidenceCount} insights (${pct(lowRatio)}) have low confidence`,
+    actual: lowRatio,
+    threshold: c.maxLowConfidenceRatio,
+    severity: "warning"
+  });
+  if (!lowOk) {
+    recommendations.push(
+      "Review low-confidence insights and add supporting evidence",
+      "Consider removing or merging uncertain insights"
+    );
+  }
+  if (c.requireVerifiedInsights) {
+    const verifiedOk = m.unverifiedCount === 0;
+    checks.push({
+      name: "Verified Insights",
+      passed: verifiedOk,
+      message: verifiedOk ? "All insights have been verified by a person" : `${m.unverifiedCount} insight(s) still need a person to verify them`,
+      actual: m.unverifiedCount,
+      threshold: 0,
+      severity: "error"
+    });
+    if (!verifiedOk) recommendations.push("Verify each insight against its source before continuing");
+  }
+  return { checks, metrics: m, recommendations: [...new Set(recommendations)] };
+}
+
+// packages/gates/src/gate.ts
+var GateDefinition = external_exports.object({
+  id: external_exports.string().min(1),
+  /** The stage this gate closes, e.g. "business-case". */
+  stage: external_exports.string().min(1),
+  title: external_exports.string().optional(),
+  mode: external_exports.enum(["block", "warn"]).default("block"),
+  /** Nodes that must exist in the stage, by type and optionally kind (e.g. artifact / "deck"), with a minimum count each. */
+  requires: external_exports.array(
+    external_exports.object({
+      type: NodeType.default("artifact"),
+      kind: external_exports.string().optional(),
+      min: external_exports.number().int().min(1).default(1),
+      label: external_exports.string().optional()
+    })
+  ).default([]),
+  /** Every required artifact must trace upstream to at least one evidence node. */
+  requireEvidence: external_exports.boolean().default(true),
+  /** No artifact in the stage may be suspect. */
+  requireFresh: external_exports.boolean().default(true),
+  evidenceQuality: EvidenceQualityConfig.partial().optional(),
+  approval: external_exports.object({ required: external_exports.boolean().default(true), minApprovers: external_exports.number().int().min(1).default(1) }).default({})
+});
+function evaluateGate(definitionInput, ctx) {
+  const def = GateDefinition.parse(definitionInput);
+  const checks = [];
+  const recommendations = [];
+  const stageNodes = ctx.stageNodeIds.map((id) => ctx.graph.getNode(id)).filter((n) => n !== void 0);
+  const missingIds = ctx.stageNodeIds.filter((id) => !ctx.graph.getNode(id));
+  if (missingIds.length > 0) {
+    checks.push({
+      name: "Known Artifacts",
+      passed: false,
+      message: `${missingIds.length} stage item(s) are not in the trace graph: ${missingIds.join(", ")}`,
+      severity: "error",
+      subjects: missingIds
+    });
+  }
+  for (const req of def.requires) {
+    const found = stageNodes.filter((n) => n.type === req.type && (!req.kind || n.kind === req.kind));
+    const label2 = req.label ?? req.kind ?? req.type;
+    checks.push({
+      name: `Required: ${label2}`,
+      passed: found.length >= req.min,
+      message: found.length >= req.min ? `${found.length} ${label2} present` : `Need at least ${req.min} ${label2}, found ${found.length}`,
+      actual: found.length,
+      threshold: req.min,
+      severity: "error",
+      subjects: found.map((n) => n.id)
+    });
+    if (found.length < req.min) recommendations.push(`Create the missing ${label2} for stage "${def.stage}"`);
+  }
+  if (def.requireEvidence) {
+    const unsupported = stageNodes.filter(
+      (n) => n.type !== "evidence" && ctx.graph.upstream(n.id, { types: ["evidence"] }).length === 0
+    );
+    checks.push({
+      name: "Evidence Coverage",
+      passed: unsupported.length === 0,
+      message: unsupported.length === 0 ? "Every artifact traces back to evidence" : `${unsupported.length} artifact(s) cite no evidence: ${unsupported.map((n) => n.id).join(", ")}`,
+      actual: unsupported.length,
+      threshold: 0,
+      severity: "error",
+      subjects: unsupported.map((n) => n.id)
+    });
+    if (unsupported.length > 0) recommendations.push("Link each artifact to the evidence or insights it relies on");
+  }
+  if (def.requireFresh) {
+    const inStage = new Set(stageNodes.map((n) => n.id));
+    const stale = ctx.graph.suspects().filter((s) => inStage.has(s.node.id));
+    checks.push({
+      name: "Freshness",
+      passed: stale.length === 0,
+      message: stale.length === 0 ? "Nothing in this stage rests on changed evidence" : stale.map((s) => `${s.node.id} rests on changed ${s.causes.map((c) => c.id).join(", ")}`).join("; "),
+      actual: stale.length,
+      threshold: 0,
+      severity: "error",
+      subjects: stale.map((s) => s.node.id)
+    });
+    if (stale.length > 0) recommendations.push("Review suspect artifacts, update them, then confirm their links");
+  }
+  if (def.evidenceQuality && ctx.insights) {
+    const quality = checkEvidenceQuality(ctx.insights, def.evidenceQuality);
+    checks.push(...quality.checks);
+    recommendations.push(...quality.recommendations);
+  }
+  if (def.approval.required) {
+    const approvers = new Set((ctx.approvals ?? []).map((a) => a.by));
+    const ok = approvers.size >= def.approval.minApprovers;
+    checks.push({
+      name: "Approval",
+      passed: ok,
+      message: ok ? `Approved by ${[...approvers].join(", ")}` : `Needs ${def.approval.minApprovers} approver(s), has ${approvers.size}`,
+      actual: approvers.size,
+      threshold: def.approval.minApprovers,
+      severity: "error"
+    });
+  }
+  const blocking = checks.some((c) => !c.passed && c.severity === "error");
+  const anyFailed = checks.some((c) => !c.passed);
+  const status = blocking && def.mode === "block" ? "blocked" : anyFailed ? "warning" : "passed";
+  return {
+    gateId: def.id,
+    stage: def.stage,
+    status,
+    passed: status !== "blocked",
+    checks,
+    recommendations: [...new Set(recommendations)]
+  };
+}
+
+// packages/store/src/config.ts
+var DEFAULT_PREFIXES = {
+  EV: "evidence",
+  INS: "insight",
+  REQ: "requirement",
+  FR: "requirement",
+  NFR: "requirement",
+  SC: "requirement",
+  US: "requirement",
+  DEC: "decision",
+  ART: "artifact",
+  DES: "design",
+  SPEC: "spec"
+};
+var DEFAULT_FILE_TYPES = [
+  { glob: "{research,evidence}/**", type: "evidence" },
+  {
+    glob: "**/*.{pdf,ppt,pptx,key,odp,doc,docx,odt,rtf,xls,xlsx,ods,csv,png,jpg,jpeg,gif,svg,fig,md,markdown,html}",
+    type: "artifact"
+  }
+];
+var CoreflowConfig = external_exports.object({
+  /** Markdown files scanned for definitions. */
+  include: external_exports.array(external_exports.string()).default(["specs/**/*.md", "docs/**/*.md"]),
+  /** Never scanned, never linked by the edit hook. */
+  exclude: external_exports.array(external_exports.string()).default(["**/node_modules/**", "**/.git/**", ".coreflow/**", "**/dist/**"]),
+  /** ID prefix (the part before the dash) to node type. IDs with other prefixes are ignored. */
+  prefixes: external_exports.record(NodeType).default(DEFAULT_PREFIXES),
+  /** Types for files linked by path, such as decks, PDFs and interview transcripts. */
+  fileTypes: external_exports.array(external_exports.object({ glob: external_exports.string(), type: NodeType })).default(DEFAULT_FILE_TYPES),
+  /** Regular expression on the repo-relative path that marks a file as a test. */
+  testPattern: external_exports.string().default(String.raw`(^|/)(__tests__|tests?)/|\.(test|spec)\.[cm]?[jt]sx?$|(^|/)test_[^/]*\.py$|_test\.(py|go)$`),
+  /** Where `coreflow new` writes artifacts. Keep it inside `include` so they are scanned. */
+  artifactsDir: external_exports.string().default("docs/artifacts"),
+  /** Stage gates. Nodes join a stage through front-matter `stage:`. */
+  gates: external_exports.array(GateDefinition).default([])
+});
+
+// packages/store/src/markdown.ts
+var import_yaml = __toESM(require_dist(), 1);
+var ID = String.raw`[A-Z][A-Z0-9]*-\d+`;
+var INLINE = new RegExp(String.raw`^\s*(?:[-*+]\s+|\d+[.)]\s+)?\*\*(${ID}):?\*\*\s*:?\s*(.*)$`);
+var HEADING = new RegExp(String.raw`^(#{1,6})\s+(${ID})\b[\s:.–—-]*(.*)$`);
+var ANY_HEADING = /^(#{1,6})\s+(.*)$/;
+var FENCE = /^\s*(```|~~~)/;
+var CITATION = new RegExp(String.raw`\[(${ID}(?:\s*[,;]\s*${ID})*)\]`, "g");
+var ID_PATTERN = new RegExp(String.raw`\b${ID}\b`, "g");
+function typeForId(id, prefixes) {
+  const prefix = id.slice(0, id.lastIndexOf("-"));
+  return prefixes[prefix];
+}
+function extractCitations(text2, exclude) {
+  const found = [];
+  let inFence = false;
+  for (const line of text2.split("\n")) {
+    if (FENCE.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    for (const match of line.matchAll(CITATION)) {
+      for (const id of match[1].split(/\s*[,;]\s*/)) {
+        if (id !== exclude && !found.includes(id)) found.push(id);
+      }
+    }
+  }
+  return found;
+}
+function slugify(text2) {
+  const slug = text2.toLowerCase().replace(/\[[^\]]*\]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return slug || "section";
+}
+function splitFrontMatter(text2) {
+  const normalised = text2.replace(/\r\n/g, "\n");
+  if (!normalised.startsWith("---\n")) return { data: void 0, body: normalised, offset: 0 };
+  const end = normalised.indexOf("\n---", 4);
+  if (end === -1) return { data: void 0, body: normalised, offset: 0 };
+  const after = normalised.indexOf("\n", end + 4);
+  const body = after === -1 ? "" : normalised.slice(after + 1);
+  try {
+    const data = (0, import_yaml.parse)(normalised.slice(4, end));
+    const offset = normalised.slice(0, after === -1 ? normalised.length : after + 1).split("\n").length - 1;
+    return { data: data && typeof data === "object" ? data : void 0, body, offset };
+  } catch {
+    return { data: void 0, body: normalised, offset: 0 };
+  }
+}
+function firstHeading(body) {
+  const match = body.match(/^#{1,6}\s+(.+)$/m);
+  return match?.[1]?.trim();
+}
+function toIdList(value) {
+  if (typeof value === "string") return value.split(/[\s,]+/).filter(Boolean);
+  if (Array.isArray(value)) return value.filter((v) => typeof v === "string");
+  return [];
+}
+function optionalString(value) {
+  return typeof value === "string" && value.trim() ? value.trim() : void 0;
+}
+function shortTitle(text2) {
+  const t = text2.replace(/\s+/g, " ").trim();
+  if (!t) return void 0;
+  return t.length > 100 ? `${t.slice(0, 97)}...` : t;
+}
+function splitSections(body) {
+  const lines = body.split("\n");
+  const sections = [];
+  const preamble = [];
+  let inFence = false;
+  lines.forEach((line, i) => {
+    if (FENCE.test(line)) inFence = !inFence;
+    const heading = !inFence ? line.match(/^##\s+(.+)$/) : null;
+    if (heading) sections.push({ title: heading[1].trim(), text: [line], line: i });
+    else if (sections.length) sections[sections.length - 1].text.push(line);
+    else preamble.push(line);
+  });
+  return {
+    preamble: preamble.join("\n"),
+    sections: sections.map((s) => ({ title: s.title, text: s.text.join("\n"), line: s.line }))
+  };
+}
+function extractDefinitions(path, text2, prefixes) {
+  const { data, body, offset } = splitFrontMatter(text2);
+  const defs = [];
+  if (data && typeof data.id === "string" && NodeType.safeParse(data.type).success) {
+    const docId = data.id;
+    const type = NodeType.parse(data.type);
+    const { preamble, sections } = splitSections(body);
+    defs.push({
+      node: {
+        id: docId,
+        type,
+        title: optionalString(data.title) ?? firstHeading(body),
+        kind: optionalString(data.kind),
+        stage: optionalString(data.stage),
+        location: path,
+        hash: contentHash(body)
+      },
+      derivedFrom: toIdList(data.derived_from),
+      cites: extractCitations(preamble, docId),
+      line: 1
+    });
+    const used = /* @__PURE__ */ new Set();
+    for (const section of sections) {
+      let slug = slugify(section.title);
+      for (let n = 2; used.has(slug); n++) slug = `${slugify(section.title)}-${n}`;
+      used.add(slug);
+      defs.push({
+        node: {
+          id: `${docId}#${slug}`,
+          type,
+          kind: "section",
+          title: shortTitle(section.title.replace(/\[[^\]]*\]/g, "")),
+          location: `${path}#${slug}`,
+          hash: contentHash(section.text.trim())
+        },
+        derivedFrom: [],
+        cites: extractCitations(section.text, docId),
+        partOf: docId,
+        line: section.line + offset + 1
+      });
+    }
+  }
+  const lines = body.split("\n");
+  let inFence = false;
+  let open;
+  const close = () => {
+    if (!open) return;
+    const type = typeForId(open.id, prefixes);
+    if (type) {
+      const content = open.lines.join("\n").trim();
+      defs.push({
+        node: {
+          id: open.id,
+          type,
+          title: shortTitle(open.title.replace(CITATION, "")),
+          location: `${path}#${open.id}`,
+          hash: contentHash(content)
+        },
+        derivedFrom: [],
+        cites: extractCitations(content, open.id),
+        line: open.start + offset + 1
+      });
+    }
+    open = void 0;
+  };
+  lines.forEach((line, i) => {
+    if (FENCE.test(line)) {
+      inFence = !inFence;
+      if (open && open.level === void 0) close();
+      else open?.lines.push(line);
+      return;
+    }
+    if (inFence) {
+      open?.lines.push(line);
+      return;
+    }
+    const heading = line.match(HEADING);
+    const anyHeading = line.match(ANY_HEADING);
+    if (anyHeading) {
+      const level = anyHeading[1].length;
+      if (open && (open.level === void 0 || level <= open.level)) close();
+      if (heading && typeForId(heading[2], prefixes)) {
+        open = { id: heading[2], title: heading[3] ?? "", start: i, lines: [line], level };
+      } else {
+        open?.lines.push(line);
+      }
+      return;
+    }
+    const inline = line.match(INLINE);
+    if (inline && typeForId(inline[1], prefixes)) {
+      if (open?.level === void 0) close();
+      if (!open) {
+        open = { id: inline[1], title: inline[2] ?? "", start: i, lines: [line] };
+        return;
+      }
+    }
+    if (open && open.level === void 0 && line.trim() === "") {
+      close();
+      return;
+    }
+    open?.lines.push(line);
+  });
+  close();
+  return defs;
+}
+
 // packages/store/src/project.ts
 var COREFLOW_DIR = ".coreflow";
 var CONFIG_FILE = "config.json";
@@ -27699,22 +28012,24 @@ function writeAtomic(path, text2) {
   writeFileSync(tmp, text2);
   renameSync(tmp, path);
 }
-function simpleMatch(pattern, path) {
-  let re = "";
-  for (let i = 0; i < pattern.length; i++) {
-    const c = pattern[i];
-    if (c === "*") {
-      if (pattern[i + 1] === "*") {
-        const slash = pattern[i + 2] === "/";
-        re += slash ? "(?:.*/)?" : ".*";
-        i += slash ? 2 : 1;
-      } else {
-        re += "[^/]*";
-      }
-    } else if (c === "?") re += "[^/]";
-    else re += c.replace(/[.+^${}()|[\]\\]/g, "\\$&");
+function emptyScan() {
+  return { added: [], changed: [], removed: [], linked: [], unlinked: [], warnings: [] };
+}
+function isFileNode(node) {
+  return node.location !== void 0 && node.id === node.location;
+}
+function fileHash(abs) {
+  const bytes = readFileSync(abs);
+  if (bytes.subarray(0, 8e3).includes(0)) {
+    return `sha256:${createHash2("sha256").update(bytes).digest("hex").slice(0, 16)}`;
   }
-  return new RegExp(`^${re}$`).test(path);
+  return contentHash(bytes.toString("utf8"));
+}
+var matchers = /* @__PURE__ */ new Map();
+function matches(pattern, path) {
+  let m = matchers.get(pattern);
+  if (!m) matchers.set(pattern, m = (0, import_picomatch2.default)(pattern, { dot: true }));
+  return m(path);
 }
 var Project = class _Project {
   constructor(root, config2, graph, now) {
@@ -27785,64 +28100,60 @@ var Project = class _Project {
     return toPosix(rel);
   }
   isExcluded(rel) {
-    return this.config.exclude.some((p) => simpleMatch(p, rel)) || rel.startsWith(`${COREFLOW_DIR}/`);
+    return this.config.exclude.some((p) => matches(p, rel)) || rel.startsWith(`${COREFLOW_DIR}/`);
   }
   isDefinitionFile(rel) {
-    return this.config.include.some((p) => simpleMatch(p, rel));
+    return this.config.include.some((p) => matches(p, rel));
   }
   fileType(rel) {
-    return new RegExp(this.config.testPattern).test(rel) ? "test" : "code";
+    if (new RegExp(this.config.testPattern).test(rel)) return "test";
+    return this.config.fileTypes.find((t) => matches(t.glob, rel))?.type ?? "code";
   }
   // ---------------------------------------------------------------- scanning
-  /** Brings the graph in line with the files: new and changed definitions, deleted files. */
+  /** Brings the graph in line with the files: definitions, citations, sections, file hashes. */
   async scan() {
-    const result = { added: [], changed: [], removed: [], linked: [], warnings: [] };
-    const files = await glob(this.config.include, {
-      cwd: this.root,
-      ignore: this.config.exclude,
-      onlyFiles: true
-    });
-    const seen = /* @__PURE__ */ new Set();
-    const scannedFiles = new Set(files.map(toPosix));
-    for (const file of [...scannedFiles].sort()) {
-      this.applyDefinitions(file, seen, result);
-    }
+    const result = emptyScan();
+    const files = await glob(this.config.include, { cwd: this.root, ignore: this.config.exclude, onlyFiles: true });
+    const scanned = [...new Set(files.map(toPosix))].sort();
+    const defs = scanned.flatMap((file) => this.readDefinitions(file, result));
+    const seen = this.applyNodes(defs, result);
+    this.applyLinks(defs, seen, result);
     for (const node of this.graph.listNodes()) {
       if (seen.has(node.id)) continue;
-      if (isMarkdownLocation(node.location)) {
-        const file = node.location.split("#")[0];
-        this.markRemoved(node, existsSync(join(this.root, file)) ? `definition removed from ${file}` : `${file} deleted`, result);
-      } else if (node.location && (node.type === "code" || node.type === "test")) {
-        this.refreshFile(node, result);
-      }
+      if (isFileNode(node)) this.refreshFile(node, result);
+      else if (isMarkdownLocation(node.location)) this.handleMissing(node, result);
     }
     return result;
   }
   /** Re-reads one Markdown file. */
   scanFile(rel) {
-    const result = { added: [], changed: [], removed: [], linked: [], warnings: [] };
-    const seen = /* @__PURE__ */ new Set();
-    this.applyDefinitions(rel, seen, result);
+    const result = emptyScan();
+    const defs = this.readDefinitions(rel, result);
+    const seen = this.applyNodes(defs, result);
+    this.applyLinks(defs, seen, result);
     for (const node of this.graph.listNodes()) {
-      if (seen.has(node.id) || !isMarkdownLocation(node.location)) continue;
-      if (node.location.split("#")[0] === rel) this.markRemoved(node, `definition removed from ${rel}`, result);
+      if (seen.has(node.id) || isFileNode(node) || !isMarkdownLocation(node.location)) continue;
+      if (node.location.split("#")[0] === rel) this.handleMissing(node, result);
     }
     return result;
   }
-  applyDefinitions(rel, seen, result) {
+  readDefinitions(rel, result) {
     const abs = join(this.root, rel);
-    if (!existsSync(abs)) return;
-    let defs;
+    if (!existsSync(abs)) return [];
     try {
-      defs = extractDefinitions(rel, readFileSync(abs, "utf8"), this.config.prefixes);
+      return extractDefinitions(rel, readFileSync(abs, "utf8"), this.config.prefixes);
     } catch (error2) {
       result.warnings.push(`${rel}: ${error2.message}`);
-      return;
+      return [];
     }
+  }
+  applyNodes(defs, result) {
+    const seen = /* @__PURE__ */ new Set();
     for (const def of defs) {
       if (seen.has(def.node.id)) {
         const first = this.graph.getNode(def.node.id)?.location;
-        result.warnings.push(`${def.node.id} is defined in ${first} and again in ${rel}:${def.line}; using the first`);
+        result.warnings.push(`${def.node.id} is defined in ${first} and again in ${def.node.location} (line ${def.line}); using the first`);
+        def.duplicate = true;
         continue;
       }
       seen.add(def.node.id);
@@ -27859,19 +28170,54 @@ var Project = class _Project {
         }
       }
     }
+    return seen;
+  }
+  /**
+   * Makes the links written in the files match the graph: `derived_from` from front-matter,
+   * `cites` from `[ID]` citations, and `depends_on` from each section to its document.
+   * Links that were written in a file and are no longer there are removed.
+   */
+  applyLinks(defs, seen, result) {
     for (const def of defs) {
-      for (const upstream of def.derivedFrom) {
-        if (!this.graph.getNode(upstream)) {
-          result.warnings.push(`${def.node.id} is derived from ${upstream}, which is not defined anywhere scanned`);
+      if (def.duplicate) continue;
+      const to = def.node.id;
+      const wanted = [
+        ...def.derivedFrom.map((from) => ({ from, type: "derived_from" })),
+        ...def.cites.map((from) => ({ from, type: "cites" }))
+      ];
+      const keep = /* @__PURE__ */ new Set();
+      for (const { from, type } of wanted) {
+        if (!this.graph.getNode(from)) {
+          const how = type === "cites" ? "cites" : "is derived from";
+          result.warnings.push(`${to} ${how} ${from}, which is not defined anywhere scanned`);
           continue;
         }
-        const exists = this.graph.linksTo(def.node.id).some((l) => l.from === upstream && l.type === "derived_from");
-        if (!exists) {
-          this.graph.link({ from: upstream, to: def.node.id, type: "derived_from" });
-          result.linked.push(`${upstream} -> ${def.node.id}`);
-        }
+        if (from === to) continue;
+        keep.add(`${from} ${type}`);
+        this.addTextLink(from, to, type, result);
+      }
+      if (def.partOf && seen.has(def.partOf)) this.addTextLink(to, def.partOf, "depends_on", result);
+      for (const link of this.graph.linksTo(to)) {
+        if (!link.fromText || link.type === "depends_on" || keep.has(`${link.from} ${link.type}`)) continue;
+        this.graph.unlink(link.from, to, link.type);
+        result.unlinked.push(`${link.from} -> ${to}`);
       }
     }
+  }
+  addTextLink(from, to, type, result) {
+    if (this.graph.linksTo(to).some((l) => l.from === from && l.type === type)) return;
+    this.graph.link({ from, to, type, fromText: true });
+    result.linked.push(`${from} -> ${to}`);
+  }
+  /** A definition that is gone. Sections just disappear (their document changed too); anything else is marked changed. */
+  handleMissing(node, result) {
+    if (node.kind === "section") {
+      this.graph.removeNode(node.id);
+      result.removed.push(node.id);
+      return;
+    }
+    const file = node.location.split("#")[0];
+    this.markRemoved(node, existsSync(join(this.root, file)) ? `definition removed from ${file}` : `${file} deleted`, result);
   }
   markRemoved(node, reason, result) {
     if (node.changed?.reason === reason) return;
@@ -27884,16 +28230,16 @@ var Project = class _Project {
       this.markRemoved(node, `${node.location} deleted`, result);
       return;
     }
-    const hash = contentHash(readFileSync(abs, "utf8"));
+    const hash = fileHash(abs);
     if (hash !== node.hash) {
       this.graph.updateContent(node.id, hash);
       result.changed.push(node.id);
     }
   }
-  /** Adds or rehashes a code or test file node. The node ID is the repo-relative path. */
+  /** Adds or rehashes a file node (code, test, deck, PDF...). The node ID is the repo-relative path. */
   ensureFileNode(rel) {
     const abs = join(this.root, rel);
-    const hash = existsSync(abs) ? contentHash(readFileSync(abs, "utf8")) : void 0;
+    const hash = existsSync(abs) ? fileHash(abs) : void 0;
     const existing = this.graph.getNode(rel);
     if (existing) {
       if (hash && existing.hash !== hash) return this.graph.updateContent(rel, hash);
@@ -27994,6 +28340,313 @@ var Project = class _Project {
   }
 };
 
+// packages/store/src/templates.ts
+var CITE = "<!-- Cite the insights and evidence each claim rests on, like [INS-3] or [EV-2]. -->";
+function frontMatter(kind) {
+  return `---
+id: {{id}}
+type: artifact
+kind: ${kind}
+stage: {{stage}}
+title: {{title_yaml}}
+created: {{date}}
+status: draft
+derived_from: [{{derived_from}}]
+---
+`;
+}
+var TEMPLATES = [
+  {
+    name: "market-sizing",
+    description: "TAM, SAM and SOM, top-down and bottom-up, with assumptions (pm-skills)",
+    kind: "market-sizing",
+    stage: "discover",
+    text: `${frontMatter("market-sizing")}
+# {{title}}
+
+${CITE}
+
+## Executive summary
+<!-- 3-5 sentences: what is being sized, headline TAM/SAM/SOM range with confidence, the single most important assumption. -->
+
+## Market definition
+<!-- Exactly what is included and excluded, geography and time frame. -->
+
+- **Included:**
+- **Excluded:**
+- **Geography / horizon:**
+
+## Top-down sizing
+
+| Layer | Number | Method | Source | Confidence |
+|---|---|---|---|---|
+| TAM | | | [EV-?] | |
+| SAM | | | | |
+| SOM | | | | |
+
+## Bottom-up sizing
+<!-- Build from unit economics. If bottom-up data is unavailable, say so; do not invent counts. -->
+
+| Segment | Customers | Revenue per customer | Subtotal | Source |
+|---|---|---|---|---|
+
+## Synthesis
+<!-- Where the methods agree, where they diverge and why, and the central estimate with a range. -->
+
+## Key assumptions
+
+| Assumption | Source | Confidence | What changes if wrong |
+|---|---|---|---|
+
+## Confidence and limitations
+<!-- Most and least confident, and the research that would raise confidence. -->
+`
+  },
+  {
+    name: "competitive-analysis",
+    description: "Competitors, feature and pricing comparison, positioning and white space (pm-skills)",
+    kind: "competitive-analysis",
+    stage: "discover",
+    text: `${frontMatter("competitive-analysis")}
+# {{title}}
+
+${CITE}
+
+## Scope
+<!-- The product area and customer segment this analysis covers. -->
+
+## Competitors
+
+| Competitor | Direct or indirect | Target market | Source |
+|---|---|---|---|
+
+## Feature comparison
+<!-- Rate as Full, Partial, None or Unknown. -->
+
+| Feature | Us | Competitor A | Competitor B | Competitor C |
+|---|---|---|---|---|
+
+## Pricing
+
+| Competitor | Entry | Mid tier | Enterprise | Model |
+|---|---|---|---|---|
+
+## Positioning and white space
+<!-- Two axes that matter to buyers, where each competitor sits, and the underserved position. -->
+
+## Competitor notes
+<!-- One short paragraph per competitor: who they serve best, their edge, their weaknesses, recent moves. -->
+
+## Implications
+<!-- What this means for our positioning and roadmap. -->
+`
+  },
+  {
+    name: "business-case",
+    description: "Problem, opportunity, proposal, costs, benefits, risks and the decision asked for",
+    kind: "business-case",
+    stage: "business-case",
+    text: `${frontMatter("business-case")}
+# {{title}}
+
+${CITE}
+
+## Decision requested
+<!-- One or two sentences: what you want approved, and by when. -->
+
+## Problem
+<!-- Who has the problem, how often, and what it costs them today. Cite interviews and data. -->
+
+## Opportunity
+<!-- Market size and why now. Cite the market sizing and competitive analysis. -->
+
+## Proposed solution
+<!-- What we would build, in plain language, and what we are deliberately not doing. -->
+
+## Costs
+
+| Item | One-off | Recurring | Basis |
+|---|---|---|---|
+
+## Benefits and success metrics
+
+| Metric | Today | Target | By when | Basis |
+|---|---|---|---|---|
+
+## Options considered
+<!-- Including doing nothing. Why the proposal beats each option. -->
+
+## Risks and mitigations
+
+| Risk | Likelihood | Impact | Mitigation |
+|---|---|---|---|
+
+## Assumptions to validate
+<!-- The assumptions the case depends on most, and how each will be tested. -->
+`
+  },
+  {
+    name: "deck",
+    description: "A slide deck in Markdown: one ## section per slide, each citing its sources",
+    kind: "deck",
+    stage: "business-case",
+    text: `${frontMatter("deck")}
+# {{title}}
+
+<!-- One "##" section per slide. Keep slides short and cite each claim, like [INS-3]. -->
+<!-- Put the business case this deck presents in derived_from above. -->
+
+## The problem
+
+## What we learned
+
+## The opportunity
+
+## Our proposal
+
+## What it costs and what it returns
+
+## Risks
+
+## The decision we need
+`
+  }
+];
+function renderTemplate(template, values) {
+  const title = values.title.replace(/\n/g, " ");
+  const vars = {
+    id: values.id,
+    title,
+    title_yaml: JSON.stringify(title),
+    stage: values.stage ?? template.stage,
+    date: values.date,
+    derived_from: (values.derivedFrom ?? []).join(", ")
+  };
+  return template.text.replace(/\{\{(\w+)\}\}/g, (whole, key) => vars[key] ?? whole);
+}
+
+// packages/store/src/artifacts.ts
+function listTemplates(project) {
+  const byName = new Map(TEMPLATES.map((t) => [t.name, t]));
+  const dir = join2(project.root, COREFLOW_DIR, "templates");
+  if (existsSync2(dir)) {
+    for (const file of readdirSync2(dir).filter((f) => f.endsWith(".md")).sort()) {
+      const name = file.slice(0, -3);
+      const text2 = readFileSync2(join2(dir, file), "utf8");
+      const kind = text2.match(/^kind:\s*(\S+)/m)?.[1] ?? name;
+      const stage = text2.match(/^stage:\s*(\S+)/m)?.[1];
+      byName.set(name, {
+        name,
+        description: `Project template (.coreflow/templates/${file})`,
+        kind,
+        stage: stage && !stage.includes("{{") ? stage : byName.get(name)?.stage ?? "draft",
+        text: text2
+      });
+    }
+  }
+  return [...byName.values()];
+}
+function nextArtifactId(project, prefix = "ART") {
+  let max = 0;
+  for (const node of project.graph.listNodes()) {
+    const m = node.id.match(new RegExp(`^${prefix}-(\\d+)$`));
+    if (m) max = Math.max(max, Number(m[1]));
+  }
+  return `${prefix}-${max + 1}`;
+}
+function newArtifact(project, options) {
+  const templates = listTemplates(project);
+  const template = templates.find((t) => t.name === options.template);
+  if (!template) {
+    throw new Error(`Unknown template "${options.template}". Templates: ${templates.map((t) => t.name).join(", ")}`);
+  }
+  const id = options.id ?? nextArtifactId(project);
+  if (project.graph.getNode(id)) throw new Error(`${id} already exists at ${project.graph.getNode(id).location}`);
+  for (const upstream of options.from ?? []) {
+    if (!project.graph.getNode(upstream)) throw new Error(`Unknown node: ${upstream}`);
+  }
+  const path = `${project.config.artifactsDir.replace(/\/+$/, "")}/${id.toLowerCase()}-${slugify(options.title)}.md`;
+  const abs = join2(project.root, path);
+  if (existsSync2(abs)) throw new Error(`${path} already exists`);
+  mkdirSync2(join2(abs, ".."), { recursive: true });
+  writeFileSync2(
+    abs,
+    renderTemplate(template, {
+      id,
+      title: options.title,
+      stage: options.stage,
+      derivedFrom: options.from,
+      date: options.date ?? (/* @__PURE__ */ new Date()).toISOString().slice(0, 10)
+    })
+  );
+  if (!project.isDefinitionFile(path)) {
+    throw new Error(`${path} was written, but it is outside "include" in .coreflow/config.json, so it will not be scanned`);
+  }
+  project.scanFile(path);
+  return { id, path };
+}
+
+// packages/store/src/gates.ts
+import { existsSync as existsSync3, readFileSync as readFileSync3, writeFileSync as writeFileSync3 } from "node:fs";
+import { join as join3 } from "node:path";
+var APPROVALS_FILE = "approvals.json";
+function approvalsPath(project) {
+  return join3(project.root, COREFLOW_DIR, APPROVALS_FILE);
+}
+function readApprovals(project) {
+  const path = approvalsPath(project);
+  if (!existsSync3(path)) return [];
+  const data = JSON.parse(readFileSync3(path, "utf8"));
+  return Array.isArray(data.approvals) ? data.approvals : [];
+}
+function stageItems(project, stage) {
+  return project.graph.listNodes().filter((n) => n.stage === stage && n.kind !== "section").sort((a, b) => a.id.localeCompare(b.id));
+}
+function findGate(project, gateId) {
+  const gate = project.config.gates.find((g) => g.id === gateId || g.stage === gateId);
+  if (!gate) {
+    const known = project.config.gates.map((g) => g.id).join(", ") || "none defined";
+    throw new Error(`Unknown gate "${gateId}". Gates in .coreflow/config.json: ${known}`);
+  }
+  return gate;
+}
+function whyStale(record2, items) {
+  const current = new Map(items.map((n) => [n.id, n.hash ?? ""]));
+  for (const [id, hash] of Object.entries(record2.hashes)) {
+    if (!current.has(id)) return `${id} is no longer in the stage`;
+    if (current.get(id) !== hash) return `${id} changed since approval`;
+  }
+  const added = [...current.keys()].filter((id) => !(id in record2.hashes));
+  if (added.length) return `${added.join(", ")} added since approval`;
+  return void 0;
+}
+function runGate(project, gate) {
+  const items = stageItems(project, gate.stage);
+  const records = readApprovals(project).filter((a) => a.gate === gate.id);
+  const valid = [];
+  const staleApprovals = [];
+  for (const record2 of records) {
+    const reason = whyStale(record2, items);
+    if (reason) staleApprovals.push({ by: record2.by, at: record2.at, reason });
+    else valid.push({ by: record2.by, at: record2.at });
+  }
+  const result = evaluateGate(gate, {
+    graph: project.graph,
+    stageNodeIds: items.map((n) => n.id),
+    approvals: valid
+  });
+  if (staleApprovals.length) {
+    result.recommendations.push(
+      `Re-approve with "coreflow approve ${gate.id} --by <name>" once the changes are reviewed`
+    );
+  }
+  return { ...result, title: gate.title, items: items.map((n) => n.id), staleApprovals };
+}
+function runGates(project, gateId) {
+  const gates = gateId ? [findGate(project, gateId)] : project.config.gates;
+  return gates.map((g) => runGate(project, g));
+}
+
 // packages/store/src/report.ts
 function label(node) {
   const title = node.title ? ` ${node.title}` : "";
@@ -28035,12 +28688,26 @@ function formatScan(result) {
     `${result.added.length} added`,
     `${result.changed.length} changed`,
     `${result.removed.length} removed`,
-    `${result.linked.length} declared links added`
+    `${result.linked.length} links from the text added`
   ];
+  if (result.unlinked.length) parts.push(`${result.unlinked.length} removed from the text`);
   const lines = [`Scanned: ${parts.join(", ")}.`];
   if (result.changed.length) lines.push(`Changed: ${result.changed.join(", ")}`);
   if (result.removed.length) lines.push(`Removed: ${result.removed.join(", ")}`);
   for (const w of result.warnings) lines.push(`Warning: ${w}`);
+  return lines.join("\n");
+}
+function formatGate(report2) {
+  const verdict = { passed: "PASSED", blocked: "BLOCKED", warning: "PASSED WITH WARNINGS" }[report2.status];
+  const lines = [`Gate ${report2.gateId}${report2.title ? ` (${report2.title})` : ""}, stage "${report2.stage}": ${verdict}`];
+  lines.push(`  Items: ${report2.items.length ? report2.items.join(", ") : "(none)"}`);
+  for (const check2 of report2.checks) {
+    lines.push(`  ${check2.passed ? "ok  " : check2.severity === "error" ? "FAIL" : "warn"} ${check2.name}: ${check2.message}`);
+  }
+  for (const stale of report2.staleApprovals) {
+    lines.push(`  Approval by ${stale.by} no longer counts: ${stale.reason}`);
+  }
+  for (const rec of report2.recommendations) lines.push(`  Next: ${rec}`);
   return lines.join("\n");
 }
 
@@ -32219,6 +32886,37 @@ function createServer(options) {
     ({ ids, session }) => withProject((p) => {
       const active = p.setActive(session ?? "default", ids);
       return active.length ? `Files written now link to ${active.join(", ")}.` : "Automatic linking is off.";
+    })
+  );
+  server2.registerTool(
+    "coreflow_new_artifact",
+    {
+      title: "Create a PM artifact from a template",
+      description: `Create a Markdown artifact (front-matter plus one section per heading) under docs/artifacts and trace it. Built-in templates: ${TEMPLATES.map((t) => `${t.name} (${t.description})`).join("; ")}. Projects may add more in .coreflow/templates. After creating it, fill each section and cite the insights and evidence behind every claim as [INS-3] or [EV-2].`,
+      inputSchema: {
+        template: external_exports.string().describe("Template name"),
+        title: external_exports.string().min(1),
+        id: external_exports.string().optional().describe("Defaults to the next free ART-n"),
+        stage: external_exports.string().optional().describe("Lifecycle stage; defaults to the template's"),
+        from: external_exports.array(external_exports.string()).optional().describe("IDs this artifact is derived from, e.g. the business case a deck presents")
+      }
+    },
+    ({ template, title, id, stage, from }) => withProject((p) => {
+      const created = newArtifact(p, { template, title, id, stage, from });
+      return `Created ${created.id} at ${created.path}. Templates available here: ${listTemplates(p).map((t) => t.name).join(", ")}.`;
+    })
+  );
+  server2.registerTool(
+    "coreflow_gate",
+    {
+      title: "Run stage gates",
+      description: "Check whether a lifecycle stage can close: required artifacts exist, cite evidence, nothing is suspect, and a person approved the current content. Approval is recorded by people with the coreflow CLI, never by an agent.",
+      inputSchema: { gate: external_exports.string().optional().describe("Gate ID or stage name; omit for all gates") },
+      annotations: { readOnlyHint: true }
+    },
+    ({ gate }) => withProject((p) => {
+      if (p.config.gates.length === 0) return 'No gates defined. Add them under "gates" in .coreflow/config.json.';
+      return runGates(p, gate).map(formatGate).join("\n\n");
     })
   );
   return server2;

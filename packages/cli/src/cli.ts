@@ -5,7 +5,17 @@
  */
 
 import { parseArgs } from "node:util";
-import { formatScan, formatSuspects, formatTrace, Project } from "@coreflow/store";
+import {
+  approveGate,
+  formatGate,
+  formatScan,
+  formatSuspects,
+  formatTrace,
+  listTemplates,
+  newArtifact,
+  Project,
+  runGates,
+} from "@coreflow/store";
 import { LinkType } from "@coreflow/trace";
 import { runHook } from "./hook";
 import { writeKiroHooks } from "./kiro";
@@ -32,6 +42,10 @@ Usage:
   coreflow confirm <id|file> [--from <id>]
   coreflow mark-changed <id> --reason "..."
   coreflow work [<id>...] [--clear] [--session S]   Set what edits are linked to
+  coreflow new <template> "<title>" [--id ART-4] [--stage S] [--from INS-1,INS-2]
+  coreflow new --list                    List artifact templates
+  coreflow gate [<gate|stage>] [--json]  Run stage gates (exits 1 if any is blocked)
+  coreflow approve <gate|stage> --by <name>   Approve what is in the stage now
   coreflow hook <claude|kiro> [--event E] [--file F] [--prompt P]
 
 Link types: ${LinkType.options.join(", ")}`;
@@ -58,6 +72,10 @@ export async function run(argv: string[], io: CliIO): Promise<number> {
       check: { type: "boolean" },
       from: { type: "string" },
       reason: { type: "string" },
+      id: { type: "string" },
+      stage: { type: "string" },
+      by: { type: "string" },
+      list: { type: "boolean" },
       clear: { type: "boolean" },
       session: { type: "string" },
       kiro: { type: "boolean" },
@@ -168,6 +186,43 @@ export async function run(argv: string[], io: CliIO): Promise<number> {
       const session = values.session ?? "default";
       const active = values.clear ? project.setActive(session, []) : positionals.length ? project.setActive(session, positionals) : project.activeIds(session);
       io.out(active.length ? `Edits in session "${session}" link to: ${active.join(", ")}` : `Nothing active in session "${session}".`);
+      return 0;
+    }
+    case "new": {
+      await project.scan();
+      if (values.list) {
+        for (const t of listTemplates(project)) io.out(`${t.name.padEnd(22)} ${t.description} (stage: ${t.stage})`);
+        return 0;
+      }
+      const { id, path } = newArtifact(project, {
+        template: need(positionals[0], "<template> (see coreflow new --list)"),
+        title: need(positionals[1], '"<title>"'),
+        id: values.id,
+        stage: values.stage,
+        from: values.from ? values.from.split(/[\s,]+/).filter(Boolean) : undefined,
+      });
+      project.save();
+      io.out(`Created ${id} at ${path}. Fill in each section and cite sources like [INS-3].`);
+      return 0;
+    }
+    case "gate": {
+      await project.scan();
+      project.save();
+      if (project.config.gates.length === 0) {
+        io.out('No gates defined. Add them under "gates" in .coreflow/config.json.');
+        return 0;
+      }
+      const reports = runGates(project, positionals[0]);
+      if (values.json) io.out(JSON.stringify(reports, null, 2));
+      else io.out(reports.map(formatGate).join("\n\n"));
+      return reports.some((r) => r.status === "blocked") ? 1 : 0;
+    }
+    case "approve": {
+      await project.scan();
+      project.save();
+      const record = approveGate(project, need(positionals[0], "<gate|stage>"), need(values.by, "--by <name>"));
+      io.out(`Approved ${Object.keys(record.hashes).join(", ")} for gate ${record.gate} as ${record.by}.`);
+      io.out("The approval stops counting if any of them changes.");
       return 0;
     }
     default:

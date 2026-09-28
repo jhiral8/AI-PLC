@@ -4,11 +4,16 @@
  * Finds trace nodes in Markdown. Three forms are recognised:
  *
  * - Front-matter with `id` and `type`: the whole file is one node and its body is the content.
- *   `derived_from: [INS-1, EV-3]` declares upstream links.
+ *   `derived_from: [INS-1, EV-3]` declares upstream links; `kind` and `stage` are kept on the
+ *   node. Each `##` section becomes its own node (`ART-2#market-size`) that the document
+ *   depends on, so a change can be traced to the section that cites it.
  * - Bold inline definitions: `- **FR-001**: The system MUST ...`. The content runs to the next
  *   blank line, definition or heading.
  * - Headings: `### REQ-12: Passwordless login`. The content runs to the next heading of the
  *   same or higher level.
+ *
+ * Citations are bracketed IDs in the content, `[INS-4]` or `[INS-4, EV-2]`, and become `cites`
+ * links into the node (or section) that contains them.
  *
  * Only IDs whose prefix is configured are picked up, and fenced code blocks are skipped.
  */
@@ -20,19 +25,55 @@ export interface MarkdownDefinition {
   node: TraceNode & { hash: string; location: string };
   /** Upstream IDs declared in front-matter `derived_from`. */
   derivedFrom: string[];
+  /** IDs cited in the content as `[ID]`. */
+  cites: string[];
+  /** For a section, the document it belongs to. */
+  partOf?: string;
   line: number;
+  /** Set during a scan when another file already defined this ID. */
+  duplicate?: boolean;
 }
 
-const INLINE = /^\s*(?:[-*+]\s+|\d+[.)]\s+)?\*\*([A-Z][A-Z0-9]*-\d+):?\*\*\s*:?\s*(.*)$/;
-const HEADING = /^(#{1,6})\s+([A-Z][A-Z0-9]*-\d+)\b[\s:.–—-]*(.*)$/;
-const ANY_HEADING = /^(#{1,6})\s/;
+const ID = String.raw`[A-Z][A-Z0-9]*-\d+`;
+const INLINE = new RegExp(String.raw`^\s*(?:[-*+]\s+|\d+[.)]\s+)?\*\*(${ID}):?\*\*\s*:?\s*(.*)$`);
+const HEADING = new RegExp(String.raw`^(#{1,6})\s+(${ID})\b[\s:.–—-]*(.*)$`);
+const ANY_HEADING = /^(#{1,6})\s+(.*)$/;
 const FENCE = /^\s*(```|~~~)/;
+const CITATION = new RegExp(String.raw`\[(${ID}(?:\s*[,;]\s*${ID})*)\]`, "g");
 /** A token that looks like a definition ID. */
-export const ID_PATTERN = /\b[A-Z][A-Z0-9]*-\d+\b/g;
+export const ID_PATTERN = new RegExp(String.raw`\b${ID}\b`, "g");
 
 export function typeForId(id: string, prefixes: Record<string, NodeType>): NodeType | undefined {
   const prefix = id.slice(0, id.lastIndexOf("-"));
   return prefixes[prefix];
+}
+
+/** Bracketed IDs in text, outside code fences, in order of first appearance. */
+export function extractCitations(text: string, exclude?: string): string[] {
+  const found: string[] = [];
+  let inFence = false;
+  for (const line of text.split("\n")) {
+    if (FENCE.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    for (const match of line.matchAll(CITATION)) {
+      for (const id of match[1]!.split(/\s*[,;]\s*/)) {
+        if (id !== exclude && !found.includes(id)) found.push(id);
+      }
+    }
+  }
+  return found;
+}
+
+export function slugify(text: string): string {
+  const slug = text
+    .toLowerCase()
+    .replace(/\[[^\]]*\]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || "section";
 }
 
 function splitFrontMatter(text: string): { data: Record<string, unknown> | undefined; body: string; offset: number } {
@@ -62,10 +103,33 @@ function toIdList(value: unknown): string[] {
   return [];
 }
 
+function optionalString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
 function shortTitle(text: string): string | undefined {
   const t = text.replace(/\s+/g, " ").trim();
   if (!t) return undefined;
   return t.length > 100 ? `${t.slice(0, 97)}...` : t;
+}
+
+/** Splits a document body at `##` headings outside code fences. */
+function splitSections(body: string): { preamble: string; sections: { title: string; text: string; line: number }[] } {
+  const lines = body.split("\n");
+  const sections: { title: string; text: string[]; line: number }[] = [];
+  const preamble: string[] = [];
+  let inFence = false;
+  lines.forEach((line, i) => {
+    if (FENCE.test(line)) inFence = !inFence;
+    const heading = !inFence ? line.match(/^##\s+(.+)$/) : null;
+    if (heading) sections.push({ title: heading[1]!.trim(), text: [line], line: i });
+    else if (sections.length) sections[sections.length - 1]!.text.push(line);
+    else preamble.push(line);
+  });
+  return {
+    preamble: preamble.join("\n"),
+    sections: sections.map((s) => ({ title: s.title, text: s.text.join("\n"), line: s.line })),
+  };
 }
 
 export function extractDefinitions(
@@ -77,17 +141,43 @@ export function extractDefinitions(
   const defs: MarkdownDefinition[] = [];
 
   if (data && typeof data.id === "string" && NodeType.safeParse(data.type).success) {
+    const docId = data.id;
+    const type = NodeType.parse(data.type);
+    const { preamble, sections } = splitSections(body);
     defs.push({
       node: {
-        id: data.id,
-        type: NodeType.parse(data.type),
-        title: typeof data.title === "string" ? data.title : firstHeading(body),
+        id: docId,
+        type,
+        title: optionalString(data.title) ?? firstHeading(body),
+        kind: optionalString(data.kind),
+        stage: optionalString(data.stage),
         location: path,
         hash: contentHash(body),
       },
       derivedFrom: toIdList(data.derived_from),
+      cites: extractCitations(preamble, docId),
       line: 1,
     });
+    const used = new Set<string>();
+    for (const section of sections) {
+      let slug = slugify(section.title);
+      for (let n = 2; used.has(slug); n++) slug = `${slugify(section.title)}-${n}`;
+      used.add(slug);
+      defs.push({
+        node: {
+          id: `${docId}#${slug}`,
+          type,
+          kind: "section",
+          title: shortTitle(section.title.replace(/\[[^\]]*\]/g, "")),
+          location: `${path}#${slug}`,
+          hash: contentHash(section.text.trim()),
+        },
+        derivedFrom: [],
+        cites: extractCitations(section.text, docId),
+        partOf: docId,
+        line: section.line + offset + 1,
+      });
+    }
   }
 
   const lines = body.split("\n");
@@ -98,15 +188,17 @@ export function extractDefinitions(
     if (!open) return;
     const type = typeForId(open.id, prefixes);
     if (type) {
+      const content = open.lines.join("\n").trim();
       defs.push({
         node: {
           id: open.id,
           type,
-          title: shortTitle(open.title),
+          title: shortTitle(open.title.replace(CITATION, "")),
           location: `${path}#${open.id}`,
-          hash: contentHash(open.lines.join("\n").trim()),
+          hash: contentHash(content),
         },
         derivedFrom: [],
+        cites: extractCitations(content, open.id),
         line: open.start + offset + 1,
       });
     }

@@ -6,7 +6,17 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { formatScan, formatSuspects, formatTrace, Project } from "@coreflow/store";
+import {
+  formatGate,
+  formatScan,
+  formatSuspects,
+  formatTrace,
+  listTemplates,
+  newArtifact,
+  Project,
+  runGates,
+  TEMPLATES,
+} from "@coreflow/store";
 import { LinkType } from "@coreflow/trace";
 import { z } from "zod";
 
@@ -152,6 +162,44 @@ export function createServer(options: ServerOptions): McpServer {
       withProject((p) => {
         const active = p.setActive(session ?? "default", ids);
         return active.length ? `Files written now link to ${active.join(", ")}.` : "Automatic linking is off.";
+      }),
+  );
+
+  server.registerTool(
+    "coreflow_new_artifact",
+    {
+      title: "Create a PM artifact from a template",
+      description: `Create a Markdown artifact (front-matter plus one section per heading) under docs/artifacts and trace it. Built-in templates: ${TEMPLATES.map((t) => `${t.name} (${t.description})`).join("; ")}. Projects may add more in .coreflow/templates. After creating it, fill each section and cite the insights and evidence behind every claim as [INS-3] or [EV-2].`,
+      inputSchema: {
+        template: z.string().describe("Template name"),
+        title: z.string().min(1),
+        id: z.string().optional().describe("Defaults to the next free ART-n"),
+        stage: z.string().optional().describe("Lifecycle stage; defaults to the template's"),
+        from: z.array(z.string()).optional().describe("IDs this artifact is derived from, e.g. the business case a deck presents"),
+      },
+    },
+    ({ template, title, id, stage, from }) =>
+      withProject((p) => {
+        const created = newArtifact(p, { template, title, id, stage, from });
+        return `Created ${created.id} at ${created.path}. Templates available here: ${listTemplates(p)
+          .map((t) => t.name)
+          .join(", ")}.`;
+      }),
+  );
+
+  server.registerTool(
+    "coreflow_gate",
+    {
+      title: "Run stage gates",
+      description:
+        "Check whether a lifecycle stage can close: required artifacts exist, cite evidence, nothing is suspect, and a person approved the current content. Approval is recorded by people with the coreflow CLI, never by an agent.",
+      inputSchema: { gate: z.string().optional().describe("Gate ID or stage name; omit for all gates") },
+      annotations: { readOnlyHint: true },
+    },
+    ({ gate }) =>
+      withProject((p) => {
+        if (p.config.gates.length === 0) return 'No gates defined. Add them under "gates" in .coreflow/config.json.';
+        return runGates(p, gate).map(formatGate).join("\n\n");
       }),
   );
 

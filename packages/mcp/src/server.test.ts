@@ -44,8 +44,10 @@ describe("coreflow MCP server", () => {
     const { tools } = await client.listTools();
     expect(tools.map((t) => t.name).sort()).toEqual([
       "coreflow_confirm",
+      "coreflow_gate",
       "coreflow_link",
       "coreflow_mark_changed",
+      "coreflow_new_artifact",
       "coreflow_scan",
       "coreflow_suspects",
       "coreflow_trace",
@@ -85,5 +87,14 @@ describe("coreflow MCP server", () => {
     await call("coreflow_scan");
     expect((await call("coreflow_work", { ids: ["REQ-7"] })).text).toContain("REQ-7");
     expect(Project.open(root).activeIds("any-agent-session")).toEqual(["REQ-7"]);
+  });
+
+  it("creates an artifact and runs gates, but offers no way to approve", async () => {
+    await call("coreflow_scan");
+    const created = await call("coreflow_new_artifact", { template: "business-case", title: "Passwordless", from: ["INS-1"] });
+    expect(created.text).toContain("Created ART-1 at docs/artifacts/art-1-passwordless.md");
+    expect((await call("coreflow_gate")).text).toContain("No gates defined");
+    const { tools } = await client.listTools();
+    expect(tools.some((t) => t.name.includes("approve"))).toBe(false);
   });
 });

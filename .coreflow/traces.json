@@ -72,16 +72,37 @@
       "hash": "sha256:0088f4e80d377dd4"
     },
     {
+      "id": "FR-011",
+      "type": "requirement",
+      "title": "Citations written in an artifact as `[ID]` MUST link the cited item to the section or slide that ...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-011",
+      "hash": "sha256:203368f72ac958a8"
+    },
+    {
+      "id": "FR-012",
+      "type": "requirement",
+      "title": "A gate approval MUST record what it approved and stop counting when any approved item changes or ...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-012",
+      "hash": "sha256:3815c1d1a4d06ce7"
+    },
+    {
+      "id": "FR-013",
+      "type": "requirement",
+      "title": "Files linked by path MUST be typed by configurable rules, so decks and documents are artifacts an...",
+      "location": "specs/006-coreflow-evidence-lifecycle/spec.md#FR-013",
+      "hash": "sha256:e92541e993be37bb"
+    },
+    {
       "id": "packages/cli/src/cli.test.ts",
       "type": "test",
       "location": "packages/cli/src/cli.test.ts",
-      "hash": "sha256:493eb0aec3cb5c81"
+      "hash": "sha256:fc1e270b7441b95d"
     },
     {
       "id": "packages/cli/src/cli.ts",
       "type": "code",
       "location": "packages/cli/src/cli.ts",
-      "hash": "sha256:4bb585d523db5baa"
+      "hash": "sha256:7160141e90741c29"
     },
     {
       "id": "packages/cli/src/hook.ts",
@@ -111,43 +132,79 @@
       "id": "packages/gates/src/gate.ts",
       "type": "code",
       "location": "packages/gates/src/gate.ts",
-      "hash": "sha256:6362bf55d9810726"
+      "hash": "sha256:c0b085ee9dff3a7a"
     },
     {
       "id": "packages/gates/src/gates.test.ts",
       "type": "test",
       "location": "packages/gates/src/gates.test.ts",
-      "hash": "sha256:1c21adb9b6fec1aa"
+      "hash": "sha256:7f38898ff1d38c19"
     },
     {
       "id": "packages/mcp/src/server.test.ts",
       "type": "test",
       "location": "packages/mcp/src/server.test.ts",
-      "hash": "sha256:f0b7b0ca0099d1c5"
+      "hash": "sha256:787b26cb18f88357"
     },
     {
       "id": "packages/mcp/src/server.ts",
       "type": "code",
       "location": "packages/mcp/src/server.ts",
-      "hash": "sha256:3a9a9e38be3a027e"
+      "hash": "sha256:9e8b35709e523b6b"
+    },
+    {
+      "id": "packages/store/src/artifacts.test.ts",
+      "type": "test",
+      "location": "packages/store/src/artifacts.test.ts",
+      "hash": "sha256:afd8c28f6576eb09"
+    },
+    {
+      "id": "packages/store/src/artifacts.ts",
+      "type": "code",
+      "location": "packages/store/src/artifacts.ts",
+      "hash": "sha256:970b909a1183e578"
+    },
+    {
+      "id": "packages/store/src/config.ts",
+      "type": "code",
+      "location": "packages/store/src/config.ts",
+      "hash": "sha256:462880eef957875b"
+    },
+    {
+      "id": "packages/store/src/gates.ts",
+      "type": "code",
+      "location": "packages/store/src/gates.ts",
+      "hash": "sha256:28a9d46c5de03fe9"
+    },
+    {
+      "id": "packages/store/src/markdown.ts",
+      "type": "code",
+      "location": "packages/store/src/markdown.ts",
+      "hash": "sha256:eb475c22392cdfde"
     },
     {
       "id": "packages/store/src/project.ts",
       "type": "code",
       "location": "packages/store/src/project.ts",
-      "hash": "sha256:18c73f3b6802e4f4"
+      "hash": "sha256:716520f59410e467"
     },
     {
       "id": "packages/store/src/report.ts",
       "type": "code",
       "location": "packages/store/src/report.ts",
-      "hash": "sha256:960491af880a0b07"
+      "hash": "sha256:31a908d602351253"
     },
     {
       "id": "packages/store/src/store.test.ts",
       "type": "test",
       "location": "packages/store/src/store.test.ts",
       "hash": "sha256:2da045ca2e065075"
+    },
+    {
+      "id": "packages/store/src/templates.ts",
+      "type": "code",
+      "location": "packages/store/src/templates.ts",
+      "hash": "sha256:17e88d2ac40d6e06"
     },
     {
       "id": "packages/trace/src/graph.test.ts",
@@ -171,7 +228,7 @@
       "id": "packages/trace/src/schema.ts",
       "type": "code",
       "location": "packages/trace/src/schema.ts",
-      "hash": "sha256:cb401c56fe98e043"
+      "hash": "sha256:e5576cd144ada0a0"
     },
     {
       "id": "plugins/coreflow/hooks/hooks.json",
@@ -189,7 +246,7 @@
       "id": "plugins/coreflow/skills/coreflow/SKILL.md",
       "type": "code",
       "location": "plugins/coreflow/skills/coreflow/SKILL.md",
-      "hash": "sha256:30423c03af0588fa",
+      "hash": "sha256:9fb64a0822478540",
       "changed": {
         "reason": "definition removed from plugins/coreflow/skills/coreflow/SKILL.md",
         "at": "2026-09-26T10:30:52.901Z"
@@ -215,6 +272,12 @@
       "title": "A PM can take one idea from sources to an approved business-case gate without writing links by hand.",
       "location": "specs/006-coreflow-evidence-lifecycle/spec.md#SC-003",
       "hash": "sha256:7ee0ebb383f170f7"
+    },
+    {
+      "id": "THIRD_PARTY_NOTICES.md",
+      "type": "artifact",
+      "location": "THIRD_PARTY_NOTICES.md",
+      "hash": "sha256:065131e52ca3a66d"
     }
   ],
   "links": [
@@ -427,6 +490,15 @@
     },
     {
       "from": "FR-008",
+      "to": "packages/cli/src/cli.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:44f62aa7c3d01630",
+      "createdAt": "2026-09-28T07:59:14.021Z"
+    },
+    {
+      "from": "FR-008",
       "to": "packages/gates/src/evidence-quality.ts",
       "type": "implements",
       "confidence": 1,
@@ -453,6 +525,51 @@
       "createdAt": "2026-09-26T10:30:53.576Z"
     },
     {
+      "from": "FR-008",
+      "to": "packages/store/src/gates.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:44f62aa7c3d01630",
+      "createdAt": "2026-09-28T07:59:13.905Z"
+    },
+    {
+      "from": "FR-009",
+      "to": "packages/store/src/artifacts.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:7838f823db1a7979",
+      "createdAt": "2026-09-28T07:59:14.475Z"
+    },
+    {
+      "from": "FR-009",
+      "to": "packages/store/src/artifacts.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:7838f823db1a7979",
+      "createdAt": "2026-09-28T07:59:14.250Z"
+    },
+    {
+      "from": "FR-009",
+      "to": "packages/store/src/templates.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:7838f823db1a7979",
+      "createdAt": "2026-09-28T07:59:14.139Z"
+    },
+    {
+      "from": "FR-009",
+      "to": "THIRD_PARTY_NOTICES.md",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:7838f823db1a7979",
+      "createdAt": "2026-09-28T07:59:14.362Z"
+    },
+    {
       "from": "FR-010",
       "to": "packages/constraints/src/lib/llm.ts",
       "type": "implements",
@@ -460,6 +577,96 @@
       "auto": false,
       "upstreamHash": "sha256:0088f4e80d377dd4",
       "createdAt": "2026-09-26T10:30:53.669Z"
+    },
+    {
+      "from": "FR-011",
+      "to": "packages/store/src/artifacts.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:203368f72ac958a8",
+      "createdAt": "2026-09-28T07:59:12.925Z"
+    },
+    {
+      "from": "FR-011",
+      "to": "packages/store/src/markdown.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:203368f72ac958a8",
+      "createdAt": "2026-09-28T07:59:12.699Z"
+    },
+    {
+      "from": "FR-011",
+      "to": "packages/store/src/project.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:203368f72ac958a8",
+      "createdAt": "2026-09-28T07:59:12.811Z"
+    },
+    {
+      "from": "FR-012",
+      "to": "packages/mcp/src/server.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:3815c1d1a4d06ce7",
+      "createdAt": "2026-09-28T07:59:13.432Z"
+    },
+    {
+      "from": "FR-012",
+      "to": "packages/mcp/src/server.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:3815c1d1a4d06ce7",
+      "createdAt": "2026-09-28T07:59:13.184Z"
+    },
+    {
+      "from": "FR-012",
+      "to": "packages/store/src/artifacts.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:3815c1d1a4d06ce7",
+      "createdAt": "2026-09-28T07:59:13.298Z"
+    },
+    {
+      "from": "FR-012",
+      "to": "packages/store/src/gates.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:3815c1d1a4d06ce7",
+      "createdAt": "2026-09-28T07:59:13.042Z"
+    },
+    {
+      "from": "FR-013",
+      "to": "packages/store/src/artifacts.test.ts",
+      "type": "validates",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e92541e993be37bb",
+      "createdAt": "2026-09-28T07:59:13.793Z"
+    },
+    {
+      "from": "FR-013",
+      "to": "packages/store/src/config.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e92541e993be37bb",
+      "createdAt": "2026-09-28T07:59:13.544Z"
+    },
+    {
+      "from": "FR-013",
+      "to": "packages/store/src/project.ts",
+      "type": "implements",
+      "confidence": 1,
+      "auto": false,
+      "upstreamHash": "sha256:e92541e993be37bb",
+      "createdAt": "2026-09-28T07:59:13.681Z"
     }
   ]
 }

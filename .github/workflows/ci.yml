@@ -22,3 +22,6 @@ jobs:
         run: pnpm bundle && git diff --exit-code plugins/coreflow/scripts
       - name: Nothing in this repo's own traces is suspect
         run: node plugins/coreflow/scripts/coreflow.mjs suspects --check
+      - name: The example's business-case gate passes
+        working-directory: examples/passwordless-login
+        run: node ../../plugins/coreflow/scripts/coreflow.mjs gate

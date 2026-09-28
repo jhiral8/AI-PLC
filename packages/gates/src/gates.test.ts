@@ -111,4 +111,20 @@ describe("evaluateGate", () => {
     });
     expect(result.checks[0]).toMatchObject({ name: "Known Artifacts", passed: false, subjects: ["GHOST-1"] });
   });
+
+  it("requires artifacts by kind, so two business cases do not stand in for a deck", () => {
+    const g = businessCaseGraph();
+    g.upsertNode({ id: "BC-1", type: "artifact", kind: "business-case" });
+    g.upsertNode({ id: "DECK-1", type: "artifact", kind: "business-case" });
+    const byKind: GateDefinitionInput = {
+      id: "G3",
+      stage: "business-case",
+      requires: [{ kind: "business-case" }, { kind: "deck" }],
+    };
+    const result = evaluateGate(byKind, { graph: g, stageNodeIds: ["BC-1", "DECK-1"], approvals });
+    const deck = result.checks.find((c) => c.name === "Required: deck");
+    expect(deck).toMatchObject({ passed: false, actual: 0 });
+    expect(result.checks.find((c) => c.name === "Required: business-case")).toMatchObject({ passed: true, actual: 2 });
+    expect(result.status).toBe("blocked");
+  });
 });

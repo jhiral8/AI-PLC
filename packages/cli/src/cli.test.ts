@@ -157,3 +157,47 @@ describe("coreflow hook", () => {
     expect(Project.open(root).graph.linksFrom("REQ-7")).toHaveLength(0);
   });
 });
+
+describe("coreflow new, gate and approve", () => {
+  it("creates artifacts from templates, then gates the stage until someone approves it", async () => {
+    await cf("init");
+    const configPath = join(root, ".coreflow/config.json");
+    const config = JSON.parse(readFileSync(configPath, "utf8"));
+    config.gates = [{ id: "G-BC", stage: "business-case", requires: [{ kind: "business-case" }, { kind: "deck" }] }];
+    writeFileSync(configPath, JSON.stringify(config));
+
+    expect(await cf("gate")).toBe(1);
+    expect(out.join("\n")).toContain("FAIL Required: business-case: Need at least 1 business-case, found 0");
+
+    expect(await cf("new --list")).toBe(0);
+    expect(out.join("\n")).toMatch(/business-case\s+Problem, opportunity/);
+    expect(await cf('new business-case "Passwordless login" --from INS-1')).toBe(0);
+    expect(out.join()).toContain("Created ART-1 at docs/artifacts/art-1-passwordless-login.md");
+    expect(await cf('new deck "Passwordless pitch" --from ART-1')).toBe(0);
+
+    expect(await cf("approve G-BC")).toBe(2);
+    expect(err.join()).toContain("--by");
+    expect(await cf("approve business-case --by craig")).toBe(0);
+    expect(out.join()).toContain("Approved ART-1, ART-2 for gate G-BC as craig");
+
+    // INS-1 is upstream of both artifacts but cites no evidence, so coverage still fails.
+    expect(await cf("gate G-BC")).toBe(1);
+    expect(out.join("\n")).toContain("FAIL Evidence Coverage");
+    write("docs/research.md", "- **EV-1**: Interview\n\n- **INS-1**: Users abandon login [EV-1]\n");
+    // Changing INS-1 makes both artifacts suspect; confirming them after review clears it.
+    expect(await cf("gate G-BC --json")).toBe(1);
+    expect(JSON.parse(out.join("")).at(0).checks.find((c: { name: string }) => c.name === "Freshness").passed).toBe(false);
+    await cf("confirm ART-1");
+    await cf("confirm ART-2");
+    expect(await cf("gate G-BC")).toBe(0);
+    expect(out.join("\n")).toContain("stage \"business-case\": PASSED");
+  });
+
+  it("reports unknown templates and gates as errors", async () => {
+    await cf("init");
+    expect(await cf('new pitch "x"')).toBe(2);
+    expect(err.join()).toContain('Unknown template "pitch"');
+    expect(await cf("gate")).toBe(0);
+    expect(out.join()).toContain("No gates defined");
+  });
+});
