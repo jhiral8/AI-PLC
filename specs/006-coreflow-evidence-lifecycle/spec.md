@@ -144,6 +144,9 @@ affected items.
 - **FR-008**: Gates MUST check completeness, evidence coverage, freshness, evidence quality and approval, in block or warn mode.
 - **FR-009**: Artifact templates MUST come from a permissively licensed library (initially product-on-purpose/pm-skills, Apache-2.0).
 - **FR-010**: Model access MUST go through one injectable client.
+- **FR-011**: Citations written in an artifact as `[ID]` MUST link the cited item to the section or slide that contains them, and removing a citation MUST remove the link.
+- **FR-012**: A gate approval MUST record what it approved and stop counting when any approved item changes or the stage's items change. Only people approve; agents cannot.
+- **FR-013**: Files linked by path MUST be typed by configurable rules, so decks and documents are artifacts and research files are evidence.
 
 ### Key Entities
 
@@ -165,4 +168,7 @@ affected items.
 ## Status of Work
 
 - Done in this repository: trace graph with suspect propagation (`packages/trace`), gate evaluation with the ported evidence-quality check (`packages/gates`), component scanner and constraint checker ported from AI-PM (`packages/scanner`, `packages/constraints`).
-- Next: file format and CLI, MCP server, Claude Code plugin and Kiro power (User Stories 1–2).
+- Done: file format and Markdown definitions (`packages/store`), CLI and hook handler (`packages/cli`), MCP server (`packages/mcp`), Claude Code plugin and Kiro power (`plugins/coreflow`). User Stories 1 and 2 pass as automated tests. SC-001 checked on this spec: changing FR-002 flags exactly its two linked files.
+- Done: artifacts and gates over files. Citations link per section and slide, templates come from pm-skills plus CoreFlow's own business case and deck, gates run from `.coreflow/config.json` with approvals in `.coreflow/approvals.json`. User Story 3 and acceptance scenarios US4-3 and US4-4 pass as tests; `examples/passwordless-login` goes from evidence to a passing business-case gate.
+- Not yet: the evidence-quality check in file-based gates (insights have no confidence field in Markdown yet), ingesting PDFs and web research (US4-1, US4-2), rendering decks to slides.
+- Next: research ingestion and deck rendering (rest of User Story 4).

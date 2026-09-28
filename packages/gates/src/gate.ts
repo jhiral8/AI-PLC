@@ -18,9 +18,16 @@ export const GateDefinition = z.object({
   stage: z.string().min(1),
   title: z.string().optional(),
   mode: z.enum(["block", "warn"]).default("block"),
-  /** Node types that must exist in the stage, with a minimum count each. */
+  /** Nodes that must exist in the stage, by type and optionally kind (e.g. artifact / "deck"), with a minimum count each. */
   requires: z
-    .array(z.object({ type: NodeType, min: z.number().int().min(1).default(1), label: z.string().optional() }))
+    .array(
+      z.object({
+        type: NodeType.default("artifact"),
+        kind: z.string().optional(),
+        min: z.number().int().min(1).default(1),
+        label: z.string().optional(),
+      }),
+    )
     .default([]),
   /** Every required artifact must trace upstream to at least one evidence node. */
   requireEvidence: z.boolean().default(true),
@@ -78,8 +85,8 @@ export function evaluateGate(definitionInput: GateDefinitionInput, ctx: GateCont
 
   // Completeness
   for (const req of def.requires) {
-    const found = stageNodes.filter((n) => n.type === req.type);
-    const label = req.label ?? req.type;
+    const found = stageNodes.filter((n) => n.type === req.type && (!req.kind || n.kind === req.kind));
+    const label = req.label ?? req.kind ?? req.type;
     checks.push({
       name: `Required: ${label}`,
       passed: found.length >= req.min,

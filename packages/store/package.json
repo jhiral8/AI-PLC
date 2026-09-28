@@ -1,0 +1,23 @@
+{
+  "name": "@coreflow/store",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reads and writes a project's trace data: Markdown definitions, file nodes, .coreflow/traces.json and agent sessions",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@coreflow/gates": "workspace:*",
+    "@coreflow/trace": "workspace:*",
+    "picomatch": "^4.0.7",
+    "tinyglobby": "^0.2.17",
+    "yaml": "^2.9.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/picomatch": "^4.0.3"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@coreflow/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "coreflow command-line tool and agent hook handler",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@coreflow/store": "workspace:*",
+    "@coreflow/trace": "workspace:*"
+  }
+}

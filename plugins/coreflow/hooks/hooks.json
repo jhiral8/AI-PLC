@@ -1,0 +1,20 @@
+{
+  "description": "CoreFlow: note requirement IDs named in prompts and link the files Claude writes to them",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/coreflow.mjs\" hook claude", "timeout": 20 }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/coreflow.mjs\" hook claude", "timeout": 20 }
+        ]
+      }
+    ]
+  }
+}

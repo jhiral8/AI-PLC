@@ -1,0 +1,11 @@
+{
+  "name": "coreflow",
+  "owner": { "name": "jhiral8" },
+  "plugins": [
+    {
+      "name": "coreflow",
+      "source": "./plugins/coreflow",
+      "description": "Trace research, requirements, specs, code and tests; see what an upstream change makes suspect."
+    }
+  ]
+}
